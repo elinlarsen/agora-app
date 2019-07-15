@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Nav() {
+export default function VideoCover() {
     return (
         <div>
-            Nav
+            video cover
         </div>
     )
 }
