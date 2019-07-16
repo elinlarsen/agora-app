@@ -5,7 +5,7 @@ export default function AgoraList(props) {
         <div>
             <ul>   
             {props.agoras.map( (agora, index) => 
-                    ( <li key={index}> {agora.name} with {agora.members.length} members situated in {agora.location.city} </li>))
+                    ( <li key={index}> {agora.name} with {agora.members.length} members situated in {agora.city} </li>))
             }
             </ul>
         </div>

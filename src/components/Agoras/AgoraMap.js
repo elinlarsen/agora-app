@@ -9,61 +9,21 @@ const mapStyles = {
     height: '70%',
   };
 
+const AgoraMap = React.memo(function AgoraMap (props){
 
-  
-class AgoraMap extends Component  {
-
-    state = {
-        coords : [],
-    }
-
-    getAddresses =(agoras) => {
-        return agoras.map(agora => agora.location.text)
-    }
-
-    getCoordinates = (addresses) =>{
-        return addresses.map(address =>  Geocode.fromAddress(address))
-    }
-
-    componentDidMount = () => {
-        const addresses=this.getAddresses(this.props.agoras)
-        const coordinates = this.getCoordinates(addresses) 
-        
-        Promise.all(coordinates).then(locations => {
-          const markers = locations.map((place, index) => {
-            const lat = place.results[0].geometry.location.lat;
-            const lng = place.results[0].geometry.location.lng;
-            return (
-              <Marker
-                key={index}
-                position={{lat: lat,lng:lng}}
-                animation={2}
-              />
-            )
-          })
-          this.setState({
-            coords: markers
-          })
-        })
-      }
-    
-
-
-    render() {
-        Geocode.setApiKey("AIzaSyCradM-20X3j_ovam22t6F5Z48OXc1Ic2w")
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS)
     return (
         <Map
-            google={this.props.google}
-            zoom={12}
+            google={props.google}
+            zoom={10}
             style={mapStyles}
             initialCenter={{ lat: 48.866667, lng: 2.333333}}
         >        
-         {this.state.coords}        
+         {props.markers}        
         </Map>          
-    )
-    }
-}
+    ) 
+});
 
 export default GoogleApiWrapper({
-    apiKey: "AIzaSyCradM-20X3j_ovam22t6F5Z48OXc1Ic2w"
+    apiKey: process.env.REACT_APP_GOOGLE_MAPS 
   })(AgoraMap);
