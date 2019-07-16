@@ -9,21 +9,23 @@ export default class Forum extends Component {
     super(props);
 
     this.state = {
-      messages: []
+      messages: [{ user: { username: null } }]
     };
+  }
 
+  componentDidMount = () => {
     let messagesForProject = [];
     let messagesHandler = new ajaxHandler("http://localhost:5000", "messages");
     messagesHandler.getAll(res => {
-      //res.filter(a => a.project == this.props.projectId);
-      let messagesForProject = res; /*.filter(
-        a => a.project == this.props.projectId
-      );*/
-      this.setState({ messages: messagesForProject });
-    });
-  }
+      this.setState({
+        messages: res.filter(a => a.project == this.props.projectId)
+      });
+    }, "user");
+  };
 
   render() {
+    if (this.state.messages[0].user)
+      console.log(this.state.messages[0].user.username);
     return (
       <ForumContainer>
         {" "}

@@ -3,18 +3,27 @@ import { Component } from "react";
 import styled from "styled-components";
 
 export default function Message(props) {
-  let ForumMessages = styled.h1``;
+  let ForumMessages = styled.div``;
+  let messagesList = null;
+  console.log(props);
 
   if (props) {
-    ForumMessages = props.messages.map(item => (
+    messagesList = props.messages.map(item => (
       <div>
         {" "}
-        <p> {item.post_date} </p> <p> {item.username} </p> <p> {item.text} </p>{" "}
+        <p> {item.user.username} </p>
+        <p>
+          {" "}
+          {new Date(item.post_date).toDateString() +
+            " " +
+            new Date(item.post_date).toLocaleTimeString()}{" "}
+        </p>
+        <p> {item.text} </p>
       </div>
     ));
   }
 
-  return <ForumMessages />;
+  return <ForumMessages> {messagesList} </ForumMessages>;
 
-  // return <p> </p>;
+  return <p> </p>;
 }

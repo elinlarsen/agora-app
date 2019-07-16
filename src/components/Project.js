@@ -14,7 +14,7 @@ export default class Projects extends Component {
     */
 
   state = {
-    _id: null,
+    _id: this.props.match.params.id,
     name: null,
     description: null,
     picture: null,
@@ -23,7 +23,7 @@ export default class Projects extends Component {
 
   componentDidMount = () => {
     let expandItem = queryString.parse(this.props.location.search).expand;
-    console.log("expand item is " + expandItem);
+    //console.log("expand item is " + expandItem);
     projectHandler.getOne(
       this.props.match.params.id,
       data =>
@@ -56,20 +56,24 @@ export default class Projects extends Component {
 }
 
 const ProjectWrapper = styled.div`
-  width: 80%;
+  width: 90%;
   padding: 10px;
 `;
 const ProjectTitle = styled.div`
   padding: 10px;
-  background-color: darkblue;
+  background-color: #21222a;
   font-weight: bold;
   color: white;
+  font-size: 25px;
+  border-radius: 10px;
 `;
 
 const ProjectImage = styled.img`
-  width: 25%;
-  heigth: 10%;
+  width: 26%;
+  height: 10%;
   border-style: solid;
+  border-color: darkgray;
+  border-radius: 10px;
   margin: 10px 0px;
 `;
 const ProjectDescription = styled.p`
@@ -78,6 +82,9 @@ const ProjectDescription = styled.p`
   padding: 20px;
   border-style: solid;
   margin: 10px 0px;
+  border-style: solid;
+  border-color: darkgray;
+  border-radius: 10px;
 `;
 const ProjectDescriptionRow = styled.div`
   display: flex;

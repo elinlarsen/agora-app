@@ -9,9 +9,12 @@ class ajaxHandler {
     this.result = null;
   }
 
-  getAll(clbk) {
+  getAll(clbk, expandItem) {
+    console.log(
+      "endpoint for get all is " + `this.endpoint/?expand=${expandItem}`
+    );
     this.instance
-      .get(this.endpoint)
+      .get(`${this.endpoint}/?expand=${expandItem}`)
       .then(serverRes => clbk(serverRes.data))
       .catch(serverErr => console.log("No data retrieved--------", serverErr));
   }

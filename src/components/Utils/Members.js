@@ -16,7 +16,9 @@ export default function Members(props) {
 const MessageContainer = styled.div`
   display: flex;
   flex-direction: column;
-
+  width: 26%;
   padding: 10px;
   border-style: solid;
+  border-color: darkgray;
+  border-radius: 10px;
 `;
