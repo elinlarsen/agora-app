@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ajaxHandler from "../ajaxHandler.js";
 import ProjectCard from "./Projects/ProjectCard.js";
@@ -26,13 +27,45 @@ export default class Projects extends Component {
       padding: 50px;
     `;
 
+    const StyledProjectCard = styled.div`
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 500px;
+      width: 300px;
+      margin: auto;
+      border-style: solid;
+      border-radius: 2px;
+      border-color: black;
+      font-size: 30px;
+      color: white;
+      font-weight: bold;
+      background-color: lightblue;
+    `;
+
     let projectCards = this.state.projects.map(projectItem => (
       <ProjectCard project={projectItem} key={projectItem._id}>
         {" "}
       </ProjectCard>
     ));
 
+    let emptyProjectCard = (
+      <StyledProjectCard>
+        {" "}
+        <Link to="projectcreate">
+          {" "}
+          <p>New Project </p>{" "}
+        </Link>
+      </StyledProjectCard>
+    );
+
     console.log(projectCards);
-    return <ProjectsGrid> {projectCards} </ProjectsGrid>;
+    return (
+      <ProjectsGrid>
+        {" "}
+        {projectCards} {emptyProjectCard}{" "}
+      </ProjectsGrid>
+    );
   }
 }
