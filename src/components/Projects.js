@@ -31,6 +31,7 @@ export default class Projects extends Component {
         {" "}
       </ProjectCard>
     ));
+
     console.log(projectCards);
     return <ProjectsGrid> {projectCards} </ProjectsGrid>;
   }
