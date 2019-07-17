@@ -1,21 +1,20 @@
-import React from 'react'
+import React from "react";
 
 //librairies
-import styled from 'styled-components'
-import ImageUploader from 'react-images-upload';
+import styled from "styled-components";
+import ImageUploader from "react-images-upload";
 
 //components
-import CreateButton from "./../Utils/CreateButton"
-import InputForm from "../Utils/InputForm"
+import CreateButton from "./../Utils/CreateButton";
+import InputForm from "../Utils/InputForm";
 
-
-const Form=styled.form`
-    padding : 5vh; 
-    display : flex; 
-    flex-flow: column nowrap; 
-    justify-content: center; 
-    align-items: center; 
-`
+const Form = styled.form`
+  padding: 5vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+`;
 
 export default function FormContainer(props) {
     return (
