@@ -22,10 +22,9 @@ export default function FormContainer(props) {
         <Form  onSubmit={props.handleSubmit} >
 
             {Object.keys(props.object).map(key => {
-                console.log(props.exceptions)
                 if(!props.exceptions.includes(key))
                 return (<InputForm label={key.toUpperCase()}
-                            text="text" 
+                            text="text"
                             name={key} 
                             value={props.object[key]} 
                             onChange={props.handleChange}                
@@ -38,7 +37,7 @@ export default function FormContainer(props) {
                     buttonText='Upload an image'
                     onChange={props.onDrop}
                     imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                    maxFileSize={5242880}
+                    maxFileSize={10242880}
                     singleImage={props.singleImage}
                 />
 
