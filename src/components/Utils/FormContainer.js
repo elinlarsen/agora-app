@@ -10,6 +10,7 @@ import InputForm from "../Utils/InputForm"
 
 
 const Form=styled.form`
+    padding : 5vh; 
     display : flex; 
     flex-flow: column nowrap; 
     justify-content: center; 

@@ -3,17 +3,19 @@ import styled from 'styled-components'
 
 const Input=styled.input`
     width: 30vw;
-    border : 1px solid green;
+    border : 1px solid #0C214A;
     border-radius : 10px; 
     padding: 1vh;
     font-size : 1.2rem;
-    color : green; 
+    color : #0C214A; 
 `
 
 const Label=styled.label`
     text-align: center;
     font-size : 1.3rem;
-    color : black; 
+    font-weigth: bold; 
+    color : #0C214A; 
+    padding: 2vh 0; 
 `
 
 
