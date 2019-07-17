@@ -47,19 +47,14 @@ export default class AgoraForm extends Component {
         if (!this.checkAllFields()) return console.warn("form incomplete");
 
         var fd = new FormData();
-
-        
+       
         Object.keys(this.state.newAgora).forEach(item =>{
             if(typeof newAgora[item] === "object" && item !== "picture"){
                 const stringifiedArr = JSON.stringify(newAgora[item])
                 fd.append([item], stringifiedArr)
-                // for(let x of newAgora[item])fd.append(item, x)
-            }else{
-                console.log("item --", item )
+            }
+            else{
             fd.append([item], this.state.newAgora[item])
-            // fd[item]=this.state.newAgora[item]
-            //fd={...fd, item: item}
-            //fd.append(item.toString(), item)
             if (item=="picture" && this.state.newAgora[item][0]!==undefined) fd.set("picture", this.state.newAgora[item][0], this.state.newAgora[item][0].name)
             }
         })
@@ -70,7 +65,6 @@ export default class AgoraForm extends Component {
         this.state.newAgoraHandler.createOne(fd, dbres => {
             console.log("fd after db handler ", fd)
             console.log("dbres ---->", dbres)
-            //this.setState({displayForm: !this.state.displayForm})
         })
 
         this.props.addNewAgora(this.state.newAgora); //pass the new agora into the parent state

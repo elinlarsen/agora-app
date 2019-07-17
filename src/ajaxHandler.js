@@ -4,7 +4,7 @@ console.log("AJAX Handler initialized");
 class ajaxHandler {
   constructor(baseUrl, endpoint) {
     this.BASE_URL = baseUrl;
-    this.instance = axios.create({ baseURL: this.BASE_URL,  withCredentials: true }, );
+    this.instance = axios.create({ baseURL: this.BASE_URL,  withCredentials: false }, );
     this.endpoint = endpoint;
     this.result = null;
   }

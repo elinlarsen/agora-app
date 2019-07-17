@@ -26,7 +26,11 @@ export default class Agora extends Component {
 
    state={
         search: "",
-        agora : "",
+        agora : {
+            projects: [],
+            members: [],
+            picture: []
+        },
         agoraHandler: new ajaxHandler(process.env.REACT_APP_API_URL, "/agoras"),
         displayForm: false,
     } 
@@ -38,9 +42,9 @@ export default class Agora extends Component {
     filterProjects = () => filterBy(this.state.search, this.state.projects, "name")
 
     componentDidMount = () => {
-        //let expandItem = queryString.parse(this.props.location.search).expand;
+
         let expandItem = "projects";
-        //console.log("expand item is " + expandItem);
+
         this.state.agoraHandler.getOne(
           this.props.match.params.id,
           data => {
@@ -56,18 +60,22 @@ export default class Agora extends Component {
                 city: data.city
                 }
             });
-            console.log(data)
           },
           expandItem
         );
       };
 
     render() {
-        console.log("this.state.agora-----", this.state.agora)
+        console.log("this.state.agora.projects-----", this.state.agora.projects)
         return (
             <div>
                 <SearchBar handleChange={this.handleSearch}/>
-                            
+                {this.state.agora.projects!==undefined}
+                <ProjectsGrid> {
+                     this.state.agora.projects.map(projectItem => (
+                        <ProjectCard project={projectItem} key={projectItem._id}/>
+                     ))}        
+                 </ProjectsGrid>;  
             </div>
         )
     }
