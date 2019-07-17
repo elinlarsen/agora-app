@@ -23,7 +23,7 @@ export default function FormContainerProject(props) {
         if (!props.exceptions.includes(key))
           return (
             <InputFormProject
-              label={key}
+              label={props.object[key].label}
               type={props.object[key].type}
               name={props.object[key].name}
               value={props.object[key].value}

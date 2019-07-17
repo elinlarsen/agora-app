@@ -9,21 +9,36 @@ export default class ProjectForm extends Component {
     this.state = {
       project: {
         name: {
+          label: "Name",
           name: "name",
           value: "new project" + Math.random(),
           type: "text"
         },
         description: {
+          label: "Description",
           name: "description",
           value: "the description of your project",
           type: "text"
         },
         minimum_contribution: {
+          label: "Minimum Contribution",
           name: "minimum_contribution",
           value: 0,
           type: "number"
         },
-        total_amount: { name: "total_amount", value: 0, type: "number" }
+        total_amount: {
+          name: "total_amount",
+          label: "Total Amount",
+          value: 0,
+          type: "number"
+        },
+        start_date: {
+          name: "start_date",
+          label: "Start Date",
+          type: "date",
+          value: Date.now()
+        }
+
         /*start_date: new Date("2019/17/07").toISOString()
         
         end_date: "When is the project expected to end",
@@ -43,10 +58,19 @@ export default class ProjectForm extends Component {
   }
 
   handleChange = event => {
-    let { name, value, type } = event.target;
-    this.setState({
-      project: { ...this.state.project, [name]: { name, value, type } }
-    });
+    let newName = event.target.name;
+    let newValue = event.target.value;
+    let projectToUpdate = { ...this.state.project };
+
+    projectToUpdate[newName] = {
+      name: newName,
+      label: projectToUpdate[newName].label,
+      value: newValue,
+      type: projectToUpdate[newName].type
+    };
+
+    console.log(newName);
+    this.setState({ project: projectToUpdate });
   };
 
   handleSubmit = event => {
@@ -55,6 +79,9 @@ export default class ProjectForm extends Component {
     for (let key in this.state.project) {
       values[key] = this.state.project[key].value;
     }
+
+    //Adding user
+    values.members = ["5d2b484933e4882ce41a993b"];
 
     this.state.newProjectHandler.createOne(values, dbRes => {
       console.log(dbRes);
