@@ -26,13 +26,14 @@ export default class Forum extends Component {
   };
 
   submitMessage = e => {
+    e.preventDefault();
+
     let userDetails = {
       _id: "5d2b484933e4882ce41a993b",
       picture: "../../images/me.jpg",
       username: "yacineberrada"
     };
 
-    //e.preventDefault();
     let dataToPost = {
       user: userDetails._id,
       text: this.state.currentPost,
@@ -40,15 +41,23 @@ export default class Forum extends Component {
       post_date: Date.now()
     };
 
-    this.messagesHandlerPost.createOne(dataToPost, res => console.log(res));
+    this.messagesHandlerPost.createOne(dataToPost, dbRes => {
+      console.log(dbRes);
+      this.updateStateWithNewMessage();
+    });
   };
 
   componentDidMount = () => {
+    this.updateStateWithNewMessage();
+  };
+
+  updateStateWithNewMessage = () => {
     let messagesForProject = [];
 
     this.messagesHandler.getAll(res => {
       this.setState({
-        messages: res.filter(a => a.project == this.props.projectId)
+        messages: res.filter(a => a.project == this.props.projectId),
+        currentPost: ""
       });
     }, "user");
   };
@@ -60,7 +69,7 @@ export default class Forum extends Component {
     };
     let emptyMessage = [{ user: userDetails }];
 
-    if (this.state.messages[0].user)
+    if (this.state.messages[0])
       console.log(this.state.messages[0].user.username);
     return (
       <ForumContainer>
@@ -69,6 +78,7 @@ export default class Forum extends Component {
         <Message messages={this.state.messages} />
         <Message
           type="empty"
+          text={this.state.currentPost}
           messages={emptyMessage}
           handleMessageSubmit={this.submitMessage}
           handleChange={this.handleChange}

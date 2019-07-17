@@ -74,6 +74,7 @@ export default function Message(props) {
           <MessageInputForm onSubmit={props.handleMessageSubmit}>
             {" "}
             <MessageUserInput
+              value={props.text}
               placeholder="Enter your contribution here"
               onChange={props.handleChange}
             />

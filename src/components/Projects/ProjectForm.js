@@ -36,18 +36,25 @@ export default class ProjectForm extends Component {
           name: "start_date",
           label: "Start Date",
           type: "date",
-          value: Date.now()
+          value: "17/7/2019"
+        },
+        end_date: {
+          name: "end_date",
+          label: "End Date",
+          type: "date",
+          value: "17/7/2020"
+        } /*
+        tags: {
+          name: "tags",
+          label: "tags",
+          type: "select"
+        },*/,
+        status: {
+          name: "status",
+          label: "status",
+          type: "select",
+          value: "ideation"
         }
-
-        /*start_date: new Date("2019/17/07").toISOString()
-        
-        end_date: "When is the project expected to end",
-        tags: "What is your project about? You can select many",
-        status:
-          "What is the project current status. If it is a new project, it is likely to be ideation",
-        members: [],
-
-        public: true*/
       },
       displayForm: false,
       newProjectHandler: new ajaxHandler(
@@ -79,14 +86,16 @@ export default class ProjectForm extends Component {
     for (let key in this.state.project) {
       values[key] = this.state.project[key].value;
     }
+    values.picture = "../../images/default.jpg";
 
     //Adding user
     values.members = ["5d2b484933e4882ce41a993b"];
 
     this.state.newProjectHandler.createOne(values, dbRes => {
-      console.log(dbRes);
       this.setState({ displayForm: !this.state.displayForm });
+      this.props.history.push("/projects");
     });
+
     //this.props.addNewproject(this.state.project);
   };
 
