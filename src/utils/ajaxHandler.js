@@ -5,7 +5,7 @@ console.log("AJAX Handler initialized");
 export default class ajaxHandler {
   constructor(baseUrl, endpoint) {
     this.BASE_URL = baseUrl;
-    this.instance = axios.create({ baseURL: this.BASE_URL });
+    this.instance = axios.create({ baseURL: this.BASE_URL, withCredentials: false }); // to change when we set the user protected route
     this.endpoint = endpoint;
     this.result = null;
   }
@@ -32,8 +32,11 @@ export default class ajaxHandler {
   createOne(data, clbk) {
     let url = `${this.endpoint}/${data}`;
     console.log("URL CREATED -----------", url);
+    console.log('DATA ---', data)
     this.instance
-      .post(this.endpoint, data)
+      .post(this.endpoint, data, 
+        //{headers: {'Content-Type': 'multipart/form-data'}}
+        )
       .then(serverRes => {
         clbk(serverRes.data);
         console.log("serverRes.data createOne ------", serverRes.data);

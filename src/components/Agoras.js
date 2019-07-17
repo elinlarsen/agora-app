@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 
+//components
 import SearchBar from './Utils/SearchBar'
 import AgoraList from './Agoras/AgoraList'
 import AgoraMap from "./Agoras/AgoraMap"
 import AgoraForm from "./Agora/AgoraForm"
 import CreateButton from "./Utils/CreateButton"
 
+//utils
 import ajaxHandler from "../utils/ajaxHandler"
+import filterBy from "../utils/utilFunctions"
 
 import { Marker } from 'google-maps-react';
 import Geocode from "react-geocode";
@@ -35,7 +38,6 @@ justify-content: space-between;
 align-items: center; `
 
 export default class Agoras extends Component {
-
     /*
     state : 
         - filtered pour la search bar
@@ -83,21 +85,9 @@ export default class Agoras extends Component {
           })
     }
 
-    filterAgoras = () => {
-        let filteredAgoras;
-        this.state.search!=="" 
-        ? filteredAgoras =this.state.agoras.filter(   
-            item => {
-                let nameToCompare=item.name.toLowerCase().split(' ').join('')
-                console.log("item ---", nameToCompare )
-                let searched=this.state.search.toLowerCase()
-                return  nameToCompare.includes(searched)
-                console.log(" nameToCompare.includes(searched)",  nameToCompare.includes(searched))
-            })
-        : filteredAgoras=this.state.agoras
-        console.log("filteredAgoras---", filteredAgoras)
-        return filteredAgoras;
-    }
+
+    filterAgoras = () => filterBy(this.state.search, this.state.agoras, "name")
+
 
     filterMarkers = () =>{
         let filteredAgoras= this.filterAgoras()
@@ -107,7 +97,6 @@ export default class Agoras extends Component {
         filteredAddresses ? addresses=filteredAddresses :  addresses=hardAddresses
         let coordinates=this.getCoordinates(addresses)
         this.getMarkers(coordinates)
-
     }   
 
     componentDidMount() {  
@@ -124,8 +113,6 @@ export default class Agoras extends Component {
     handleAddAgora = (theAgora) =>{
         let copy=[...this.state.agoras]
         copy.push(theAgora)
-        console.log("new Agora", theAgora)
-        console.log("all agoras --", copy)
          this.setState({
             agoras : copy,
             displayForm: !this.state.displayForm})
@@ -137,7 +124,9 @@ export default class Agoras extends Component {
         console.log("i am rendered again", this.state)
         return (
             <MainBody>        
-                {this.state.displayForm && <AgoraForm addNewAgora={this.handleAddAgora}/>}
+                {this.state.displayForm && <AgoraForm 
+                displayForm={this.state.displayForm} 
+                addNewAgora={this.handleAddAgora}/>}
 
                 <CreateButton clbk={this.handleDisplayForm} 
                               text="Create your Agora!"/>
