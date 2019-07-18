@@ -14,6 +14,7 @@ const Form = styled.form`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  height: inherit; 
 `;
 
 export default function FormContainer(props) {

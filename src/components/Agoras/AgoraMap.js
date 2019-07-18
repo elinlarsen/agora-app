@@ -7,10 +7,11 @@ import styled from 'styled-components'
 require('dotenv').config()
 
 const MapParent=styled.div`
+position: relative; /* Set the navbar to fixed position */
+padding-top: 10vh; 
 display : flex; 
-position : relative; 
 width :40vw;
-height: 45vh;
+height: 55vh;
 `
 
 const mapStyles = { 

@@ -3,14 +3,13 @@ import styled from 'styled-components'
 
 const SearchStyle=styled.input`
 width: 20vw; 
-border : 1px solid #0C214A;
+border : 1px solid white;
+border-bottom: #0C214A;
 border-radius : 10px; 
 padding: 1vh;
-font-size : 1.2rem;
-color : white; 
+font-size : 1.3rem;
+color : #0C214A; 
 margin: 1vh; 
-background-color : navy; 
-background-opacity : 0.2;
 
 `
 
