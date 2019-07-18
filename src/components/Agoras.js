@@ -88,7 +88,6 @@ export default class Agoras extends Component {
 
     filterMarkers = () =>{
         let filteredAgoras= this.filterAgoras()
-        console.log("coucou")
         this.getCoordinatesAndMarkers(filteredAgoras)
     }   
 
@@ -104,30 +103,48 @@ export default class Agoras extends Component {
         this.setState({displayForm: !this.state.displayForm})
     }
 
-    handleAddAgora = (theAgora) =>{
+    handleAddAgora = (newAgora) =>{
         let copy=[...this.state.agoras]
-        copy.push(theAgora)
+        this.getCoordinatesAndMarkers([newAgora]) 
+        copy.push(newAgora)
          this.setState({
             agoras : copy,
             displayForm: !this.state.displayForm})
     }
 
+    handleDelete = (agora_id) =>{
+
+        this.state.agoraHandler.deleteOne(agora_id, dbRes =>{
+
+            let deletedAgoraInDb=dbRes      
+            let copy=[...this.state.agoras]
+            let index = copy.indexOf(deletedAgoraInDb);
+            copy.splice(index, 1) 
+            this.setState({
+                agoras: copy
+            }, () => console.log("deleted in the state"))
+        })
+
+    }
+
     render() {
        console.log(" ----- ----- ----- ----- -----")
-       //console.log("this.state.agoras", this.state.agoras)
         return (
             <MainBody>        
                 <Wrapper>        
                     <AgorasContainer>
-                        <SearchBar handleChange={this.handleSearch} placeholder="Find an agora"/>
-                        <AgoraList agoras={this.filterAgoras()}/>
+                        <SearchBar handleChange={this.handleSearch} 
+                                   placeholder="Find an agora"/>
+                        <AgoraList agoras={this.filterAgoras()}
+                                   handleDelete={this.handleDelete}
+                        />
                     </AgorasContainer>
 
                     <AgoraMap style={{position: "relative"}} 
                               agoras={this.filterAgoras()}
-                              />            
-        
+                              />                  
                  </Wrapper> 
+
                  {this.state.displayForm && <AgoraForm 
                 displayForm={this.state.displayForm} 
                 addNewAgora={this.handleAddAgora}/>}
