@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 import styled from "styled-components";
-import ajaxHandler from "../../ajaxHandler.js";
+import ajaxHandler from "../../utils/ajaxHandler.js";
 import Message from "./Message.js";
 
 export default class Forum extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from "styled-components";
-import ajaxHandler from "../ajaxHandler.js";
+import ajaxHandler from "../utils/ajaxHandler.js";
 import ProjectCard from "./Projects/ProjectCard.js";
 
 import SearchBar from './Utils/SearchBar'

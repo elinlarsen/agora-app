@@ -12,8 +12,8 @@ import Projects from "./components/Projects.js";
 import ProjectForm from "./components/Projects/ProjectForm.js";
 
 import UpdateAgoraForm from "./components/Agora/UpdateAgoraForm.js";
-import SignUp from "./components/SignUp.js";
-import LogIn from "./components/LogIn.js";
+import SignUp from "./components/Auth/SignUp.js";
+import LogIn from "./components/Auth/LogIn.js";
 import User from "./components/User.js";
 import Home from "./components/Home.js";
 
