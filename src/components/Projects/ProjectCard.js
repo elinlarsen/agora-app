@@ -5,8 +5,8 @@ import {
   ProjectCardText,
   ActionButton,
   HR,
-  ButtonWrapper
-} from "../StyledComponents.js";
+  Button
+} from "../Utils/StyledComponents.js";
 
 export default function ProjectCard(props) {
   return (
