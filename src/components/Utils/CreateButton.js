@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Button=styled.button`
     width: 20vw; 
-    background-color : #0C214A
+    background-color : #0C214A;
     border : 1px solid #0C214A;
     border-radius : 10px; 
     padding: 1vh;
@@ -21,6 +21,7 @@ const Wrapper = styled.div`
 `
 
 export default function CreateButton(props) {
+  
     return (
         <Wrapper>
             <Button disabled={props.disabled} onClick={props.clbk}>{props.text} </Button>     

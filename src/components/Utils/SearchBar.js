@@ -9,7 +9,9 @@ padding: 1vh;
 font-size : 1.2rem;
 color : white; 
 margin: 1vh; 
-background-color : #0C214A
+background-color : navy; 
+background-opacity : 0.2;
+
 `
 
 export default function SearchBar(props) {

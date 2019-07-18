@@ -2,17 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Input=styled.input`
-    width: 30vw;
+    width: 20vw;
     border : 1px solid #0C214A;
-    border-radius : 10px; 
-    padding: 1vh;
-    font-size : 1.2rem;
+    border-radius : 5px; 
+    padding: 0.8vh;
+    font-size : 1rem;
     color : #0C214A; 
 `
 
 const Label=styled.label`
     text-align: center;
-    font-size : 1.3rem;
+    font-size : 1rem;
     font-weigth: bold; 
     color : #0C214A; 
     padding: 2vh 0; 
