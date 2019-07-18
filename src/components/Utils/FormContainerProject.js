@@ -28,6 +28,7 @@ export default function FormContainerProject(props) {
               name={props.object[key].name}
               value={props.object[key].value}
               onChange={props.handleChange}
+              children={props.object[key].children}
             />
           );
       })}

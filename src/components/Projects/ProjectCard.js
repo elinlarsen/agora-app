@@ -4,7 +4,8 @@ import {
   ImageWrapper,
   ProjectCardText,
   ActionButton,
-  HR
+  HR,
+  ButtonWrapper
 } from "../StyledComponents.js";
 
 export default function ProjectCard(props) {
@@ -16,6 +17,10 @@ export default function ProjectCard(props) {
       </ImageWrapper>
       <ProjectCardText> {props.project.name} </ProjectCardText> <HR />
       <ProjectCardText>
+        <ProjectTags tags={props.project.tags}> </ProjectTags>
+      </ProjectCardText>{" "}
+      <HR />
+      <ProjectCardText>
         {" "}
         {"Status: "} {props.project.status}{" "}
       </ProjectCardText>{" "}
@@ -24,10 +29,27 @@ export default function ProjectCard(props) {
         {" "}
         {"Number of contributors: "} {props.project.members.length}{" "}
       </ProjectCardText>
-      <ActionButton href={"/project/" + props.project._id}>
-        {" "}
-        Be part of it!{" "}
-      </ActionButton>
+      <ButtonWrapper>
+        <ActionButton href={"/project/" + props.project._id}>
+          {" "}
+          Contribute{" "}
+        </ActionButton>
+        <ActionButton href={"/projectcreate/" + props.project._id}>
+          {" "}
+          Update{" "}
+        </ActionButton>
+        <ActionButton> Delete </ActionButton>
+      </ButtonWrapper>{" "}
     </ProjectCardWrapper>
   );
 }
+
+const ProjectTags = props => {
+  let tagItems = props.tags.map(tag => <span> {tag} </span>);
+  return (
+    <React.Fragment>
+      {" "}
+      <span> Topics: </span> {tagItems}
+    </React.Fragment>
+  );
+};
