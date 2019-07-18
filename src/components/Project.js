@@ -4,15 +4,11 @@ import Forum from "./Project/Forum.js";
 import styled from "styled-components";
 import ajaxHandler from "../utils/ajaxHandler.js";
 import Status from "./Project/Status.js";
-import queryString from "query-string";
+//import queryString from "query-string";
 
 let projectHandler = new ajaxHandler(process.env.REACT_APP_API_URL_, "projects");
 
 export default class Projects extends Component {
-  /*state : 
-    - filtered pour la search bar
-    - projectList (updated when edited and new project added / deleted )
-    */
 
   state = {
     _id: this.props.match.params.id,

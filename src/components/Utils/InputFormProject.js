@@ -37,7 +37,7 @@ export default function InputFormProject(props) {
 }
 
 const Input = props => {
-  if (props.type != "select" && props.type != "div") {
+  if (props.type !== "select" && props.type !== "div") {
     return (
       <StyledInput
         type={props.type}

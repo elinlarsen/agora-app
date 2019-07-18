@@ -52,11 +52,11 @@ export default class Forum extends Component {
   };
 
   updateStateWithNewMessage = () => {
-    let messagesForProject = [];
+    //let messagesForProject = [];
 
     this.messagesHandler.getAll(res => {
       this.setState({
-        messages: res.filter(a => a.project == this.props.projectId),
+        messages: res.filter(a => a.project === this.props.projectId),
         currentPost: ""
       });
     }, "user");

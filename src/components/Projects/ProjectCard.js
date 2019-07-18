@@ -13,7 +13,7 @@ export default function ProjectCard(props) {
     <ProjectCardWrapper>
       <ImageWrapper>
         {" "}
-        <img src={props.project.picture} height="100%" width="100%" />{" "}
+        <img src={props.project.picture} height="100%" width="100%" alt={props.project.name}/>{" "}
       </ImageWrapper>
       <ProjectCardText> {props.project.name} </ProjectCardText> <HR />
       <ProjectCardText>

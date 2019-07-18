@@ -58,7 +58,7 @@ export default class AgoraForm extends Component {
             }
             else{
             fd.append([item], this.state.newAgora[item])
-            if (item=="picture" && this.state.newAgora[item][0]!==undefined) fd.set("picture", this.state.newAgora[item][0], this.state.newAgora[item][0].name)
+            if (item==="picture" && this.state.newAgora[item][0]!==undefined) fd.set("picture", this.state.newAgora[item][0], this.state.newAgora[item][0].name)
             }
         })
       

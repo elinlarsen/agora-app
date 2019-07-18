@@ -62,7 +62,7 @@ export default class UpdateAgoraForm extends Component {
             }
             else{
                 fd.append([item], agora[item])
-                if (item=="picture" && agora[item][0]!==undefined) fd.set("picture", agora[item][0], agora[item][0].name)
+                if (item==="picture" && agora[item][0]!==undefined) fd.set("picture", agora[item][0], agora[item][0].name)
             }
         })
 

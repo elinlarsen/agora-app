@@ -64,35 +64,35 @@ export default function ProjectStatus(props) {
   `;
 
   function renderStatus(props) {
-    if (props.status == "ideation") {
+    if (props.status === "ideation") {
       return (
         <Ideation>
           {" "}
           <CenteredWhiteText> Ideation </CenteredWhiteText>{" "}
         </Ideation>
       );
-    } else if (props.status == "planning") {
+    } else if (props.status === "planning") {
       return (
         <Planning>
           {" "}
           <CenteredWhiteText> Planning </CenteredWhiteText>{" "}
         </Planning>
       );
-    } else if (props.status == "financed") {
+    } else if (props.status === "financed") {
       return (
         <Financed>
           {" "}
           <CenteredWhiteText> Financed </CenteredWhiteText>{" "}
         </Financed>
       );
-    } else if (props.status == "ongoing") {
+    } else if (props.status === "ongoing") {
       return (
         <Ongoing>
           {" "}
           <CenteredWhiteText> Ongoing </CenteredWhiteText>{" "}
         </Ongoing>
       );
-    } else if (props.status == "done") {
+    } else if (props.status === "done") {
       return (
         <Done>
           {" "}

@@ -5,8 +5,8 @@ import {Link} from "react-router-dom";
 import SearchBar from './Utils/SearchBar'
 import AgoraList from './Agoras/AgoraList'
 import AgoraMap from "./Agoras/AgoraMap"
-import AgoraForm from "./Agora/AgoraForm"
-import CreateButton from "./Utils/CreateButton"
+//import AgoraForm from "./Agora/AgoraForm"
+//import CreateButton from "./Utils/CreateButton"
 
 //utils
 import ajaxHandler from "../utils/ajaxHandler"
@@ -81,7 +81,7 @@ export default class Agoras extends Component {
 
     getCoordinatesAndMarkers = (agoras) =>{
         agoras.map( (agora, index) => {
-            Geocode.fromAddress(agora.address)
+            return Geocode.fromAddress(agora.address)
             .then(response => {
                 this.locationToMarker(agora, index, response)
                 })

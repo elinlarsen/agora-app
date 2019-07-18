@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FormContainerProject from "../Utils/FormContainerProject.js";
 import ajaxHandler from "../../utils/ajaxHandler";
-import { publicDecrypt } from "crypto";
+//import { publicDecrypt } from "crypto";
 
 console.log(process.env);
 
@@ -99,9 +99,9 @@ export default class ProjectForm extends Component {
     let newValue = event.target.value;
     let projectToUpdate = { ...this.state.project };
 
-    if (event.target.type == "checkbox" && event.target.checked) {
+    if (event.target.type === "checkbox" && event.target.checked) {
       projectToUpdate[newName].value.push(newValue);
-    } else if (event.target.type == "checkbox" && !event.target.checked) {
+    } else if (event.target.type === "checkbox" && !event.target.checked) {
       projectToUpdate[newName].value.splice(
         projectToUpdate[newName].value.indexOf(newValue),
         1
@@ -112,7 +112,7 @@ export default class ProjectForm extends Component {
     projectToUpdate[newName] = {
       name: newName,
       label: projectToUpdate[newName].label,
-      value: event.target.type != "checkbox" ? newValue : newTags,
+      value: event.target.type !== "checkbox" ? newValue : newTags,
       type: projectToUpdate[newName].type,
       children: projectToUpdate[newName].children
     };

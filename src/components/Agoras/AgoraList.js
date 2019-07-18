@@ -51,7 +51,7 @@ function AgoraContainer(props){
     return(
         <Container>
             <ImageContainer>
-                    <img src={props.agora.picture[0]} height="100%" width="100%" />
+                    <img src={props.agora.picture[0]} alt={props.agora.name} height="100%" width="100%" />
                 </ImageContainer>
                 
             <InfoContainer>

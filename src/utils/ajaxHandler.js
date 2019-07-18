@@ -14,7 +14,7 @@ class ajaxHandler {
 
   getAll(clbk, expandItem) {
     console.log(
-      "endpoint for get all is " + `this.endpoint/?expand=${expandItem}`
+      `endpoint for get all is this.endpoint/?expand=${expandItem}`
     );
     this.instance
       .get(`${this.endpoint}/?expand=${expandItem}`)

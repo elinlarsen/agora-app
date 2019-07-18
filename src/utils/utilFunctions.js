@@ -1,17 +1,20 @@
 export default function filterBy (search, list, by){
     let res; 
     let searchLC=search.toLowerCase()
-    /*search!==""      
+    search!==""      
     ? res=list.filter( item => item[by].toLowerCase().split(' ').join('').includes(searchLC))
-    : console.log("coucou") //res=list*/
-
-    if(search!=="" ){
-        res=list.filter( item => item[by].toLowerCase().split(' ').join('').includes(searchLC))
-    }
-    else{res=list}
+    : res=list
     return res
 }
 
-function getPropertiesFromArrayOfObjects (array, property){
+ function getPropertiesFromArrayOfObjects (array, property)  {
     return array.map(item => item[`${property}`])
 }
+
+ function capitalize(s) {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase() + s.slice(1)
+  }
+
+export {filterBy, getPropertiesFromArrayOfObjects, capitalize};
+
