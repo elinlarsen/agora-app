@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from "react-router-dom";
 
 //components
 import SearchBar from './Utils/SearchBar'
@@ -22,13 +23,24 @@ flex-flow: column;
 justify-content: flex-start; 
 align-items: center; 
 padding: 0 1vw; 
-height: 80vh; 
+height: inherit; 
 `
 const Wrapper=styled.div`
 display : flex; 
 flex-flow: row wrap; 
-justify-content: space-evenly; 
-align-items: center; 
+justify-content: space-between; 
+align-items: flex-start; 
+height: inherit; 
+`
+
+const SearchContainer=styled.div`
+height: 10vh; 
+width : 100%; 
+display : flex; 
+justify-content: center; 
+align-items: center;
+font-weigth: bold;  
+font-size : 2rem; 
 `
 
 const AgorasContainer=styled.div`
@@ -36,7 +48,8 @@ display : flex;
 flex-flow: column; 
 justify-content: flex-start; 
 align-items: flex-start;
-padding : 2vh 0; `
+height: inherit; 
+padding-bottom : 7vh `
 
 export default class Agoras extends Component {
 
@@ -113,9 +126,7 @@ export default class Agoras extends Component {
     }
 
     handleDelete = (agora_id) =>{
-
         this.state.agoraHandler.deleteOne(agora_id, dbRes =>{
-
             let deletedAgoraInDb=dbRes      
             let copy=[...this.state.agoras]
             let index = copy.indexOf(deletedAgoraInDb);
@@ -124,19 +135,32 @@ export default class Agoras extends Component {
                 agoras: copy
             }, () => console.log("deleted in the state"))
         })
+    }
+
+    handleUpdateAgora = ()=>{
+        console.log("coucou")
 
     }
 
     render() {
        console.log(" ----- ----- ----- ----- -----")
         return (
-            <MainBody>        
-                <Wrapper>        
+            <MainBody>   
+                <SearchContainer>
+                    <Link style={{textDecoration : 'none', color : '#0C214A'}} to={{ pathname: '/agoracreate',state: {action : "create"}}}>
+                            Create your agora!  
+                    </Link> 
+                </SearchContainer>
+   
+                <Wrapper> 
+                     
                     <AgorasContainer>
                         <SearchBar handleChange={this.handleSearch} 
                                    placeholder="Find an agora"/>
                         <AgoraList agoras={this.filterAgoras()}
                                    handleDelete={this.handleDelete}
+                                   displayForm={this.state.displayForm}
+                                   handleUpdateAgora={this.handleUpdateAgora}                   
                         />
                     </AgorasContainer>
 
@@ -144,13 +168,11 @@ export default class Agoras extends Component {
                               agoras={this.filterAgoras()}
                               />                  
                  </Wrapper> 
-
-                 {this.state.displayForm && <AgoraForm 
-                displayForm={this.state.displayForm} 
-                addNewAgora={this.handleAddAgora}/>}
-
-                <CreateButton clbk={this.handleDisplayForm} 
-                              text="Create your Agora!"/>   
+                 {/*this.state.displayForm && <AgoraForm 
+                                                displayForm={this.state.displayForm} 
+                                                addNewAgora={this.handleAddAgora}/>}
+                {<CreateButton clbk={this.handleDisplayForm} 
+                              text="Create your Agora!"/>  */}
             </MainBody>
         )
     }

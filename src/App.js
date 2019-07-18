@@ -10,6 +10,8 @@ import Agora from "./components/Agora.js";
 import Project from "./components/Project.js";
 import Projects from "./components/Projects.js";
 import ProjectForm from "./components/Projects/ProjectForm.js";
+
+import UpdateAgoraForm from "./components/Agora/UpdateAgoraForm.js";
 import SignUp from "./components/SignUp.js";
 import LogIn from "./components/LogIn.js";
 import User from "./components/User.js";
@@ -45,6 +47,7 @@ export default class App extends Component {
             <Route exact path="/agoras" component={Agoras} />
             <Route exact path="/projects" component={Projects} />
             <Route exact path="/agora/:id" component={Agora} />
+            <Route exact path="/agoracreate" component={UpdateAgoraForm} />
             <Route exact path="/projectcreate" component={ProjectForm} />
             <Route exact path="/project/:id" component={Project} />
             <Route exact path="/user" component={User} />

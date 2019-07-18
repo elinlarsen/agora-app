@@ -19,12 +19,12 @@ export default class AgoraForm extends Component {
         super(props)
         this.state = {
             newAgora: {
-                name:"new agora",
-                description: "the goal of your agora",
+                name:"A funny name for your agora",
+                description: "What's its purpose ?",
                 picture: [],
-                address : "Type an address Google Maps will understand ",
-                zipcode : "Zipcode",
-                city: "Your city",
+                address : "An address ",
+                zipcode : "A zipcode",
+                city: "A city",
                 members: [],
                 projects:[],
             },
@@ -61,8 +61,6 @@ export default class AgoraForm extends Component {
             if (item=="picture" && this.state.newAgora[item][0]!==undefined) fd.set("picture", this.state.newAgora[item][0], this.state.newAgora[item][0].name)
             }
         })
-
-        for(let x of fd) console.log(x)
       
         this.state.newAgoraHandler.createOne(fd, dbres => {
             let newAgora=dbres
@@ -70,14 +68,13 @@ export default class AgoraForm extends Component {
             this.props.addNewAgora(newAgora) //pass the new agora into the parent state      
         })
 
-        //sthis.props.addNewAgora(this.state.newAgora); 
+        //this.props.addNewAgora(this.state.newAgora); 
     } 
     
     onDrop = (picture)=> {
         console.log("picture ---", picture)
         this.setState({newAgora:{...this.state.newAgora, picture: this.state.newAgora.picture.concat(picture)}});
     }
-    //todo : spread
   
 
     render() {
@@ -92,7 +89,7 @@ export default class AgoraForm extends Component {
                 handleChange={this.handleChange}
                 onDrop={this.onDrop}
                 singleImage={true}
-                displayForm={this.state.displayForm}
+                displayForm={this.props.displayForm}
                 textSubmit="Submit your new Agora!"/>
             </>
         )
