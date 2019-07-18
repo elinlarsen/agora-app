@@ -10,7 +10,10 @@ export default class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = { projects: [] };
-    this.projectHandler = new ajaxHandler("http://localhost:5000", "projects");
+    this.projectHandler = new ajaxHandler(
+      process.env.REACT_APP_API_URL_,
+      "projects"
+    );
   }
 
   componentDidMount = () => {
