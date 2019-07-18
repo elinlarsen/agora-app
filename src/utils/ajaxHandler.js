@@ -30,9 +30,7 @@ export default class ajaxHandler {
   }
 
   createOne(data, clbk) {
-    let url = `${this.endpoint}/${data}`;
-    console.log("URL CREATED -----------", url);
-    console.log('DATA ---', data)
+
     this.instance
       .post(this.endpoint, data, 
         //{headers: {'Content-Type': 'multipart/form-data'}}

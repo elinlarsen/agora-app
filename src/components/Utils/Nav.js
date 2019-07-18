@@ -4,6 +4,9 @@ import styled from 'styled-components'
 import {Link} from "react-router-dom";
 
 const NavContainer=styled.div`
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
     display : flex; 
     flex-flow : row nowrap; 
     justify-content :space-between;

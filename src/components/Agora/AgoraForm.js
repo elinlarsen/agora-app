@@ -9,6 +9,10 @@ import FormContainer from "../Utils/FormContainer"
 
 //var FormData = require('form-data');
 
+import styled from 'styled-components'
+const FormTitle= styled.h2`
+color : #0C214A; 
+`
 
 export default class AgoraForm extends Component {
     constructor(props){
@@ -24,8 +28,7 @@ export default class AgoraForm extends Component {
                 members: [],
                 projects:[],
             },
-
-            newAgoraHandler: new ajaxHandler(process.env.REACT_APP_API_URL, "/agoras/new"),
+            newAgoraHandler: new ajaxHandler(process.env.REACT_APP_API_URL_, "/agoras/new"),
         }   
     }
 
@@ -47,37 +50,31 @@ export default class AgoraForm extends Component {
         if (!this.checkAllFields()) return console.warn("form incomplete");
 
         var fd = new FormData();
-
-        
+       
         Object.keys(this.state.newAgora).forEach(item =>{
             if(typeof newAgora[item] === "object" && item !== "picture"){
                 const stringifiedArr = JSON.stringify(newAgora[item])
                 fd.append([item], stringifiedArr)
-                // for(let x of newAgora[item])fd.append(item, x)
-            }else{
-                console.log("item --", item )
+            }
+            else{
             fd.append([item], this.state.newAgora[item])
-            // fd[item]=this.state.newAgora[item]
-            //fd={...fd, item: item}
-            //fd.append(item.toString(), item)
             if (item=="picture" && this.state.newAgora[item][0]!==undefined) fd.set("picture", this.state.newAgora[item][0], this.state.newAgora[item][0].name)
             }
         })
 
-        console.log("form data updated ------", fd)
         for(let x of fd) console.log(x)
       
         this.state.newAgoraHandler.createOne(fd, dbres => {
-            console.log("fd after db handler ", fd)
-            console.log("dbres ---->", dbres)
-            //this.setState({displayForm: !this.state.displayForm})
+            let newAgora=dbres
+            console.log("dbres ", newAgora)
+            this.props.addNewAgora(newAgora) //pass the new agora into the parent state      
         })
 
-        this.props.addNewAgora(this.state.newAgora); //pass the new agora into the parent state
+        //sthis.props.addNewAgora(this.state.newAgora); 
     } 
     
     onDrop = (picture)=> {
-        console.log(picture)
+        console.log("picture ---", picture)
         this.setState({newAgora:{...this.state.newAgora, picture: this.state.newAgora.picture.concat(picture)}});
     }
     //todo : spread
@@ -86,6 +83,7 @@ export default class AgoraForm extends Component {
     render() {
         return (
             <>
+            <FormTitle> Create your Agora ! </FormTitle>
             {this.props.displayForm}
             <FormContainer 
                 exceptions={["picture", "members", "projects"]}

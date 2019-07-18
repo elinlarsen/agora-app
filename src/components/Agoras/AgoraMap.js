@@ -2,15 +2,15 @@ import React from 'react'
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import Geocode from "react-geocode";
 import styled from 'styled-components'
-import { relative } from 'path';
+
 
 require('dotenv').config()
 
 const MapParent=styled.div`
 display : flex; 
 position : relative; 
-width :100vw;
-height: 40vh;
+width :40vw;
+height: 45vh;
 `
 
 const mapStyles = { 
@@ -30,7 +30,10 @@ const AgoraMap = React.memo(function AgoraMap (props){
                 defaultOptions={{
                     draggable: true, }}
             >        
-            {props.markers}        
+            {//props.markers
+            } 
+            {props.agoras.map(agora => agora.marker)
+            }       
             </Map>  
         </MapParent>        
     ) 
