@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import Members from "./Utils/Members.js";
 import Forum from "./Project/Forum.js";
 import styled from "styled-components";
-import ajaxHandler from "../ajaxHandler.js";
+import ajaxHandler from "../utils/ajaxHandler.js";
 import Status from "./Project/Status.js";
 import queryString from "query-string";
 
-let projectHandler = new ajaxHandler("http://localhost:5000", "projects");
+let projectHandler = new ajaxHandler(process.env.REACT_APP_API_URL_, "projects");
 
 export default class Projects extends Component {
   /*state : 
