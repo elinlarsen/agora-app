@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from "react-router-dom";
+import CreateButton from '../Utils/CreateButton';
 
 const Wrapper=styled.div`
 display : flex; 
@@ -55,6 +56,10 @@ function AgoraContainer(props){
                 <Location>{props.agora.city}</Location>
                 <Link to={`/agora/${props.agora._id}`}> See more </Link>
                 <Link to={`/agora/${props.agora._id}`}> Update </Link>
+                <CreateButton clbk={() => props.handleDelete(props.agora._id)}
+                              text="Delete" 
+                              disabled={false}
+                /> 
             </InfoContainer>
         </Container>
     )
@@ -62,15 +67,13 @@ function AgoraContainer(props){
 
 export default function AgoraList(props) {
     return (
-        <Wrapper>
-           
+        <Wrapper>        
             {props.agoras.map( (agora, index) => 
                 (<AgoraContainer key={index}
                                  agora={agora}
+                                 handleDelete={props.handleDelete}
                                 />))
-                //( <li key={index}> {agora.name} with {agora.members.length} members situated in {agora.city} </li>))
-          
-            }
+                }
         </Wrapper>
     )
 }
