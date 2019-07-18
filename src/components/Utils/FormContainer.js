@@ -9,7 +9,7 @@ import CreateButton from "./../Utils/CreateButton";
 import InputForm from "../Utils/InputForm";
 
 const Form = styled.form`
-  padding: 5vh;
+  padding: 1vh;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
