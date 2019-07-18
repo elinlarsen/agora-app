@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import FormContainerProject from "../Utils/FormContainerProject.js";
-import ajaxHandler from "../../ajaxHandler";
+import ajaxHandler from "../../utils/ajaxHandler";
 import { publicDecrypt } from "crypto";
 
 console.log(process.env);
