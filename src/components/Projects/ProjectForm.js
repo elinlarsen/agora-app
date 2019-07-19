@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import FormContainerProject from "../Utils/FormContainerProject.js";
 import ajaxHandler from "../../utils/ajaxHandler";
-//import { publicDecrypt } from "crypto";
-
-console.log(process.env);
+import { changeDateFormat } from "../../utils/utilFunctions";
 
 export default class ProjectForm extends Component {
   constructor(props) {
@@ -76,19 +74,16 @@ export default class ProjectForm extends Component {
   componentDidMount = () => {
     if (this.props.match.params.id) {
       this.state.projectHandler.getOne(this.props.match.params.id, res => {
-        console.log(res);
         let projectToUpdate = { ...this.state.project };
-
         projectToUpdate.name.value = res.name;
         projectToUpdate.description.value = res.description;
         projectToUpdate.minimum_contribution.value = res.minimum_contribution;
         projectToUpdate.total_amount.value = res.minimum_total_amount;
-        projectToUpdate.start_date.value = res.start_date;
-        projectToUpdate.end_date.value = res.end_date;
+        projectToUpdate.start_date.value = changeDateFormat(res.start_date);
+        projectToUpdate.end_date.value = changeDateFormat(res.end_date);
         projectToUpdate.tags.value = res.tags;
         projectToUpdate.tags.children = Tags(res.tags);
         projectToUpdate.status.value = res.status;
-
         this.setState({ project: projectToUpdate });
       });
     }
@@ -107,8 +102,9 @@ export default class ProjectForm extends Component {
       );
       projectToUpdate[newName].value.splice(indexOfItemToUncheck, 1);
     }
-    console.log(projectToUpdate[newName].value);
+
     let newTags = projectToUpdate[newName].value;
+
     projectToUpdate[newName] = {
       name: newName,
       label: projectToUpdate[newName].label,
@@ -128,26 +124,21 @@ export default class ProjectForm extends Component {
     for (let key in this.state.project) {
       values[key] = this.state.project[key].value;
     }
-    values.picture = "../../images/default.jpg";
+    values.picture = "../../images/trump.jpg";
     values.members = ["5d2b484933e4882ce41a993b"];
 
     if (this.props.match.params.id) {
-      console.log("updating entry");
       console.log(this.state.createOrUpdateProjectHandler);
       this.state.projectHandler.updateOne(
         this.props.match.params.id,
         values,
         dbRes => {
-          console.log("Values");
-          console.log(values);
           this.setState({ displayForm: !this.state.displayForm });
           this.props.history.push("/projects");
         }
       );
     } else {
       this.state.createProjectHandler.createOne(values, dbRes => {
-        console.log("Values");
-        console.log(values);
         this.setState({ displayForm: !this.state.displayForm });
         this.props.history.push("/projects");
       });
@@ -190,22 +181,19 @@ const StatusOptions = props => {
 };
 
 const Tags = props => {
-  console.log("Active tags are ");
-  console.log(props);
-
   let tagsList = [
-    "culture",
-    "environment",
-    "security",
-    "sport",
-    "mobility",
-    "digital",
-    "education",
-    "solidarity",
-    "health",
-    "cleanliness",
-    "lifestyle",
-    "economy"
+    "Culture",
+    "Environment",
+    "Security",
+    "Sport",
+    "Mobility",
+    "Digital",
+    "Education",
+    "Solidarity",
+    "Health",
+    "Cleanliness",
+    "Lifestyle",
+    "Economy"
   ];
 
   const checkedStatus = tag => {

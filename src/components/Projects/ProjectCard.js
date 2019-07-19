@@ -1,5 +1,4 @@
 import React from "react";
-import ajaxHandler from "../../ajaxHandler.js";
 
 import {
   ProjectCardWrapper,
@@ -9,7 +8,8 @@ import {
   HR,
   ButtonWrapper,
   StyledTag,
-  TagGrid
+  TagGrid,
+  GenericWrapper
 } from "../Utils/StyledComponents.js";
 
 export default function ProjectCard(props) {
@@ -24,34 +24,34 @@ export default function ProjectCard(props) {
           alt={props.project.name}
         />{" "}
       </ImageWrapper>
-      <ProjectCardText> {props.project.name} </ProjectCardText> <HR />
-      <ProjectCardText>
+      <GenericWrapper>
+        <ProjectCardText> {props.project.name} </ProjectCardText> <HR />
         <ProjectTags tags={props.project.tags}> </ProjectTags>
-      </ProjectCardText>{" "}
-      <HR />
-      <ProjectCardText>
-        {" "}
-        {"Status: "} {props.project.status}{" "}
-      </ProjectCardText>{" "}
-      <HR />
-      <ProjectCardText>
-        {" "}
-        {"Number of contributors: "} {props.project.members.length}{" "}
-      </ProjectCardText>
-      <ButtonWrapper>
-        <ActionButton href={"/project/" + props.project._id}>
+        <HR />
+        <ProjectCardText>
           {" "}
-          Contribute{" "}
-        </ActionButton>
-        <ActionButton href={"/projectcreate/" + props.project._id}>
+          {"Status: "} {props.project.status}{" "}
+        </ProjectCardText>{" "}
+        <HR />
+        <ProjectCardText>
           {" "}
-          Update{" "}
-        </ActionButton>
-        <ActionButton onClick={props.deleteFunction} name={props.project._id}>
-          {" "}
-          Delete{" "}
-        </ActionButton>
-      </ButtonWrapper>{" "}
+          {"Number of contributors: "} {props.project.members.length}{" "}
+        </ProjectCardText>
+        <ButtonWrapper>
+          <ActionButton href={"/project/" + props.project._id}>
+            {" "}
+            Contribute{" "}
+          </ActionButton>
+          <ActionButton href={"/projectcreate/" + props.project._id}>
+            {" "}
+            Update{" "}
+          </ActionButton>
+          <ActionButton onClick={props.deleteFunction} name={props.project._id}>
+            {" "}
+            Delete{" "}
+          </ActionButton>
+        </ButtonWrapper>{" "}
+      </GenericWrapper>
     </ProjectCardWrapper>
   );
 }
