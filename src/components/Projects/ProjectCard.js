@@ -1,11 +1,15 @@
 import React from "react";
+import ajaxHandler from "../../ajaxHandler.js";
+
 import {
   ProjectCardWrapper,
   ImageWrapper,
   ProjectCardText,
   ActionButton,
   HR,
-  ButtonWrapper
+  ButtonWrapper,
+  StyledTag,
+  TagGrid
 } from "../StyledComponents.js";
 
 export default function ProjectCard(props) {
@@ -38,18 +42,16 @@ export default function ProjectCard(props) {
           {" "}
           Update{" "}
         </ActionButton>
-        <ActionButton> Delete </ActionButton>
+        <ActionButton onClick={props.deleteFunction} name={props.project._id}>
+          {" "}
+          Delete{" "}
+        </ActionButton>
       </ButtonWrapper>{" "}
     </ProjectCardWrapper>
   );
 }
 
 const ProjectTags = props => {
-  let tagItems = props.tags.map(tag => <span> {tag} </span>);
-  return (
-    <React.Fragment>
-      {" "}
-      <span> Topics: </span> {tagItems}
-    </React.Fragment>
-  );
+  let tagItems = props.tags.map(tag => <StyledTag> {tag} </StyledTag>);
+  return <TagGrid> {tagItems}</TagGrid>;
 };

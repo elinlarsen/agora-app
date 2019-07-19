@@ -49,7 +49,11 @@ export default class Projects extends Component {
     `;
 
     let projectCards = this.state.projects.map(projectItem => (
-      <ProjectCard project={projectItem} key={projectItem._id}>
+      <ProjectCard
+        project={projectItem}
+        key={projectItem._id}
+        deleteFunction={this.deleteItem}
+      >
         {" "}
       </ProjectCard>
     ));
@@ -72,4 +76,19 @@ export default class Projects extends Component {
       </ProjectsGrid>
     );
   }
+
+  deleteItem = event => {
+    let projectHandler = new ajaxHandler(
+      process.env.REACT_APP_API_URL_,
+      "/projects"
+    );
+    console.log(event.target.name);
+    projectHandler.deleteOne(event.target.name, res => console.log(res));
+    let newState = this.state;
+    let indexToRemove = newState.projects.findIndex(
+      project => project._id == event.target.name
+    );
+    newState.projects.splice(indexToRemove, 1);
+    this.setState(newState);
+  };
 }

@@ -52,3 +52,23 @@ export const ActionButton = styled.a`
   width: 32%;
   border-radius: 1px;
 `;
+
+export const TagGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px 5px;
+  width: 100%;
+`;
+
+export const StyledTag = styled.div`
+  padding: 2px 6px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: gray;
+  background-color: darkcyan;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  margin: auto;
+  width: 120px;
+`;

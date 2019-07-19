@@ -38,13 +38,13 @@ export default class ProjectForm extends Component {
           name: "start_date",
           label: "Start Date",
           type: "date",
-          value: "17/7/2019"
+          value: "2020-07-16"
         },
         end_date: {
           name: "end_date",
           label: "End Date",
           type: "date",
-          value: "17/7/2020"
+          value: "2020-07-17"
         },
         tags: {
           name: "tags",
@@ -62,8 +62,8 @@ export default class ProjectForm extends Component {
         }
       },
       displayForm: false,
-      newProjectHandler: new ajaxHandler(
-        "http://localhost:5000" /*process.env.REACT_APP_API_URL_*/,
+      createProjectHandler: new ajaxHandler(
+        process.env.REACT_APP_API_URL_,
         "/projects/new"
       ),
       projectHandler: new ajaxHandler(
@@ -102,10 +102,10 @@ export default class ProjectForm extends Component {
     if (event.target.type == "checkbox" && event.target.checked) {
       projectToUpdate[newName].value.push(newValue);
     } else if (event.target.type == "checkbox" && !event.target.checked) {
-      projectToUpdate[newName].value.splice(
-        projectToUpdate[newName].value.indexOf(newValue),
-        1
+      let indexOfItemToUncheck = projectToUpdate[newName].value.indexOf(
+        newValue
       );
+      projectToUpdate[newName].value.splice(indexOfItemToUncheck, 1);
     }
     console.log(projectToUpdate[newName].value);
     let newTags = projectToUpdate[newName].value;
@@ -114,7 +114,10 @@ export default class ProjectForm extends Component {
       label: projectToUpdate[newName].label,
       value: event.target.type != "checkbox" ? newValue : newTags,
       type: projectToUpdate[newName].type,
-      children: projectToUpdate[newName].children
+      children:
+        event.target.type == "checkbox"
+          ? Tags(projectToUpdate[newName].value)
+          : projectToUpdate[newName].children
     };
     this.setState({ project: projectToUpdate });
   };
@@ -129,6 +132,8 @@ export default class ProjectForm extends Component {
     values.members = ["5d2b484933e4882ce41a993b"];
 
     if (this.props.match.params.id) {
+      console.log("updating entry");
+      console.log(this.state.createOrUpdateProjectHandler);
       this.state.projectHandler.updateOne(
         this.props.match.params.id,
         values,
@@ -140,7 +145,7 @@ export default class ProjectForm extends Component {
         }
       );
     } else {
-      this.state.newProjectHandler.createOne(values, dbRes => {
+      this.state.createProjectHandler.createOne(values, dbRes => {
         console.log("Values");
         console.log(values);
         this.setState({ displayForm: !this.state.displayForm });
@@ -175,15 +180,7 @@ export default class ProjectForm extends Component {
 }
 
 const StatusOptions = props => {
-  let enumList = [
-    "ideation",
-    "planning",
-    "financed",
-    "execution",
-    "financed",
-    "ongoing",
-    "done"
-  ];
+  let enumList = ["ideation", "planning", "financed", "ongoing", "done"];
 
   const items = enumList.map(enumItem => (
     <option value={enumItem}> {enumItem} </option>
@@ -212,18 +209,19 @@ const Tags = props => {
   ];
 
   const checkedStatus = tag => {
-    if (props.includes(tag)) return "checked";
+    if (props.includes(tag)) return true;
+    else return false;
   };
 
   const items = tagsList.map(enumItem => (
     <React.Fragment>
-      <label name={enumItem}> {enumItem} </label>{" "}
       <input
         type="checkbox"
         value={enumItem}
         name="tags"
         checked={checkedStatus(enumItem)}
       />
+      <label name={enumItem}> {enumItem} </label>{" "}
     </React.Fragment>
   ));
 
