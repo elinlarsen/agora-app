@@ -53,30 +53,50 @@ export default class UpdateAgoraForm extends Component {
         const {agora} = this.state
         event.preventDefault();
         if (!this.checkAllFields()) return console.warn("form incomplete");
-
         var fd = new FormData();
-       
-        Object.keys(agora).forEach(item =>{
-            if(typeof agora[item] === "object" && item !== "picture"){
-                fd.append([item], JSON.stringify(agora[item]))
-            }
-            else{
-                fd.append([item], agora[item])
-                if (item==="picture" && agora[item][0]!==undefined) fd.set("picture", agora[item][0], agora[item][0].name)
-            }
-        })
 
-    if(this.action==="update"){
-        this.state.agoraHandler.updateOne(agora._id, fd,  updatedAgora => {
-            this.props.history.push("/agoras");
-           
-        })
+        if(this.action==="create"){
+   
+            Object.keys(agora).forEach(item =>{
+                /*if(typeof agora[item] === "object" && item !== "picture")fd.append([item], JSON.stringify(agora[item]))
+                else{
+                    fd.append([item], agora[item])
+                    if (item==="picture" && agora[item][0]!==undefined) fd.set("picture", agora[item][0], agora[item][0].name)
+                }*/
+                for(let x of fd) console.log("form data --------",x)
+                if(item === "picture")agora[item].forEach(key =>fd.set("picture", key, key.name))
+
+                else if([ 'members', 'projects'].includes(item)) agora[item].forEach(key => fd.set([item], key))
+
+                else {fd.append(item, agora[item])}
+            })
+
+            this.state.newAgoraHandler.createOne(fd, newAgora => {
+                console.log("created agora --", newAgora)
+                this.props.history.push("/agoras");
+            })
+        }   
+
+        if(this.action==="update"){
+
+             Object.keys(agora).forEach(item =>{
+                if(item === "picture")agora[item].forEach(key =>fd.set("picture", key, key.name))
+
+                else if([ 'members', 'projects'].includes(item)) agora[item].forEach(key => fd.set([item], key))
+
+                else {fd.append(item, agora[item])}
+            })
+            //for(let x of fd) console.log("form data --------",x)
+
+            this.state.agoraHandler.updateOne(agora._id, fd,  updatedAgora => {
+                console.log("updatedAgora --", updatedAgora)
+                this.props.history.push("/agoras");
+            
+            })
     }
-    if(this.action==="create"){
-        this.state.newAgoraHandler.createOne(fd, newAgora => {
-            this.props.history.push("/agoras");
-        })
-    }
+
+
+
     } 
     
     onDrop = (picture)=> {
@@ -87,7 +107,8 @@ export default class UpdateAgoraForm extends Component {
         if(this.action==="update"){
             this.state.agoraHandler.getOne(this.id, (dbres) =>{
                 console.log("dbres getOne : ", dbres)
-                this.setState({agora: dbres}, () => console.log("this.state ----", this.state))
+                dbres.picture=[]
+                this.setState({agora: dbres}, () => console.log("this.state from DB updated with empty picture ----", this.state))
             })           
         }
     }

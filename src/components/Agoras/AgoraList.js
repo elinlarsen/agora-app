@@ -58,8 +58,8 @@ function AgoraContainer(props){
                 <Name>{props.agora.name}</Name>
                 <Members>{props.agora.members.length} members</Members>
                 <Location>{props.agora.city}</Location>
-                <Link to={`/agora/${props.agora._id}`}> See more </Link>
-                <Link to={
+                <Link style={{textDecoration : 'none', color : '#0C214A' }} to={`/agora/${props.agora._id}`}> Discovers </Link>
+                <Link style={{textDecoration : 'none', color : '#0C214A' }} to={
                             {   pathname: '/agoracreate',
                                 state: {
                                     agoraID: props.agora._id,
