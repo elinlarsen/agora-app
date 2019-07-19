@@ -12,10 +12,14 @@ import Projects from "./components/Projects.js";
 import ProjectForm from "./components/Projects/ProjectForm.js";
 
 import UpdateAgoraForm from "./components/Agora/UpdateAgoraForm.js";
-import SignUp from "./components/Auth/SignUp.js";
-import LogIn from "./components/Auth/LogIn.js";
+import Auth from "./components/Auth/Auth.js";
 import User from "./components/User.js";
 import Home from "./components/Home.js";
+//import PageAuth from "./components/Auth/Auth";
+
+//---- custom auth component
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
+
 
 export default class App extends Component {
   state = {
@@ -47,13 +51,13 @@ export default class App extends Component {
             <Route exact path="/agoras" component={Agoras} />
             <Route exact path="/projects" component={Projects} />
             <Route exact path="/agora/:id" component={Agora} />
-            <Route exact path="/agoracreate" component={UpdateAgoraForm} />
-            <Route exact path="/projectcreate" component={ProjectForm} />
-            <Route exact path="/projectcreate/:id" component={ProjectForm} />
+            <ProtectedRoute Route exact path="/agoracreate" component={UpdateAgoraForm} />
+            <ProtectedRoute exact path="/projectcreate" component={ProjectForm} />
+            <ProtectedRoute Route exact path="/projectcreate/:id" component={ProjectForm} />
             <Route exact path="/project/:id" component={Project} />
             <Route exact path="/user" component={User} />
-            <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/login" component={LogIn} />
+            <Route exact path={["/signup","/signin" ]} component={Auth} />
+
           </Switch>
         </div>
         <Footer />

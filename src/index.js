@@ -5,11 +5,15 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router } from "react-router-dom";
 
+import { AuthProvider } from "./components/Auth/Guard";
+
 require("dotenv").config();
 
 ReactDOM.render(
   <Router>
-    <App />
+     <AuthProvider>
+        <App />
+     </AuthProvider>
   </Router>,
   document.getElementById("root")
 );
