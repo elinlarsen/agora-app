@@ -1,5 +1,4 @@
 import React from "react";
-import { Component } from "react";
 import styled from "styled-components";
 
 const MessageRow = styled.div`
@@ -43,16 +42,16 @@ const MessageInputButton = styled.input`
 
 export default function Message(props) {
   let messagesList = null;
-  let emptyMessage = null;
+  //let emptyMessage = null;
 
   if (props) {
-    if (props.type != "empty") {
+    if (props.type !== "empty") {
       messagesList = props.messages.map(item => (
         <MessageRow>
           {" "}
           <MessagePicture>
             {" "}
-            <img src={item.user.picture} width="100%" />{" "}
+            <img src={item.user.picture} width="100%" alt={item.user.username} />{" "}
           </MessagePicture>
           <MessageUserName> {item.user.username} </MessageUserName>
           <MessageUserText>
@@ -67,7 +66,7 @@ export default function Message(props) {
       messagesList = (
         <MessageRow>
           <MessagePicture>
-            <img src={props.messages[0].user.picture} width="100%" />{" "}
+            <img src={props.messages[0].user.picture} width="100%" alt={props.messages[0].user.username}/>{" "}
           </MessagePicture>
           <MessageUserName> {props.messages[0].user.username} </MessageUserName>
           <MessageUserText> {""} </MessageUserText>

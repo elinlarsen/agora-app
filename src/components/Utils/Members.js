@@ -7,7 +7,7 @@ export default function Members(props) {
       <PictureAndNameContainer>
         <MemberPicture>
           {" "}
-          <img src={item.picture} width="100%" />
+          <img src={item.picture} width="100%" alt={item.name}/>
         </MemberPicture>
         <MemberName>
           {" "}

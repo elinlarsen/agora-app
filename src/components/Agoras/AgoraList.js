@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from "react-router-dom";
+
+//components
 import CreateButton from '../Utils/CreateButton';
 
 const Wrapper=styled.div`
@@ -43,19 +45,32 @@ font-size: 1.2rem;
 
 `
 
+
 function AgoraContainer(props){
+
     return(
         <Container>
             <ImageContainer>
-                    <img src={props.agora.picture[0]} height="100%" width="100%" />
+                    <img src={props.agora.picture[0]} alt={props.agora.name} height="100%" width="100%" />
                 </ImageContainer>
                 
             <InfoContainer>
                 <Name>{props.agora.name}</Name>
                 <Members>{props.agora.members.length} members</Members>
                 <Location>{props.agora.city}</Location>
-                <Link to={`/agora/${props.agora._id}`}> See more </Link>
-                <Link to={`/agora/${props.agora._id}`}> Update </Link>
+                <Link style={{textDecoration : 'none', color : '#0C214A' }} to={`/agora/${props.agora._id}`}> Discovers </Link>
+                <Link style={{textDecoration : 'none', color : '#0C214A' }} to={
+                            {   pathname: '/agoracreate',
+                                state: {
+                                    agoraID: props.agora._id,
+                                    //handleUpdateAgora,
+                                    action : "update", 
+                                }           
+                            }
+                        }>
+                        Update
+                </Link>
+        
                 <CreateButton clbk={() => props.handleDelete(props.agora._id)}
                               text="Delete" 
                               disabled={false}
@@ -72,6 +87,7 @@ export default function AgoraList(props) {
                 (<AgoraContainer key={index}
                                  agora={agora}
                                  handleDelete={props.handleDelete}
+                                 handleUpdateAgora={props.handleUpdateAgora}
                                 />))
                 }
         </Wrapper>

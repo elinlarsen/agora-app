@@ -10,6 +10,7 @@ const Button=styled.button`
     font-size : 1.2rem;
     color : white; 
     margin: 1vh;
+    opacity : 0.8; 
 `
 
 const Wrapper = styled.div`

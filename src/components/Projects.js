@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ajaxHandler from "../ajaxHandler.js";
+import ajaxHandler from "../utils/ajaxHandler.js";
 import ProjectCard from "./Projects/ProjectCard.js";
-import StyledComponents from "./StyledComponents.js";
-import { isTemplateElement } from "@babel/types";
+//import StyledComponents from "./Utils/StyledComponents.js";
+//import { isTemplateElement } from "@babel/types";
 
 export default class Projects extends Component {
   constructor(props) {

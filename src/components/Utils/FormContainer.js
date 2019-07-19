@@ -14,6 +14,7 @@ const Form = styled.form`
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  height: inherit; 
 `;
 
 export default function FormContainer(props) {
@@ -21,13 +22,15 @@ export default function FormContainer(props) {
         <Form  onSubmit={props.handleSubmit} >
 
             {Object.keys(props.object).map(key => {
-                if(!props.exceptions.includes(key))
-                return (<InputForm label={key.toUpperCase()}
-                            text="text"
-                            name={key} 
-                            value={props.object[key]} 
-                            onChange={props.handleChange}                
-                />)
+                if(!props.exceptions.includes(key)){
+                    return (<InputForm label={key.toUpperCase()}
+                    text="text"
+                    name={key} 
+                    value={props.object[key]} 
+                    onChange={props.handleChange}                
+                    />)
+                }
+
             })}
 
                 <ImageUploader
