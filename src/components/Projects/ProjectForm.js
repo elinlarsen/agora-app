@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import FormContainerProject from "../Utils/FormContainerProject.js";
 import ajaxHandler from "../../utils/ajaxHandler";
-//import { publicDecrypt } from "crypto";
-
-console.log(process.env);
+import { changeDateFormat } from "../../utils/utilFunctions";
 
 export default class ProjectForm extends Component {
   constructor(props) {
@@ -38,13 +36,13 @@ export default class ProjectForm extends Component {
           name: "start_date",
           label: "Start Date",
           type: "date",
-          value: "17/7/2019"
+          value: "2020-07-16"
         },
         end_date: {
           name: "end_date",
           label: "End Date",
           type: "date",
-          value: "17/7/2020"
+          value: "2020-07-17"
         },
         tags: {
           name: "tags",
@@ -62,8 +60,8 @@ export default class ProjectForm extends Component {
         }
       },
       displayForm: false,
-      newProjectHandler: new ajaxHandler(
-        "http://localhost:5000" /*process.env.REACT_APP_API_URL_*/,
+      createProjectHandler: new ajaxHandler(
+        process.env.REACT_APP_API_URL_,
         "/projects/new"
       ),
       projectHandler: new ajaxHandler(
@@ -76,19 +74,16 @@ export default class ProjectForm extends Component {
   componentDidMount = () => {
     if (this.props.match.params.id) {
       this.state.projectHandler.getOne(this.props.match.params.id, res => {
-        console.log(res);
         let projectToUpdate = { ...this.state.project };
-
         projectToUpdate.name.value = res.name;
         projectToUpdate.description.value = res.description;
         projectToUpdate.minimum_contribution.value = res.minimum_contribution;
         projectToUpdate.total_amount.value = res.minimum_total_amount;
-        projectToUpdate.start_date.value = res.start_date;
-        projectToUpdate.end_date.value = res.end_date;
+        projectToUpdate.start_date.value = changeDateFormat(res.start_date);
+        projectToUpdate.end_date.value = changeDateFormat(res.end_date);
         projectToUpdate.tags.value = res.tags;
         projectToUpdate.tags.children = Tags(res.tags);
         projectToUpdate.status.value = res.status;
-
         this.setState({ project: projectToUpdate });
       });
     }
@@ -101,20 +96,24 @@ export default class ProjectForm extends Component {
 
     if (event.target.type === "checkbox" && event.target.checked) {
       projectToUpdate[newName].value.push(newValue);
-    } else if (event.target.type === "checkbox" && !event.target.checked) {
-      projectToUpdate[newName].value.splice(
-        projectToUpdate[newName].value.indexOf(newValue),
-        1
+    } else if (event.target.type == "checkbox" && !event.target.checked) {
+      let indexOfItemToUncheck = projectToUpdate[newName].value.indexOf(
+        newValue
       );
+      projectToUpdate[newName].value.splice(indexOfItemToUncheck, 1);
     }
-    console.log(projectToUpdate[newName].value);
+
     let newTags = projectToUpdate[newName].value;
+
     projectToUpdate[newName] = {
       name: newName,
       label: projectToUpdate[newName].label,
       value: event.target.type !== "checkbox" ? newValue : newTags,
       type: projectToUpdate[newName].type,
-      children: projectToUpdate[newName].children
+      children:
+        event.target.type == "checkbox"
+          ? Tags(projectToUpdate[newName].value)
+          : projectToUpdate[newName].children
     };
     this.setState({ project: projectToUpdate });
   };
@@ -125,24 +124,21 @@ export default class ProjectForm extends Component {
     for (let key in this.state.project) {
       values[key] = this.state.project[key].value;
     }
-    values.picture = "../../images/default.jpg";
+    values.picture = "../../images/trump.jpg";
     values.members = ["5d2b484933e4882ce41a993b"];
 
     if (this.props.match.params.id) {
+      console.log(this.state.createOrUpdateProjectHandler);
       this.state.projectHandler.updateOne(
         this.props.match.params.id,
         values,
         dbRes => {
-          console.log("Values");
-          console.log(values);
           this.setState({ displayForm: !this.state.displayForm });
           this.props.history.push("/projects");
         }
       );
     } else {
-      this.state.newProjectHandler.createOne(values, dbRes => {
-        console.log("Values");
-        console.log(values);
+      this.state.createProjectHandler.createOne(values, dbRes => {
         this.setState({ displayForm: !this.state.displayForm });
         this.props.history.push("/projects");
       });
@@ -175,15 +171,7 @@ export default class ProjectForm extends Component {
 }
 
 const StatusOptions = props => {
-  let enumList = [
-    "ideation",
-    "planning",
-    "financed",
-    "execution",
-    "financed",
-    "ongoing",
-    "done"
-  ];
+  let enumList = ["ideation", "planning", "financed", "ongoing", "done"];
 
   const items = enumList.map(enumItem => (
     <option value={enumItem}> {enumItem} </option>
@@ -193,37 +181,35 @@ const StatusOptions = props => {
 };
 
 const Tags = props => {
-  console.log("Active tags are ");
-  console.log(props);
-
   let tagsList = [
-    "culture",
-    "environment",
-    "security",
-    "sport",
-    "mobility",
-    "digital",
-    "education",
-    "solidarity",
-    "health",
-    "cleanliness",
-    "lifestyle",
-    "economy"
+    "Culture",
+    "Environment",
+    "Security",
+    "Sport",
+    "Mobility",
+    "Digital",
+    "Education",
+    "Solidarity",
+    "Health",
+    "Cleanliness",
+    "Lifestyle",
+    "Economy"
   ];
 
   const checkedStatus = tag => {
-    if (props.includes(tag)) return "checked";
+    if (props.includes(tag)) return true;
+    else return false;
   };
 
   const items = tagsList.map(enumItem => (
     <React.Fragment>
-      <label name={enumItem}> {enumItem} </label>{" "}
       <input
         type="checkbox"
         value={enumItem}
         name="tags"
         checked={checkedStatus(enumItem)}
       />
+      <label name={enumItem}> {enumItem} </label>{" "}
     </React.Fragment>
   ));
 

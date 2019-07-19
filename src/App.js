@@ -21,6 +21,9 @@ import Home from "./components/Home.js";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 
 
+import { ThemeProvider } from "styled-components";
+import { mainTheme } from "../src/components/Utils/StyledComponents";
+
 export default class App extends Component {
   state = {
     logInStatus: true,
@@ -33,6 +36,7 @@ export default class App extends Component {
 
   render() {
     return (
+      <ThemeProvider theme={mainTheme}>
       <React.Fragment>
         <Nav logInStatus={this.state.logInStatus} userInfo={this.state.user} />
         <div className="main-body">
@@ -62,6 +66,7 @@ export default class App extends Component {
         </div>
         <Footer />
       </React.Fragment>
+      </ThemeProvider >
     );
   }
 }
