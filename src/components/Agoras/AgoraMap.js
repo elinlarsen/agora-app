@@ -21,6 +21,7 @@ const mapStyles = {
 
 const AgoraMap = React.memo(function AgoraMap (props){
     Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS)
+    console.log(props.agoras)
     return (
         <MapParent>
             <Map

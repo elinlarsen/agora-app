@@ -48,7 +48,7 @@ class ajaxHandler {
         clbk(serverRes.data);
         console.log("serverRes.data createOne ------", serverRes.data);
       })
-      .catch(serverErr => console.log("no data created", serverErr));
+      .catch(serverErr => console.log("no data created ------", serverErr));
   }
 
   deleteOne(id, clbk1, clbk2) {
