@@ -16,7 +16,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => (
           return loginStatus ? (
             <Component {...props} />
           ) : (
-            <Redirect to="/signin" />
+            <Redirect to="/login" />
           );
         }}
         {...rest} // pass all passed (rest) argument(s) in a literal object to the Route

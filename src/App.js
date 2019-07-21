@@ -26,10 +26,10 @@ import { mainTheme } from "../src/components/Utils/StyledComponents";
 
 export default class App extends Component {
   state = {
-    logInStatus: true,
+    loginStatus: true,
     user: {
       _id: "",
-      username: "usernameTest",
+      first_name: "test",
       picture: "picture"
     }
   };
@@ -38,7 +38,7 @@ export default class App extends Component {
     return (
       <ThemeProvider theme={mainTheme}>
       <React.Fragment>
-        <Nav logInStatus={this.state.logInStatus} userInfo={this.state.user} />
+        <Nav logInStatus={this.state.loginStatus} userInfo={this.state.user} />
         <div className="main-body">
           <Switch>
             <Route
@@ -47,7 +47,7 @@ export default class App extends Component {
               render={props => (
                 <Home
                   {...props}
-                  logInStatus={this.state.logInStatus}
+                  logInStatus={this.state.loginStatus}
                   userInfo={this.state.user}
                 />
               )}
@@ -60,7 +60,7 @@ export default class App extends Component {
             <ProtectedRoute Route exact path="/projectcreate/:id" component={ProjectForm} />
             <Route exact path="/project/:id" component={Project} />
             <Route exact path="/user" component={User} />
-            <Route exact path={["/signup","/signin" ]} component={Auth} />
+            <Route exact path={["/signup","/login" ]} component={Auth} />
 
           </Switch>
         </div>

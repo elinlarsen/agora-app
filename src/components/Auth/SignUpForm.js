@@ -19,6 +19,12 @@ export default class Signup extends Component {
             label: "Your lastname",
             value : "Hidalgo",
             type : "text"},
+        username: {
+            name : "username",
+            label: "Choose an username",
+            value : "testusername",
+            type : "text"
+        },
         email:  {
                 name : "email",
                 label : "Your email",
@@ -76,8 +82,12 @@ export default class Signup extends Component {
             user[item].forEach(key =>fd.set("picture", key, key.name))
         }
            
-        else {fd.append(item, user[item])}
+        else {
+          console.log("user[item].value) -", user[item].value)
+          fd.append(item, user[item].value)}
     })
+
+    for (let x of fd) (console.log("fd key value : ", x, "type of ", typeof x))
 
     signUpHandler.createOne( fd, serverRes => {
     

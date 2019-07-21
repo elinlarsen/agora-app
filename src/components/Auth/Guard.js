@@ -49,16 +49,15 @@ class AuthProvider extends React.Component {
 
   signin = (clbk, data) => {
     apiAuthHandler
-      .post("/signin", data)
+      .post("/login", data)
       .then(async serverRes => {
-        // once loggedin, the state is updated =>
-        // this will prevent the ProtectedRoute component redirect to /signin
-        // check src/auth/ProtectedRoute.js
-        await this.updateState(serverRes.data); // wait state update
-        // then ... exec the callback (leading to a redirect)
+        await this.updateState(serverRes.data); 
         clbk(serverRes.data.loginStatus);
       })
-      .catch(serverErr => this.setState({ isLoggedIn: false }));
+      .catch(serverErr => {
+        this.setState({ isLoggedIn: false })
+        console.log("error while logging in : ", serverErr)
+    });
   };
 
   signout = clbk => {

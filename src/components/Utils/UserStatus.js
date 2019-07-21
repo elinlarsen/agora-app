@@ -39,8 +39,8 @@ export default function UserStatus(props) {
         if(isloggedIn){
         return (
             <UserOptions>
-                <UserProfile> Hello {user.username}</UserProfile>
-                <Img src={user.picture} alt={user.username}/>
+                <UserProfile> Hello {user.first_name}</UserProfile>
+                <Img src={user.picture} alt={user.first_name}/>
             </UserOptions>
             )
         } 

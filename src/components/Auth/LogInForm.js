@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { AuthConsumer } from "./Guard";
 import FormContainerProject from "../Utils/FormContainerProject"
 
-export default class SignUp extends Component {
+export default class LogIn extends Component {
 
     state ={
         user : {
@@ -54,7 +54,7 @@ export default class SignUp extends Component {
                         handleSubmit={evt => this.handleSubmit(evt, signin)}
                         object={this.state.user}
                         handleChange={this.handleChange}
-                        textSubmit="Sign In !"
+                        textSubmit="Log In !"
                         imageUploader={false}
                         />
                         
