@@ -25,43 +25,24 @@ import { ThemeProvider } from "styled-components";
 import { mainTheme } from "../src/components/Utils/StyledComponents";
 
 export default class App extends Component {
-  state = {
-    loginStatus: true,
-    user: {
-      _id: "",
-      first_name: "test",
-      picture: "picture"
-    }
-  };
 
   render() {
     return (
       <ThemeProvider theme={mainTheme}>
       <React.Fragment>
-        <Nav logInStatus={this.state.loginStatus} userInfo={this.state.user} />
+        <Nav />
         <div className="main-body">
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <Home
-                  {...props}
-                  logInStatus={this.state.loginStatus}
-                  userInfo={this.state.user}
-                />
-              )}
-            />
+            <Route exact path="/" render={props => ( <Home {...props} /> )}/>
             <Route exact path="/agoras" component={Agoras} />
             <Route exact path="/projects" component={Projects} />
             <Route exact path="/agora/:id" component={Agora} />
-            <ProtectedRoute Route exact path="/agoracreate" component={UpdateAgoraForm} />
+            <ProtectedRoute exact path="/agoracreate" component={UpdateAgoraForm} />
             <ProtectedRoute exact path="/projectcreate" component={ProjectForm} />
-            <ProtectedRoute Route exact path="/projectcreate/:id" component={ProjectForm} />
+            <ProtectedRoute exact path="/projectcreate/:id" component={ProjectForm} />
             <Route exact path="/project/:id" component={Project} />
             <Route exact path="/user" component={User} />
             <Route exact path={["/signup","/login" ]} component={Auth} />
-
           </Switch>
         </div>
         <Footer />

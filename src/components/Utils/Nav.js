@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import UserStatus from "./UserStatus"
 import styled from 'styled-components'
 import {Link} from "react-router-dom";
@@ -21,16 +21,16 @@ const Logo=styled.div`
     color: white; 
 `
 
-export default class Nav extends Component {
-    render(){
-        return (
-            <NavContainer>
-                
-                <Link to="/" style={{ textDecoration: 'none' }}> <Logo>Agora</Logo></Link>
-                
-                <UserStatus logInStatus={this.props.logInStatus}
-                            userInfo={this.props.userInfo}/>
-            </NavContainer>
-        )
-    }
+export default function Nav(props) {
+    return (
+        <NavContainer>              
+            <Link to="/" style={{ textDecoration: 'none' }}> <Logo>Agora</Logo></Link>
+          
+            <UserStatus/>
+            
+        </NavContainer>
+    )
 }
+
+
+

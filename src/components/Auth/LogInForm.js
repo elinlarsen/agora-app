@@ -9,32 +9,32 @@ export default class LogIn extends Component {
             email : {
                 name : "email",
                 label : "Your email",
-                 value : "first_last@email.com",
+                 value : "demo@email.com",
                  type : "text"
             },
             password :
             {
                 name : "password",
                 label : "Your password",
-                value : "Ah5y!i)2GH",
+                value : "testtest",
                 type : "password"
             } 
         }
     }
 
     handleSubmit = (evt, signin) => {
-        // the handleSubmit method here receives 2 params
-        // 1 - the classic event object
-        // 2 - the signin function, passed by the AuthConsumer
+        let email= this.state.user.email.value
+        let pwd=this.state.user.password.value
         evt.preventDefault();
-        signin((status) => { // this callback is executed inside the Provider !!!
+        signin( (status) => { // this callback is executed inside the Provider !!!
           this.props.redirect("/agoras");
-        }, this.state);
-      };
+          console.log("status ----", status)
+        }, {email, password : pwd});
 
-      checkAllFieldsFilled() {
-          // TODO
-      }
+        //for (let x of fd) (console.log("fd key value : ", x, "type of ", typeof x))
+      };
+    
+    checkAllFieldsFilled() {}
 
 
     handleChange = evt => {
@@ -45,7 +45,7 @@ export default class LogIn extends Component {
       };
 
     render() {
-        console.log("state --", this.state.user)
+
         return (
             <AuthConsumer>
                 {({ signin }) => (

@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 const apiAuthHandler = axios.create({
-  withCredentials: false,
+  withCredentials: true,
   baseURL: process.env.REACT_APP_API_URL_
 });
 
@@ -12,19 +12,22 @@ class AuthProvider extends React.Component {
   constructor() {
     super();
     this.state = {
-      loginStatus: {}, // by default, user is not signed-in...
-      // i started with a false value but then ...
-      // i've put an object literal here just to avoid a weird refresh bug ... still investigating
-      user: null
+      loginStatus: {},    
+      user: {
+        first_name : "", 
+        last_name : "", 
+        username: "",
+        email : "", 
+        picture : ""
+      }
     };
   }
 
   componentDidMount() {
-    this.isLoggedIn(); // check if user is signed-in when AuthConsumer is mounted
+    this.isLoggedIn();
   }
 
-  // check mdn @ : https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Fonctions/get
-  get user() {
+   get user() {
     return this.state.user;
   }
 
@@ -36,13 +39,9 @@ class AuthProvider extends React.Component {
   isLoggedIn = () => {
     apiAuthHandler
       .get("/loggedin", null)
-      .then(serverRes => {
-        // server accepted the request (this user is stored into session)
-        // let's update the state loginStatus + user key/value pairs
-        this.updateState(serverRes.data);
-      })
+      .then(serverRes => this.updateState(serverRes.data))
       .catch(serverErr => {
-        // console.error(serverErr);
+        console.error(serverErr);
         this.setState({ loginStatus: false });
       });
   };
@@ -56,19 +55,21 @@ class AuthProvider extends React.Component {
       })
       .catch(serverErr => {
         this.setState({ isLoggedIn: false })
-        console.log("error while logging in : ", serverErr)
+        console.log("error while logging in signin function - guard: ", serverErr)
     });
   };
 
   signout = clbk => {
-    // send a request to the server : session will be destroyed there
-    apiAuthHandler.post("/signout").then(serverRes => {
-      this.setState({ loginStatus: false }, () => clbk(this.isLoggedIn));
+    apiAuthHandler.post("/signout")
+    .then(serverRes => {
+      this.setState({ loginStatus: false }, () => {
+        console.log( "signout info ---",serverRes )
+        clbk(this.isLoggedIn)});
     });
   };
 
   render() {
-    // return a context Provider ...
+
     return (
       <AuthContext.Provider
         // below, the values exposed by the provider (to be consumed later ;)
