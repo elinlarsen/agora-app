@@ -57,7 +57,9 @@ export default class ProjectForm extends Component {
           type: "select",
           children: StatusOptions(),
           value: "ideation"
-        }
+        },
+
+        picture: { value: [] }
       },
       displayForm: false,
       createProjectHandler: new ajaxHandler(
@@ -120,35 +122,89 @@ export default class ProjectForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    let values = {};
+
+    let formData = new FormData();
+    let currentProject = this.state.project;
+
+    Object.keys(currentProject).forEach(item => {
+      if (item === "picture")
+        currentProject[item].value.forEach(key =>
+          formData.set("picture", key, key.name)
+        );
+      else if (["tags"].includes(item)) {
+        currentProject[item].value.forEach(key => {
+          console.log(key);
+          formData.append([item], key);
+        });
+      } else {
+        formData.append(item, currentProject[item].value);
+      }
+    });
+
+    /*  if (typeof currentProject[item].value === "object" && item !== "image") {
+        console.log("HEY I AM" + currentProject[item].value);
+        const stringifiedArr = JSON.stringify(currentProject[item].value);
+        formData.append([item], stringifiedArr);
+      } else if (
+        typeof currentProject[item].value === "object" &&
+        item == "image" &&
+        currentProject[item].value[0] !== undefined
+      ) {
+        formData.set(
+          "picture",
+          currentProject[item].value[0],
+          currentProject[item].value[0].name
+        );
+      } else {
+        formData.append(item, currentProject[item].value);
+      }
+    });*/
+
+    console.log(formData.keys());
+
+    console.log("FORM DATA IS");
+    for (var key of formData.keys()) {
+      console.log(key);
+      console.log(formData.getAll(key));
+    }
+
+    /* let values = {};
     for (let key in this.state.project) {
       values[key] = this.state.project[key].value;
     }
     values.picture = "../../images/trump.jpg";
-    values.members = ["5d2b484933e4882ce41a993b"];
+    values.members = ["5d2b484933e4882ce41a993b"]; */
 
     if (this.props.match.params.id) {
-      console.log(this.state.createOrUpdateProjectHandler);
       this.state.projectHandler.updateOne(
         this.props.match.params.id,
-        values,
+        formData,
         dbRes => {
           this.setState({ displayForm: !this.state.displayForm });
           this.props.history.push("/projects");
         }
       );
     } else {
-      this.state.createProjectHandler.createOne(values, dbRes => {
+      this.state.createProjectHandler.createOne(formData, dbRes => {
         this.setState({ displayForm: !this.state.displayForm });
         this.props.history.push("/projects");
       });
     }
   };
 
-  onDrop = picture => {
-    this.setState({
-      project: { image: this.state.project.image.concat(picture) }
+  /*  this.state.newAgoraHandler.createOne(fd, dbres => {
+      let newAgora = dbres;
+      console.log("dbres ", newAgora);
+      this.props.addNewAgora(newAgora); //pass the new agora into the parent state
     });
+  }; */
+
+  onDrop = picture => {
+    let stateCopy = { ...this.state };
+    stateCopy.project.picture.value = stateCopy.project.picture.value.concat(
+      picture
+    );
+    this.setState(stateCopy, () => console.log(this.state.project.picture));
   };
 
   render() {
@@ -182,18 +238,18 @@ const StatusOptions = props => {
 
 const Tags = props => {
   let tagsList = [
-    "Culture",
-    "Environment",
-    "Security",
-    "Sport",
-    "Mobility",
-    "Digital",
-    "Education",
-    "Solidarity",
-    "Health",
-    "Cleanliness",
-    "Lifestyle",
-    "Economy"
+    "culture",
+    "environment",
+    "security",
+    "sport",
+    "mobility",
+    "digital",
+    "education",
+    "solidarity",
+    "health",
+    "cleanliness",
+    "lifestyle",
+    "economy"
   ];
 
   const checkedStatus = tag => {

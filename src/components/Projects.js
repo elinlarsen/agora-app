@@ -20,7 +20,6 @@ export default class Projects extends Component {
   componentDidMount = () => {
     this.projectHandler.getAll(res => {
       this.setState({ projects: res });
-      console.log(res);
     });
   };
 

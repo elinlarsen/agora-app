@@ -30,11 +30,6 @@ export default function ProjectCard(props) {
         <HR />
         <ProjectCardText>
           {" "}
-          {"Status: "} {props.project.status}{" "}
-        </ProjectCardText>{" "}
-        <HR />
-        <ProjectCardText>
-          {" "}
           {"Number of contributors: "} {props.project.members.length}{" "}
         </ProjectCardText>
         <ButtonWrapper>
@@ -57,6 +52,6 @@ export default function ProjectCard(props) {
 }
 
 const ProjectTags = props => {
-  let tagItems = props.tags.map(tag => <StyledTag> {tag} </StyledTag>);
+  let tagItems = props.tags.map(tag => <StyledTag> {"#" + tag} </StyledTag>);
   return <TagGrid> {tagItems}</TagGrid>;
 };
