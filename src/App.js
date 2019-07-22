@@ -20,34 +20,32 @@ import Home from "./components/Home.js";
 //---- custom auth component
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 
-
 import { ThemeProvider } from "styled-components";
 import { mainTheme } from "../src/components/Utils/StyledComponents";
 
 export default class App extends Component {
-
   render() {
     return (
       <ThemeProvider theme={mainTheme}>
-      <React.Fragment>
-        <Nav />
-        <div className="main-body">
-          <Switch>
-            <Route exact path="/" render={props => ( <Home {...props} /> )}/>
-            <Route exact path="/agoras" component={Agoras} />
-            <Route exact path="/projects" component={Projects} />
-            <Route exact path="/agora/:id" component={Agora} />
-            <ProtectedRoute exact path="/agoracreate" component={UpdateAgoraForm} />
-            <ProtectedRoute exact path="/projectcreate" component={ProjectForm} />
-            <ProtectedRoute exact path="/projectcreate/:id" component={ProjectForm} />
-            <Route exact path="/project/:id" component={Project} />
-            <Route exact path="/user" component={User} />
-            <Route exact path={["/signup","/login" ]} component={Auth} />
-          </Switch>
-        </div>
-        <Footer />
-      </React.Fragment>
-      </ThemeProvider >
+        <React.Fragment>
+          <Nav />
+          <div className="main-body">
+            <Switch>
+              <Route exact path="/" render={props => <Home {...props} />} />
+              <Route exact path="/agoras" component={Agoras} />
+              <Route exact path="/projects" component={Projects} />
+              <Route exact path="/agora/:id" component={Agora} />
+              <Route exact path="/agoracreate" component={UpdateAgoraForm} />
+              <Route exact path="/projectcreate" component={ProjectForm} />
+              <Route exact path="/projectcreate/:id" component={ProjectForm} />
+              <Route exact path="/project/:id" component={Project} />
+              <Route exact path="/user" component={User} />
+              <Route exact path={["/signup", "/login"]} component={Auth} />
+            </Switch>
+          </div>
+          <Footer />
+        </React.Fragment>
+      </ThemeProvider>
     );
   }
 }

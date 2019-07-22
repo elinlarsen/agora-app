@@ -54,6 +54,90 @@ export const StyledTag = styled.div`
 export const VideoWrapper = styled.div`
   width: 100%;
   height: 30%;
+  margin-top: -300px;
+`;
+
+export const B = styled.span`
+  font-weight: bold;
+`;
+
+export const Banner = styled.div`
+  display: flex;
+  background-color: white;
+  justify-content: flex-start;
+  align-items: center;
+  height: inherit;
+  flex-direction: column;
+`;
+
+export const BannerText = styled.p`
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0px;
+`;
+
+export const BannerTextAndIcon = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: start;
+  width: 70%;
+`;
+
+export const IconsAndTextContainer = styled.div`
+  padding-top: 20px;
+  font-size: 20px;
+  width: 40%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+
+export const IconsContainer = styled.div`
+  height: 30%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const H1 = styled.h1`
+  font-size: 45px;
+  font-weight: bold;
+  width: 70%;
+  text-align: center;
+  margin: 20px 0px 20px 0px;
+`;
+
+export const P = styled.p`
+  font-size: 20px;
+  text-align: center;
+  margin: 0px 0px 10px 0px;
+  width: 70%;
+`;
+
+export const PforIcon = styled.p`
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  margin: 0px;
+  padding: 20px;
+  text-align: justify;
+  margin: auto;
+  padding: 30px;
+`;
+
+export const HRIcon = styled.hr`
+  margin-top: 20px;
+  width: 70%;
 `;
 
 // --- Projects Page Components ---//
