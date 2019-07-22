@@ -1,10 +1,16 @@
+//react librairies
 import React, { Component } from 'react'
+import {Link} from "react-router-dom";
 import styled from "styled-components";
-import ajaxHandler from "../utils/ajaxHandler.js";
-import ProjectCard from "./Projects/ProjectCard.js";
 
+// axios handler
+import ajaxHandler from "../utils/ajaxHandler.js";
+
+//components
+import ProjectCard from "./Projects/ProjectCard.js";
 import SearchBar from './Utils/SearchBar'
 import filterBy from '../utils/utilFunctions'
+import CreateButton from './Utils/CreateButton';
 
 const Main= styled.div`
 display : flex; 
@@ -33,14 +39,6 @@ color : #0C214A;
 
 
 export default class Agora extends Component {
-    /*
-    props : agoraId
-    state : 
-        filtered projects
-
-        if agoraId == null => form create Agora
-        else description & ...
-    */
 
    state={
         search: "",
@@ -70,6 +68,18 @@ export default class Agora extends Component {
         );
       };
 
+      handleDelete = (agora_id) => {
+        this.state.agoraHandler.deleteOne(agora_id, dbRes => {
+            let deletedAgoraInDb = dbRes
+            let copy = [...this.state.agoras]
+            let index = copy.indexOf(deletedAgoraInDb);
+            copy.splice(index, 1)
+            this.setState({
+                agoras: copy
+            }, () => console.log("deleted in the state"))
+        })
+    }
+
     render() {
         console.log("this.state.agora----", this.state.agora)
         console.log("filterProjects()", this.filterProjects())
@@ -77,8 +87,20 @@ export default class Agora extends Component {
             <Main>
                 <Title>Welcome to the Agora {this.state.agora.name} ! </Title>
                 <SubTitle> {this.state.agora.description} </SubTitle>
-                <SearchBar handleChange={this.handleSearch} 
-                           placeholder="Find a project."/>
+                <div> 
+                        <Link style={{textDecoration : 'none', color : '#0C214A' }} to={
+                                    {   pathname: '/agoracreate',
+                                        state: {
+                                            agoraID: this.state.agora._id,
+                                            action : "update", 
+                                        } }}>Update</Link>      
+                        <CreateButton clbk={() => this.handleDelete(this.state.agora._id)}
+                                    text="Delete" 
+                                    disabled={false}>
+                        </CreateButton>
+                        <SearchBar handleChange={this.handleSearch} placeholder="Find a project by its name."/>
+                </div>
+
                 {this.state.agora.projects!==undefined}
                 <ProjectsGrid> {
                         this.filterProjects().map(projectItem => (

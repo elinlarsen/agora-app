@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import SearchBar from './Utils/SearchBar'
 import AgoraList from './Agoras/AgoraList'
 import AgoraMap from "./Agoras/AgoraMap"
-import AgoraContainer from "./Agoras/AgoraContainer"
 //import AgoraForm from "./Agora/AgoraForm"
 //import CreateButton from "./Utils/CreateButton"
 
@@ -37,7 +36,7 @@ height: inherit;
 `
 
 const CTAContainer = styled.div`
-height: 10vh; 
+height: inherit; 
 width : 100%; 
 display : flex; 
 justify-content: center; 
@@ -87,7 +86,7 @@ export default class Agoras extends Component {
         return new Promise((resolve, reject) => {
             agoras.forEach(async (agora, i) => {
                 try {
-                    const geocode = await Geocode.fromAddress(agora.address);
+                    const geocode = await Geocode.fromAddress(agora.zipcode);
                     codes[i] = geocode.results[0].geometry.location;
                     const count = codes.reduce((acc, v) => { if (v) acc += 1; return acc }, 0)
                     if (count === agoras.length) resolve(codes)
@@ -97,13 +96,12 @@ export default class Agoras extends Component {
         })
     }
 
-    filterAgoras = () => filterBy(this.state.search, this.state.agoras, "name")
+    filterAgoras = () => filterBy(this.state.search, this.state.agoras, "zipcode")
 
     componentDidMount() {
         this.state.agoraHandler.getAll(async dbRes => {
             this.getCoordinatesAndMarkers(dbRes)
                 .then(codes => {
-                    console.log("coucou dbres", dbRes)
                     dbRes.forEach((agora, i) => {
                         agora.geocode = codes[i];
                     })
@@ -126,51 +124,31 @@ export default class Agoras extends Component {
         })
     }
 
-    handleDelete = (agora_id) => {
-        this.state.agoraHandler.deleteOne(agora_id, dbRes => {
-            let deletedAgoraInDb = dbRes
-            let copy = [...this.state.agoras]
-            let index = copy.indexOf(deletedAgoraInDb);
-            copy.splice(index, 1)
-            this.setState({
-                agoras: copy
-            }, () => console.log("deleted in the state"))
-        })
-    }
-
-    handleUpdateAgora = () => {
-        console.log("coucou")
-    }
-
+  
     render() {
         console.log(" renda ----- ----- ----- ----- -----")
         return (
             <MainBody>
                 <CTAContainer>
+                    <SearchBar  handleChange={this.handleSearch} placeholder="Search an agora by its zipcode." />
                     <Link style={{ textDecoration: 'none', color: '#0C214A' }} to={{ pathname: '/agoracreate', state: { action: "create" } }}>
                         Create your agora!
                     </Link>
                 </CTAContainer>
 
                 <Wrapper>
-                    <AgorasContainer>
-                        <SearchBar
-                            handleChange={this.handleSearch}
-                            placeholder="Find an agora" />
-
+                    {/*<AgorasContainer>
                         <AgoraList agoras={this.filterAgoras()}
                             handleDelete={this.handleDelete}
                             displayForm={this.state.displayForm}
                             handleUpdateAgora={this.handleUpdateAgora}
                         />
-                    </AgorasContainer>
+                    </AgorasContainer>*/}
 
                     <AgoraMap style={{ position: "relative" }}
                               agoras={this.filterAgoras()}
-                              isOpen={this.state.isOpen} 
-                              infoIndex={this.state.infoIndex}
-                              onToggleOpen= {this.onToggleOpen}
-                              showInfo={this.showInfo}
+                              handleDelete={this.handleDelete}
+                              handleUpdateAgora={this.handleUpdateAgora}
                     />
                 </Wrapper>
             </MainBody>
