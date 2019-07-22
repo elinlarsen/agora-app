@@ -98,7 +98,7 @@ export default class ProjectForm extends Component {
 
     if (event.target.type === "checkbox" && event.target.checked) {
       projectToUpdate[newName].value.push(newValue);
-    } else if (event.target.type == "checkbox" && !event.target.checked) {
+    } else if (event.target.type === "checkbox" && !event.target.checked) {
       let indexOfItemToUncheck = projectToUpdate[newName].value.indexOf(
         newValue
       );
@@ -113,7 +113,7 @@ export default class ProjectForm extends Component {
       value: event.target.type !== "checkbox" ? newValue : newTags,
       type: projectToUpdate[newName].type,
       children:
-        event.target.type == "checkbox"
+        event.target.type === "checkbox"
           ? Tags(projectToUpdate[newName].value)
           : projectToUpdate[newName].children
     };

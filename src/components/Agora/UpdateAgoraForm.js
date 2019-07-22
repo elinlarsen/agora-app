@@ -50,8 +50,8 @@ export default class UpdateAgoraForm extends Component {
     }
 
     handleSubmit = (event)  =>{
-        const {agora} = this.state
         event.preventDefault();
+        const {agora} = this.state      
         if (!this.checkAllFields()) return console.warn("form incomplete");
         var fd = new FormData();
 

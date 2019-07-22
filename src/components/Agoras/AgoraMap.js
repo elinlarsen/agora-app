@@ -1,5 +1,6 @@
 import React from 'react'
 import { Map, GoogleApiWrapper} from 'google-maps-react';
+
 import Geocode from "react-geocode";
 import styled from 'styled-components'
 
@@ -21,7 +22,7 @@ const mapStyles = {
 
 const AgoraMap = React.memo(function AgoraMap (props){
     Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS)
-    console.log(props.agoras)
+
     return (
         <MapParent>
             <Map
@@ -29,12 +30,23 @@ const AgoraMap = React.memo(function AgoraMap (props){
                 zoom={12}
                 style={mapStyles}
                 initialCenter={{ lat: 48.866667, lng: 2.333333}}
+                onClick={props.onMapClick}
                 defaultOptions={{
                     draggable: true, }}
             >        
             {//props.markers
             } 
-            {props.agoras.map(agora => agora.marker)
+            {props.agoras.map(agora => { return (agora.marker)
+                /*console.log("agora marker ", agora.marker)
+                return (
+                <>
+                {agora.marker}
+                {agora.infoWindow}
+                </>
+                
+                )*/}
+                //marker.addListener('click', () => infowindow.open(Map, marker))
+            )
             }       
             </Map>  
         </MapParent>        

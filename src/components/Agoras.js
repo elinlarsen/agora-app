@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import SearchBar from './Utils/SearchBar'
 import AgoraList from './Agoras/AgoraList'
 import AgoraMap from "./Agoras/AgoraMap"
+import AgoraContainer from "./Agoras/AgoraContainer"
 //import AgoraForm from "./Agora/AgoraForm"
 //import CreateButton from "./Utils/CreateButton"
 
@@ -12,7 +13,7 @@ import AgoraMap from "./Agoras/AgoraMap"
 import ajaxHandler from "../utils/ajaxHandler"
 import filterBy from "../utils/utilFunctions"
 
-import { Marker } from 'google-maps-react';
+import { Marker , InfoWindow} from 'google-maps-react';
 import Geocode from "react-geocode";
 
 import styled from 'styled-components'
@@ -57,8 +58,11 @@ export default class Agoras extends Component {
         search: "",
         agoras : [],
         agoraHandler: new ajaxHandler(process.env.REACT_APP_API_URL_, "/agoras"),
-        markers :[],
+        //markers :[],
         displayForm: false,
+        //showInfoIndex: 0,
+        //isOpen: false,
+        //showingInfoWindow: true
     } 
 
    handleSearch = (searchedText) =>{
@@ -66,16 +70,33 @@ export default class Agoras extends Component {
     this.filterMarkers()
     }
 
+    //showInfo = (index) => this.setState({showInfoIndex: index })
+
+    //handleToggle = () => this.setState({isOpen: !this.state.isOpen })
+
+    toggleInfo = (showingInfoWindow) => { showingInfoWindow=!showingInfoWindow}
+
     locationToMarker =  (agora, index, location) =>{
+        agora.showingInfoWindow=false
         const { lat, lng } = location.results[0].geometry.location; 
         let marker=<Marker
-                        key={index}
+                        key={`${index}-marker`}
                         position={{lat: lat,lng:lng}}
                         animation={3}
-                        />
+                        onClick = { () => this.toggleInfo(agora.showingInfoWindow)}
+                        //onClick={()=>{this.showInfo(index)} }
+                       // name = {agora.name}
+                        />                                       
+                        //(this.state.showInfoIndex == index ) && 
+        let infoW= <InfoWindow key={`${index}-infoWindow`}
+                               marker = {marker}
+                               visible = { this.state.isOpen }>                      
+                         <p>coucou </p>
+                    </InfoWindow>            
         agora.coords ={ lat, lng }
-        agora.marker=marker
-        
+        agora.marker=marker   
+        agora.infoWindow=infoW
+        //agora.showingInfoWindow=showingInfoWindow
         return agora
     }
 
@@ -89,6 +110,7 @@ export default class Agoras extends Component {
                 console.log("ERROR ADDRESS ----- ", err, "this address is -----", agora.address)
                 Geocode.fromAddress(agora.zipcode)
                     .then( res => {
+                        console.log("zipcode --", agora.zipcode)
                         this.locationToMarker(agora, index, res)
                         })
                     .catch(err => console.log("ERROR ZIPCODE", err, "the zipcode is ----", agora.zipcode))
@@ -166,6 +188,7 @@ export default class Agoras extends Component {
 
                     <AgoraMap style={{position: "relative"}} 
                               agoras={this.filterAgoras()}
+                              //onMapClick = { this.onMapClick }
                               />                  
                  </Wrapper> 
                  {/*this.state.displayForm && <AgoraForm 

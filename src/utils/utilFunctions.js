@@ -1,7 +1,7 @@
 export default function filterBy(search, list, by) {
   let res;
   let searchLC = search.toLowerCase();
-  search !== ""
+  search !== null
     ? (res = list.filter(item =>
         item[by]
           .toLowerCase()

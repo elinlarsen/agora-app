@@ -60,7 +60,7 @@ export default class Projects extends Component {
     projectHandler.deleteOne(event.target.name, res => console.log(res));
     let newState = this.state;
     let indexToRemove = newState.projects.findIndex(
-      project => project._id == event.target.name
+      project => project._id === event.target.name
     );
     newState.projects.splice(indexToRemove, 1);
     this.setState(newState);
