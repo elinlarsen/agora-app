@@ -47,7 +47,7 @@ export default class Projects extends Component {
     return (
       <ProjectWrapper>
         <ProjectTitle> {this.state.name} </ProjectTitle>
-        <AuthConsumer>{({ user }) => <p> {user.first_name} </p>}</AuthConsumer>
+        <AuthConsumer>{({ user }) => <p> {user.id} </p>}</AuthConsumer>
         <ProjectDescriptionRow>
           <ProjectImageContainer>
             {" "}
