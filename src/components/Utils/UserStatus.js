@@ -3,11 +3,13 @@ import {Link} from "react-router-dom";
 
 import styled from 'styled-components'
 
+import { AuthConsumer } from "../Auth/Guard";
+
 const P=styled.div`
+margin-left : 1vw; 
 color : white;  
 text-transform: uppercase; 
 `
-
 const UserOptions=styled.div`
 display : flex; 
 flex-flow: row nowrap;
@@ -18,39 +20,54 @@ padding : 0 1vw;
 const UserProfile=styled.div`
 padding : 1vw; 
 color: white; 
-
 `
-const Img =styled.div``
+const Img =styled.img`
+height: 5vh; 
+border-radius : 30px
+`
 
-export default function UserStatus(props) {
 
-    const getUserStatus = (isloggedIn) =>{
-        let status; 
-        isloggedIn 
-        ? status= {state: "Log Out", link: '/logOut'} 
-        : status = {state: "Log In", link: '/logIn'} 
-        return ( 
-            <>
-                <Link to={status.link} style={{ textDecoration: 'none' }}> <P> {status.state} </P> </Link>
-            </>)
+export default function UserStatus() {
+
+    const getUserStatus = (isloggedIn, signout) =>{
+        if (isloggedIn===true) {return (<span onClick={() => signout(res => console.log(res))}> LOG OUT </span>)}
+        else  {return (<Link to="/login" style={{ textDecoration: 'none' }}> <P> LOG IN </P> </Link>)}
     }
 
-    const createUserProfile = (isloggedIn, user) =>{
-        if(isloggedIn){
-        return (
-            <UserOptions>
-                <UserProfile> Hello {user.username}</UserProfile>
-                <Img src={user.picture} alt={user.username}/>
-            </UserOptions>
-            )
-        } 
+    const createUserProfile = (isloggedIn, user) =>{     
+        if(isloggedIn===true){
+            return (
+                <UserOptions>
+                    <UserProfile> {user.first_name}</UserProfile>
+                    <Img src={user.picture} alt={user.first_name}/>
+                </UserOptions>
+            )} 
     }
 
     return (
-        <UserOptions>
-          
-           {createUserProfile(props.logInStatus, props.userInfo)}  
-           {getUserStatus(props.logInStatus)}    
-        </UserOptions>
+        <>
+            <AuthConsumer>       
+                {({loginStatus, user, signout}) =>  {
+                    if (loginStatus===true) {
+                    return ( 
+                    <>       
+                        <UserOptions>
+                            <UserProfile> {user.first_name}</UserProfile>
+                            <Img src={user.picture} alt={user.first_name}/>
+                            <P onClick={() => signout(res => console.log(res))}> LOG OUT </P>
+                        </UserOptions> 
+                        
+                    </>
+                    )}
+                    else {return (
+                        <Link to="/login" style={{ textDecoration: 'none' }}> <P> LOG IN </P> </Link>
+                    )}
+                    //createUserProfile(loginStatus, user)
+                    //getUserStatus(loginStatus, signout)
+                    }}             
+            </AuthConsumer>
+                
+        </>
     )
 }
+

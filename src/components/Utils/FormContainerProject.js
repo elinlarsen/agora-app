@@ -16,7 +16,16 @@ const Form = styled.form`
   align-items: center;
 `;
 
+
 export default function FormContainerProject(props) {
+ 
+  let isImageUplaod;
+  if(props.imageUploader===undefined){
+    isImageUplaod = true
+  }
+  else{ isImageUplaod=false}
+
+
   return (
     <Form onSubmit={props.handleSubmit}>
       {Object.keys(props.object).map(key => {
@@ -33,6 +42,7 @@ export default function FormContainerProject(props) {
           );
       })}
 
+    {isImageUplaod===true &&
       <ImageUploader
         name="image"
         withIcon={true}
@@ -42,7 +52,7 @@ export default function FormContainerProject(props) {
         maxFileSize={5242880}
         singleImage={props.singleImage}
       />
-
+    }
       <CreateButton disabled={props.displayForm} text={props.textSubmit} />
     </Form>
   );

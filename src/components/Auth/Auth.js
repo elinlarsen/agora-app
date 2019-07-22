@@ -4,13 +4,13 @@ import LogInForm from "./LogInForm";
 import SignUpForm from "./SignUpForm";
 
 export default function Auth(props) {
-    const wantToSignIn = props.location.pathname === "/signin";
+    const wantToSignIn = props.location.pathname === "/login";
 
     var message = wantToSignIn
         ? "Don't you have an account yet"
         : "Already have an account";
 
-    var path = wantToSignIn ? "/signup" : "/signin";
+    var path = wantToSignIn ? "/signup" : "/login";
 
     function redirect(path) {
         console.log("@redirect");
