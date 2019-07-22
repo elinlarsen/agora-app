@@ -30,6 +30,7 @@ export const ActionButton = styled.a`
   font-size: ${props => props.theme.fontSizeMedium};
   width: 32%;
   border-radius: ${props => props.theme.defaultBorderRadius};
+  cursor: pointer;
 `;
 
 export const StyledTag = styled.div`

@@ -51,7 +51,11 @@ export default function Message(props) {
           {" "}
           <MessagePicture>
             {" "}
-            <img src={item.user.picture} width="100%" alt={item.user.username} />{" "}
+            <img
+              src={item.user.picture}
+              width="100%"
+              alt={item.user.username}
+            />{" "}
           </MessagePicture>
           <MessageUserName> {item.user.username} </MessageUserName>
           <MessageUserText>
@@ -66,11 +70,20 @@ export default function Message(props) {
       messagesList = (
         <MessageRow>
           <MessagePicture>
-            <img src={props.messages[0].user.picture} width="100%" alt={props.messages[0].user.username}/>{" "}
+            <img
+              src={props.messages[0].user.picture}
+              width="100%"
+              alt={props.messages[0].user.username}
+            />{" "}
           </MessagePicture>
           <MessageUserName> {props.messages[0].user.username} </MessageUserName>
           <MessageUserText> {""} </MessageUserText>
-          <MessageInputForm onSubmit={props.handleMessageSubmit}>
+          <MessageInputForm
+            onSubmit={props.handleMessageSubmit}
+            id={props.messageUserId}
+            picture={props.messageUserPicture}
+            username={props.messageUserUsername}
+          >
             {" "}
             <MessageUserInput
               value={props.text}

@@ -23,8 +23,7 @@ export default class Projects extends Component {
     status: null
   };
 
-  componentDidMount = () => {
-    //let expandItem = queryString.parse(this.props.location.search).expand;
+  refreshState = () => {
     let expandItem = "members";
     //console.log("expand item is " + expandItem);
     projectHandler.getOne(
@@ -43,11 +42,47 @@ export default class Projects extends Component {
     );
   };
 
+  componentDidMount = () => {
+    //let expandItem = queryString.parse(this.props.location.search).expand;
+    this.refreshState();
+  };
+
+  addUser = e => {
+    let newMembers = this.state.members;
+
+    console.log(newMembers.filter(a => a._id == e.target.id).length);
+
+    if (newMembers.filter(a => a._id == e.target.id).length == 0) {
+      newMembers.push(e.target.id);
+      projectHandler.updateOne(
+        this.state._id,
+        {
+          members: newMembers
+        },
+        res => {
+          console.log(res);
+          this.refreshState();
+        }
+      );
+
+      let stateCopy = { ...this.state };
+      stateCopy.members = newMembers;
+      this.setState(stateCopy);
+    }
+  };
+
   render() {
     return (
       <ProjectWrapper>
         <ProjectTitle> {this.state.name} </ProjectTitle>
-        <AuthConsumer>{({ user }) => <p> {user.id} </p>}</AuthConsumer>
+        <AuthConsumer>
+          {({ user }) => (
+            <button id={user.id} onClick={this.addUser}>
+              {" "}
+              Join{" "}
+            </button>
+          )}
+        </AuthConsumer>
         <ProjectDescriptionRow>
           <ProjectImageContainer>
             {" "}
