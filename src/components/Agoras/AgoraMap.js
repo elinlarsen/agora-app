@@ -85,9 +85,7 @@ function setMarkerAndPlace(props,marker,e, agora){
                     {<>
                         <ImageContainer><img src={selectedAgora.picture} alt={selectedAgora.name} height="100%" width="100%" /></ImageContainer>
                         <Name>{selectedAgora.name}</Name>
-                        {//<Link style={{textDecoration : 'none', color : '#0C214A' }} to={`/agora/${selectedAgora._id}`}> Discovers </Link>
-                        }
-                        <a style={{textDecoration : 'none', color : '#0C214A' }} href={`/agora/${selectedAgora._id}`}> Discovers </a>
+                        <a style={{textDecoration : 'none', color : '#0C214A' }} href={`/agora/${selectedAgora._id}`}> Discover </a>
                         
                     </>
                     }

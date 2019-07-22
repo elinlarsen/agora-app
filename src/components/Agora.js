@@ -24,6 +24,7 @@ flex-flow : column wrap;
 justify-content : center; 
 align-items:center; 
 padding : 1vh; 
+height: 150vh; 
 `
 
 
@@ -88,6 +89,22 @@ height : 15vh;
 
   }`
 
+  const MembersWrapper=styled.div`
+  width : 100vw;
+  `
+
+  const Number=styled.div`
+  width : inherit; 
+  height : 30vh; 
+  background-color: #0C214A; 
+  color : white;
+  font-size : 3rem; 
+  display : flex; 
+  flex-flow: column nowrap; 
+  justify-content: flex-start; 
+  align-items: center; 
+  padding-bottom : 5vh
+  `
 
 export default class Agora extends Component {
 
@@ -164,7 +181,6 @@ export default class Agora extends Component {
 
                 <CTAwrapper> 
                     <SearchBar handleChange={this.handleSearch} placeholder="Find a project by its name."/>
-                    <Button  type="button" onClick={() => this.handleJoinAgora(this.state.agora._id)}> Join this agora. </Button>     
                     <Button  type="button" onClick={() => this.handleAddProject(this.state.agora._id)}> Create a project </Button>
                 </CTAwrapper>
 
@@ -175,6 +191,15 @@ export default class Agora extends Component {
                                     key={projectItem._id}/>
                      ))}        
                  </ProjectsGrid>
+
+                 <MembersWrapper> 
+                     <Number> 
+                            <p> {this.state.agora.members.length} members </p>
+                            <Button  type="button" onClick={() => this.handleJoinAgora(this.state.agora._id)}> Join now! </Button>                         
+                     </Number>
+
+
+                 </MembersWrapper>
 
             </Main>
         )
