@@ -1,5 +1,5 @@
 import React from 'react'
-import { Map, GoogleApiWrapper} from 'google-maps-react';
+import { Map, GoogleApiWrapper,  Marker, InfoWindow} from 'google-maps-react';
 
 import Geocode from "react-geocode";
 import styled from 'styled-components'
@@ -27,27 +27,30 @@ const AgoraMap = React.memo(function AgoraMap (props){
         <MapParent>
             <Map
                 google={props.google}
-                zoom={12}
+                zoom={10}
                 style={mapStyles}
                 initialCenter={{ lat: 48.866667, lng: 2.333333}}
-                onClick={props.onMapClick}
-                defaultOptions={{
-                    draggable: true, }}
-            >        
-            {//props.markers
-            } 
-            {props.agoras.map(agora => { return (agora.marker)
-                /*console.log("agora marker ", agora.marker)
-                return (
-                <>
-                {agora.marker}
-                {agora.infoWindow}
-                </>
-                
-                )*/}
-                //marker.addListener('click', () => infowindow.open(Map, marker))
-            )
-            }       
+                defaultOptions={{draggable: true, }}
+            > 
+           
+                {props.agoras.map((agora, index) => {
+                    let indexMarker=`${index}-marker`
+                    let indexInfo=`${index}-info`
+                    console.log("coucou !!", agora)
+                    console.log("isOpen", props.isOpen)
+                    return( 
+                        <Marker onClick={() => props.showInfo(indexMarker)}
+                                key={indexMarker}
+                                position={{ lat: agora.geocode.lat, lng: agora.geocode.lng }}
+                                name = {agora.name}>
+
+                                {(props.isOpen ) &&
+                                    <InfoWindow key={indexInfo}
+                                                onCloseClick={props.onToggleOpen}>
+                                    <span>Hello Agora {agora.name}</span>
+                                    </InfoWindow>}
+                        </Marker>)               
+                })}            
             </Map>  
         </MapParent>        
     ) 

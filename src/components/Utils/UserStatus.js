@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { AuthConsumer } from "../Auth/Guard";
 
 const P=styled.div`
-margin-left : 1vw; 
+margin-left : 2vw; 
 color : white;  
 text-transform: uppercase; 
 `
@@ -31,7 +31,12 @@ export default function UserStatus() {
 
     const getUserStatus = (isloggedIn, signout) =>{
         if (isloggedIn===true) {return (<span onClick={() => signout(res => console.log(res))}> LOG OUT </span>)}
-        else  {return (<Link to="/login" style={{ textDecoration: 'none' }}> <P> LOG IN </P> </Link>)}
+        else  {return (
+        <>
+        <Link to="/signup" style={{ textDecoration: 'none' }}> <P> SIGN UP </P> </Link>
+        <Link to="/login" style={{ textDecoration: 'none' }}> <P> LOG IN </P> </Link>
+        </>
+        )}
     }
 
     const createUserProfile = (isloggedIn, user) =>{     
@@ -60,7 +65,10 @@ export default function UserStatus() {
                     </>
                     )}
                     else {return (
-                        <Link to="/login" style={{ textDecoration: 'none' }}> <P> LOG IN </P> </Link>
+                        <UserOptions>
+                            <Link to="/signup" style={{ textDecoration: 'none' }}> <P> SIGN UP </P> </Link>
+                            <Link to="/login" style={{ textDecoration: 'none' }}> <P> LOG IN </P> </Link>
+                        </UserOptions> 
                     )}
                     //createUserProfile(loginStatus, user)
                     //getUserStatus(loginStatus, signout)
