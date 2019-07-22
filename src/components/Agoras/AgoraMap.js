@@ -16,8 +16,8 @@ height: 70vh;
 
 const ImageContainer=styled.div`
 display: flex;
-height: 20vh;
-width: 30vw; 
+height: 25vh;
+width: 20vw; 
 `
 const Container=styled.div`
 display : flex; 
