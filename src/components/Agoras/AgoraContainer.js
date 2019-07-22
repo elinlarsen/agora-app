@@ -37,6 +37,7 @@ font-size: 1.2rem;
 `
 
 export default function AgoraContainer(props) {
+    console.log("props.agora",props.agora)
     return(
         <Container>
             <ImageContainer>
