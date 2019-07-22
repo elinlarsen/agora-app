@@ -37,9 +37,9 @@ export default class App extends Component {
             <Route exact path="/agoras" component={Agoras} />
             <Route exact path="/projects" component={Projects} />
             <Route exact path="/agora/:id" component={Agora} />
-            <ProtectedRoute exact path="/agoracreate" component={UpdateAgoraForm} />
-            <ProtectedRoute exact path="/projectcreate" component={ProjectForm} />
-            <ProtectedRoute exact path="/projectcreate/:id" component={ProjectForm} />
+            <Route exact path="/agoracreate" component={UpdateAgoraForm} />
+            <Route exact path="/projectcreate" component={ProjectForm} />
+            <Route exact path="/projectcreate/:id" component={ProjectForm} />
             <Route exact path="/project/:id" component={Project} />
             <Route exact path="/user" component={User} />
             <Route exact path={["/signup","/login" ]} component={Auth} />

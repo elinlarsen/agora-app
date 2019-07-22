@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //components
 import SearchBar from './Utils/SearchBar'
@@ -13,12 +13,14 @@ import AgoraContainer from "./Agoras/AgoraContainer"
 import ajaxHandler from "../utils/ajaxHandler"
 import filterBy from "../utils/utilFunctions"
 
-import { Marker , InfoWindow} from 'google-maps-react';
 import Geocode from "react-geocode";
 
 import styled from 'styled-components'
 
-const MainBody=styled.div`
+
+Geocode.enableDebug();
+
+const MainBody = styled.div`
 display : flex; 
 flex-flow: column; 
 justify-content: flex-start; 
@@ -26,7 +28,7 @@ align-items: center;
 padding: 0 1vw; 
 height: inherit; 
 `
-const Wrapper=styled.div`
+const Wrapper = styled.div`
 display : flex; 
 flex-flow: row wrap; 
 justify-content: space-between; 
@@ -34,7 +36,7 @@ align-items: flex-start;
 height: inherit; 
 `
 
-const SearchContainer=styled.div`
+const CTAContainer = styled.div`
 height: 10vh; 
 width : 100%; 
 display : flex; 
@@ -44,7 +46,7 @@ font-weigth: bold;
 font-size : 2rem; 
 `
 
-const AgorasContainer=styled.div`
+const AgorasContainer = styled.div`
 display : flex; 
 flex-flow: column; 
 justify-content: flex-start; 
@@ -54,148 +56,123 @@ padding-bottom : 7vh `
 
 export default class Agoras extends Component {
 
-    state={
+    state = {
         search: "",
-        agoras : [],
+        agoras: [],
         agoraHandler: new ajaxHandler(process.env.REACT_APP_API_URL_, "/agoras"),
-        //markers :[],
         displayForm: false,
-        //showInfoIndex: 0,
-        //isOpen: false,
-        //showingInfoWindow: true
-    } 
-
-   handleSearch = (searchedText) =>{
-    this.setState({search: searchedText.toLowerCase()})
-    this.filterMarkers()
+        isOpen: false,
+        infoIndex: null
     }
 
-    //showInfo = (index) => this.setState({showInfoIndex: index })
-
-    //handleToggle = () => this.setState({isOpen: !this.state.isOpen })
-
-    toggleInfo = (showingInfoWindow) => { showingInfoWindow=!showingInfoWindow}
-
-    locationToMarker =  (agora, index, location) =>{
-        agora.showingInfoWindow=false
-        const { lat, lng } = location.results[0].geometry.location; 
-        let marker=<Marker
-                        key={`${index}-marker`}
-                        position={{lat: lat,lng:lng}}
-                        animation={3}
-                        onClick = { () => this.toggleInfo(agora.showingInfoWindow)}
-                        //onClick={()=>{this.showInfo(index)} }
-                       // name = {agora.name}
-                        />                                       
-                        //(this.state.showInfoIndex == index ) && 
-        let infoW= <InfoWindow key={`${index}-infoWindow`}
-                               marker = {marker}
-                               visible = { this.state.isOpen }>                      
-                         <p>coucou </p>
-                    </InfoWindow>            
-        agora.coords ={ lat, lng }
-        agora.marker=marker   
-        agora.infoWindow=infoW
-        //agora.showingInfoWindow=showingInfoWindow
-        return agora
+    onToggleOpen= (isOpen) => {
+        this.setState({isOpen  : !isOpen}, () => console.log("new isopen", isOpen))
     }
 
-    getCoordinatesAndMarkers = (agoras) =>{
-        agoras.map( (agora, index) => {
-            return Geocode.fromAddress(agora.address)
-            .then(response => {
-                this.locationToMarker(agora, index, response)
-                })
-            .catch(err => {
-                console.log("ERROR ADDRESS ----- ", err, "this address is -----", agora.address)
-                Geocode.fromAddress(agora.zipcode)
-                    .then( res => {
-                        console.log("zipcode --", agora.zipcode)
-                        this.locationToMarker(agora, index, res)
-                        })
-                    .catch(err => console.log("ERROR ZIPCODE", err, "the zipcode is ----", agora.zipcode))
+    showInfo = (index) =>{
+        let copy=this.state
+        copy.infoIndex=index
+        copy.isOpen=!this.state.isOpen
+        this.setState(copy, () => console.log("new state after show info fn : ", this.state))
+    }
+
+
+    handleSearch = (searchedText) => {
+        this.setState({ search: searchedText.toLowerCase() }, () => {
+        })
+    }
+
+    getCoordinatesAndMarkers = (agoras) => {
+        const codes = new Array(agoras.length);
+        return new Promise((resolve, reject) => {
+            agoras.forEach(async (agora, i) => {
+                try {
+                    const geocode = await Geocode.fromAddress(agora.address);
+                    codes[i] = geocode.results[0].geometry.location;
+                    const count = codes.reduce((acc, v) => { if (v) acc += 1; return acc }, 0)
+                    if (count === agoras.length) resolve(codes)
+
+                } catch (error) {reject(error)}
             })
         })
     }
 
     filterAgoras = () => filterBy(this.state.search, this.state.agoras, "name")
 
-
-    filterMarkers = () =>{
-        let filteredAgoras= this.filterAgoras()
-        this.getCoordinatesAndMarkers(filteredAgoras)
-    }   
-
-    componentDidMount() {  
-        this.state.agoraHandler.getAll(dbRes => 
-            {
-                this.setState({agoras: dbRes})
-                this.filterMarkers()
-        })             
-    } 
-
-    handleDisplayForm = () =>{
-        this.setState({displayForm: !this.state.displayForm})
+    componentDidMount() {
+        this.state.agoraHandler.getAll(async dbRes => {
+            this.getCoordinatesAndMarkers(dbRes)
+                .then(codes => {
+                    console.log("coucou dbres", dbRes)
+                    dbRes.forEach((agora, i) => {
+                        agora.geocode = codes[i];
+                    })
+                    this.setState({ agoras: dbRes })
+                })
+        })
     }
 
-    handleAddAgora = (newAgora) =>{
-        let copy=[...this.state.agoras]
-        this.getCoordinatesAndMarkers([newAgora]) 
+    handleDisplayForm = () => {
+        this.setState({ displayForm: !this.state.displayForm })
+    }
+
+    handleAddAgora = (newAgora) => {
+        let copy = [...this.state.agoras]
+        this.getCoordinatesAndMarkers([newAgora])
         copy.push(newAgora)
-         this.setState({
-            agoras : copy,
-            displayForm: !this.state.displayForm})
+        this.setState({
+            agoras: copy,
+            displayForm: !this.state.displayForm
+        })
     }
 
-    handleDelete = (agora_id) =>{
-        this.state.agoraHandler.deleteOne(agora_id, dbRes =>{
-            let deletedAgoraInDb=dbRes      
-            let copy=[...this.state.agoras]
+    handleDelete = (agora_id) => {
+        this.state.agoraHandler.deleteOne(agora_id, dbRes => {
+            let deletedAgoraInDb = dbRes
+            let copy = [...this.state.agoras]
             let index = copy.indexOf(deletedAgoraInDb);
-            copy.splice(index, 1) 
+            copy.splice(index, 1)
             this.setState({
                 agoras: copy
             }, () => console.log("deleted in the state"))
         })
     }
 
-    handleUpdateAgora = ()=>{
+    handleUpdateAgora = () => {
         console.log("coucou")
-
     }
 
     render() {
-       console.log(" ----- ----- ----- ----- -----")
+        console.log(" renda ----- ----- ----- ----- -----")
         return (
-            <MainBody>   
-                <SearchContainer>
-                    <Link style={{textDecoration : 'none', color : '#0C214A'}} to={{ pathname: '/agoracreate',state: {action : "create"}}}>
-                            Create your agora!  
-                    </Link> 
-                </SearchContainer>
-   
-                <Wrapper> 
-                     
+            <MainBody>
+                <CTAContainer>
+                    <Link style={{ textDecoration: 'none', color: '#0C214A' }} to={{ pathname: '/agoracreate', state: { action: "create" } }}>
+                        Create your agora!
+                    </Link>
+                </CTAContainer>
+
+                <Wrapper>
                     <AgorasContainer>
-                        <SearchBar handleChange={this.handleSearch} 
-                                   placeholder="Find an agora"/>
+                        <SearchBar
+                            handleChange={this.handleSearch}
+                            placeholder="Find an agora" />
+
                         <AgoraList agoras={this.filterAgoras()}
-                                   handleDelete={this.handleDelete}
-                                   displayForm={this.state.displayForm}
-                                   handleUpdateAgora={this.handleUpdateAgora}                   
+                            handleDelete={this.handleDelete}
+                            displayForm={this.state.displayForm}
+                            handleUpdateAgora={this.handleUpdateAgora}
                         />
                     </AgorasContainer>
 
-                    <AgoraMap style={{position: "relative"}} 
+                    <AgoraMap style={{ position: "relative" }}
                               agoras={this.filterAgoras()}
-                              //onMapClick = { this.onMapClick }
-                              />                  
-                 </Wrapper> 
-                 {/*this.state.displayForm && <AgoraForm 
-                                                displayForm={this.state.displayForm} 
-                                                addNewAgora={this.handleAddAgora}/>}
-                {<CreateButton clbk={this.handleDisplayForm} 
-                              text="Create your Agora!"/>  */}
+                              isOpen={this.state.isOpen} 
+                              infoIndex={this.state.infoIndex}
+                              onToggleOpen= {this.onToggleOpen}
+                              showInfo={this.showInfo}
+                    />
+                </Wrapper>
             </MainBody>
         )
     }

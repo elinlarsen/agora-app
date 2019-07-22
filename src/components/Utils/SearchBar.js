@@ -10,12 +10,11 @@ padding: 1vh;
 font-size : 1.3rem;
 color : #0C214A; 
 margin: 1vh; 
-
 `
+
 
 export default function SearchBar(props) {
     return (
-        <SearchStyle type="text" onChange={(e) => props.handleChange(e.target.value)} 
-        placeholder={props.placeholder} /> 
-    )
+        <SearchStyle  type="text" onChange={(e) => props.handleChange(e.target.value)} 
+    placeholder={props.placeholder} /> )
 }
