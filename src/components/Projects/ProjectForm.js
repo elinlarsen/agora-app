@@ -212,7 +212,6 @@ const StatusOptions = props => {
   const items = enumList.map(enumItem => (
     <option value={enumItem}> {enumItem} </option>
   ));
-  //const items = <option value={"a"}> {"a"} </option>;
   return items;
 };
 

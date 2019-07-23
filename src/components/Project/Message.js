@@ -1,44 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-
-const MessageRow = styled.div`
-  display: flex;
-  padding: 5px;
-  justify-content: flex-start;
-`;
-
-const MessagePicture = styled.div`
-  width: 3%;
-`;
-
-const MessageUserName = styled.p`
-  font-weight: bold;
-  margin: 10px;
-  padding: 0px 5px;
-  width: 20%;
-`;
-
-const MessageUserText = styled.p`
-  margin: 10px;
-  padding: 0px 5px;
-  width: 30%;
-`;
-
-const MessageUserInput = styled.input`
-  margin: 10px;
-  padding: 5px 5px;
-  width: 100%;
-`;
-
-const MessageInputForm = styled.form`
-  width: 30%;
-  display: flex;
-`;
-
-const MessageInputButton = styled.input`
-  padding: 5px;
-  margin: 10px;
-`;
+import {
+  MessageRow,
+  MessagePicture,
+  MessageUserName,
+  MessageUserText,
+  MessageUserInput,
+  MessageInputForm,
+  MessageInputButton
+} from "../Utils/StyledComponents";
 
 export default function Message(props) {
   let messagesList = null;

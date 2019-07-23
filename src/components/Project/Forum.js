@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ajaxHandler from "../../utils/ajaxHandler.js";
 import Message from "./Message.js";
 import { AuthConsumer } from "../Auth/Guard";
+import { ForumContainer, ForumTitle } from "../Utils/StyledComponents";
 
 export default class Forum extends Component {
   constructor(props) {
@@ -56,8 +57,13 @@ export default class Forum extends Component {
     //let messagesForProject = [];
 
     this.messagesHandler.getAll(res => {
+      console.log(res.filter(a => a.project === this.props.projectId));
       this.setState({
-        messages: res.filter(a => a.project === this.props.projectId),
+        messages: /*res == []
+            ?*/ res.filter(
+          a => a.project === this.props.projectId
+        ) /*
+            : [{ user: { username: null } }]*/,
         currentPost: ""
       });
     }, "user");
@@ -71,8 +77,6 @@ export default class Forum extends Component {
 
     let emptyMessage = [{ user: userDetails }];
 
-    if (this.state.messages[0])
-      console.log(this.state.messages[0].user.username);
     return (
       <AuthConsumer>
         {({ user }) => (
@@ -80,40 +84,25 @@ export default class Forum extends Component {
             {" "}
             <ForumTitle> Recent contributions </ForumTitle>{" "}
             <Message messages={this.state.messages} />
-            <Message
-              type="empty"
-              text={this.state.currentPost}
-              messageUserId={user.id}
-              messageUserPicture={user.picture}
-              messageUserUsername={user.username}
-              messages={[
-                { user: { picture: user.picture, username: user.username } }
-              ]}
-              handleMessageSubmit={this.submitMessage}
-              handleChange={this.handleChange}
-            />
+            {this.props.ableToPost ? (
+              <Message
+                type="empty"
+                text={this.state.currentPost}
+                messageUserId={user.id}
+                messageUserPicture={user.picture}
+                messageUserUsername={user.username}
+                messages={[
+                  { user: { picture: user.picture, username: user.username } }
+                ]}
+                handleMessageSubmit={this.submitMessage}
+                handleChange={this.handleChange}
+              />
+            ) : (
+              <div />
+            )}
           </ForumContainer>
         )}
       </AuthConsumer>
     );
   }
 }
-
-const ForumContainer = styled.div`
-  width: 72%;
-  border-style: solid;
-  padding: 10px;
-  border-style: solid;
-  border-color: darkgray;
-  border-radius: 5px;
-`;
-
-const ForumTitle = styled.p`
-  padding: 10px;
-  margin: 0px;
-  background-color: #21222a;
-  font-weight: bold;
-  color: white;
-  font-size: 20px;
-  border-radius: 5px;
-`;
