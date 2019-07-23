@@ -90,12 +90,7 @@ height : 15vh;
   }`
 
   const MembersWrapper=styled.div`
-  width : 100vw;
-  `
-
-  const Number=styled.div`
-  width : inherit; 
-  height : 30vh; 
+  height : fit-content; 
   background-color: #0C214A; 
   color : white;
   font-size : 3rem; 
@@ -104,7 +99,37 @@ height : 15vh;
   justify-content: flex-start; 
   align-items: center; 
   padding-bottom : 5vh
+  width : 100vw;
   `
+
+  const MemberList=styled.div`
+  height: 30vh; 
+  width : 100vw;
+  display : flex; 
+ flex-flow : row nowrap; 
+ justify-content: center; 
+ align-items : center; 
+  `
+
+  const MemberInfo=styled.div`
+  height : inherit; 
+  width : inherit; 
+  display : flex; 
+  flex-flow : column nowrap; 
+  justify-content: center; 
+  align-items : center; 
+  `
+
+  const MemberPic=styled.img`
+  height : 10vh; 
+  border-radius : 5vh; 
+  `
+  const MemberName=styled.p`
+  font-size : 1rem; 
+  `
+
+
+
 
 export default class Agora extends Component {
 
@@ -112,10 +137,11 @@ export default class Agora extends Component {
         search: "",
         agora : {
             projects: [],
-            members: [],
-            picture: []
+            members: [{picture : null}],
+            picture: [""]
         },
         agoraHandler: new ajaxHandler(process.env.REACT_APP_API_URL_, "/agoras"),
+        userHandler: new ajaxHandler(process.env.REACT_APP_API_URL_, "/users"),
         displayForm: false,
     } 
 
@@ -126,18 +152,20 @@ export default class Agora extends Component {
     filterProjects = () => filterBy(this.state.search, this.state.agora.projects, "name")
 
     componentDidMount = () => {
-        let expandItem = "projects";
-        this.state.agoraHandler.getOne(
+        let expandItem1 = "projects";
+        let expandItem2 = "members";
+        let membersPopulated=[];
+
+        this.state.agoraHandler.getOneExpandTwo(
             this.props.match.params.id,
-            data => {
-                this.setState({ agora :  data }              
-                )}
+            agora => {this.setState({ agora: agora })}
             ,
-            expandItem
+            expandItem1, 
+            expandItem2,
         );
 
-    
-      };
+
+    };
 
       handleDelete = (agora_id) => {
         this.state.agoraHandler.deleteOne(agora_id, dbRes => {
@@ -153,16 +181,10 @@ export default class Agora extends Component {
 
     handleJoinAgora =()=>{}
 
-    handleAddProject = (newProject) =>{
-        let copy=this.state.agora
-        copy.projects.push(newProject._id)
-        this.setState({agora : copy}, () => console.log("agora with new project : ", this.state.agora))
-
-    }
 
     render() {
         console.log("this.state.agora----", this.state.agora)
-        console.log("filterProjects()", this.filterProjects())
+        console.log("members ---", this.state.agora.members)
         return (
             <Main>
                 <Info>
@@ -206,14 +228,19 @@ export default class Agora extends Component {
                                     key={projectItem._id}/>
                      ))}        
                  </ProjectsGrid>
-
                  <MembersWrapper> 
-                     <Number> 
-                            <p> {this.state.agora.members.length} members </p>
-                            <Button  type="button" onClick={() => this.handleJoinAgora(this.state.agora._id)}> Join now! </Button>                         
-                     </Number>
-
-
+                    <p> {this.state.agora.members.length} members </p>
+                    <Button  type="button" onClick={() => this.handleJoinAgora(this.state.agora._id)}> Join now! </Button>                         
+                     <MemberList> 
+                         {this.state.agora.members.map ((m, index) => {
+                            return(
+                                    <MemberInfo key={index}>
+                                        < MemberPic src={m.picture}/>
+                                        < MemberName> {m.username} </ MemberName>
+                                    </MemberInfo>
+                         )})
+                        }
+                    </MemberList>
                  </MembersWrapper>
 
             </Main>

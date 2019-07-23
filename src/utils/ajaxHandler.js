@@ -37,6 +37,20 @@ class ajaxHandler {
       );
   }
 
+  getOneExpandTwo(id, clbk, expandItem1, expandItem2){
+    this.instance
+    .get(`${this.endpoint}/${id}/?expand=${expandItem1}&expand=${expandItem2}`)
+    .then(serverRes => {
+      clbk(serverRes.data);
+    })
+    .catch(serverErr =>
+      console.log(
+        "ajaxhandler getOne function error : ERROR WHILE GETTING ONE DATA : ",
+        serverErr
+      )
+    );
+  }
+
   createOne(data, clbk) {
     this.instance
       .post(
