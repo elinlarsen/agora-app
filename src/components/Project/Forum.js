@@ -15,10 +15,10 @@ export default class Forum extends Component {
       currentPost: null
     };
 
-    this.messagesHandler = new ajaxHandler("http://localhost:5000", "messages");
+    this.messagesHandler = new ajaxHandler("http://localhost:5000", "/messages");
     this.messagesHandlerPost = new ajaxHandler(
       "http://localhost:5000",
-      "messages/new"
+      "/messages/new"
     );
   }
 
