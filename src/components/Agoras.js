@@ -50,6 +50,7 @@ export default class Agoras extends Component {
   };
 
   getCoordinatesAndMarkers = agoras => {
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS)
     const codes = new Array(agoras.length);
     return new Promise((resolve, reject) => {
       agoras.forEach(async (agora, i) => {
