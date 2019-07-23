@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 // Define Theme
 
 export const mainTheme = {
@@ -19,7 +20,7 @@ export const mainTheme = {
 
 // Define Utils Components
 
-export const ActionButton = styled.a`
+export const ActionButton = styled(Link)`
   display: block;
   background-color: ${props => props.theme.color2};
   padding: ${props => props.theme.defaultPaddingLarge};
@@ -219,7 +220,7 @@ export const HR = styled.hr`
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   padding-top: 20px;

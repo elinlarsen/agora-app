@@ -16,9 +16,9 @@ const ActionButtonResized = styled(ActionButton)`
 export default function CallToAction() {
   return (
     <ButtonWrapperResized>
-      <ActionButtonResized href="signup"> Sign Up </ActionButtonResized>
-      <ActionButtonResized href="login"> Log In </ActionButtonResized>
-      <ActionButtonResized href="about"> About </ActionButtonResized>
+      <ActionButtonResized to="/signup"> Sign Up </ActionButtonResized>
+      <ActionButtonResized to="/login"> Log In </ActionButtonResized>
+      <ActionButtonResized to="/about"> About </ActionButtonResized>
     </ButtonWrapperResized>
   );
 }

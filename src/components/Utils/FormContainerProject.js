@@ -16,18 +16,16 @@ const Form = styled.form`
   align-items: center;
 `;
 
-
 export default function FormContainerProject(props) {
- 
   let isImageUplaod;
-  if(props.imageUploader===undefined){
-    isImageUplaod = true
+  if (props.imageUploader === undefined) {
+    isImageUplaod = true;
+  } else {
+    isImageUplaod = false;
   }
-  else{ isImageUplaod=false}
-
 
   return (
-    <Form onSubmit={props.handleSubmit}>
+    <Form id={props.id} onSubmit={props.handleSubmit}>
       {Object.keys(props.object).map(key => {
         if (!props.exceptions.includes(key))
           return (
@@ -42,17 +40,17 @@ export default function FormContainerProject(props) {
           );
       })}
 
-    {isImageUplaod===true &&
-      <ImageUploader
-        name="image"
-        withIcon={true}
-        buttonText="Upload an image"
-        onChange={props.onDrop}
-        imgExtension={[".jpg", ".gif", ".png", ".gif"]}
-        maxFileSize={5242880}
-        singleImage={props.singleImage}
-      />
-    }
+      {isImageUplaod === true && (
+        <ImageUploader
+          name="image"
+          withIcon={true}
+          buttonText="Upload an image"
+          onChange={props.onDrop}
+          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+          maxFileSize={5242880}
+          singleImage={props.singleImage}
+        />
+      )}
       <CreateButton disabled={props.displayForm} text={props.textSubmit} />
     </Form>
   );

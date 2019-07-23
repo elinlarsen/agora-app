@@ -20,7 +20,9 @@ export default class Projects extends Component {
     description: null,
     picture: null,
     members: [],
-    status: null
+    status: null,
+    admin: null,
+    agora: null
   };
 
   refreshState = () => {
@@ -35,7 +37,8 @@ export default class Projects extends Component {
           description: data.description,
           picture: data.picture,
           members: data.members,
-          status: data.status
+          status: data.status,
+          admin: data.admin
         });
       },
       expandItem
@@ -76,13 +79,16 @@ export default class Projects extends Component {
       <ProjectWrapper>
         <ProjectTitle> {this.state.name} </ProjectTitle>
         <AuthConsumer>
-          {({ user }) => (
-            <button id={user.id} onClick={this.addUser}>
-              {" "}
-              Join{" "}
-            </button>
-          )}
+          {({ user }) =>
+            this.state.members.filter(a => a._id == user.id).length == 0 ? (
+              <ActionButton id={user.id} onClick={this.addUser}>
+                {" "}
+                Join{" "}
+              </ActionButton>
+            ) : null
+          }
         </AuthConsumer>
+
         <ProjectDescriptionRow>
           <ProjectImageContainer>
             {" "}
@@ -99,7 +105,9 @@ export default class Projects extends Component {
           </ProjectDescriptionAndStatusWrapper>
         </ProjectDescriptionRow>
         <ProjectDescriptionRow>
-          <Members membersList={this.state.members}> </Members>
+          <Members membersList={this.state.members} admin={this.state.admin}>
+            {" "}
+          </Members>
           <Forum projectId={this.state._id}> </Forum>
         </ProjectDescriptionRow>
       </ProjectWrapper>

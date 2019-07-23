@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import FormContainerProject from "../Utils/FormContainerProject.js";
 import ajaxHandler from "../../utils/ajaxHandler";
 import { changeDateFormat } from "../../utils/utilFunctions";
+import { AuthConsumer } from "../Auth/Guard";
 
 export default class ProjectForm extends Component {
   constructor(props) {
@@ -133,7 +134,6 @@ export default class ProjectForm extends Component {
         );
       else if (["tags"].includes(item)) {
         currentProject[item].value.forEach(key => {
-          console.log(key);
           formData.append([item], key);
         });
       } else {
@@ -141,32 +141,16 @@ export default class ProjectForm extends Component {
       }
     });
 
-    /*  if (typeof currentProject[item].value === "object" && item !== "image") {
-        console.log("HEY I AM" + currentProject[item].value);
-        const stringifiedArr = JSON.stringify(currentProject[item].value);
-        formData.append([item], stringifiedArr);
-      } else if (
-        typeof currentProject[item].value === "object" &&
-        item == "image" &&
-        currentProject[item].value[0] !== undefined
-      ) {
-        formData.set(
-          "picture",
-          currentProject[item].value[0],
-          currentProject[item].value[0].name
-        );
-      } else {
-        formData.append(item, currentProject[item].value);
-      }
-    });*/
+    formData.append("admin", event.target.id);
+    formData.append("members", event.target.id);
 
-    console.log(formData.keys());
+    console.log(event.target);
 
-    console.log("FORM DATA IS");
+    /*    console.log("FORM DATA IS");
     for (var key of formData.keys()) {
       console.log(key);
       console.log(formData.getAll(key));
-    }
+    }*/
 
     /* let values = {};
     for (let key in this.state.project) {
@@ -185,6 +169,10 @@ export default class ProjectForm extends Component {
         }
       );
     } else {
+      /* let dataToPost = { ...formData };
+      dataToPost.admin = "5d35cd748a4b621cecf870c1";
+      console.log(dataToPost); */
+
       this.state.createProjectHandler.createOne(formData, dbRes => {
         this.setState({ displayForm: !this.state.displayForm });
         this.props.history.push("/projects");
@@ -209,19 +197,24 @@ export default class ProjectForm extends Component {
 
   render() {
     return (
-      <>
-        {this.state.displayForm}
-        <FormContainerProject
-          exceptions={["picture", "members", "public"]}
-          handleSubmit={this.handleSubmit}
-          object={this.state.project}
-          handleChange={this.handleChange}
-          onDrop={this.onDrop}
-          singleImage={this.singleImage}
-          displayForm={this.state.displayForm}
-          textSubmit="Submit your new Project!"
-        />
-      </>
+      <AuthConsumer>
+        {({ user }) => (
+          <>
+            {this.state.displayForm}
+            <FormContainerProject
+              id={user.id}
+              exceptions={["picture", "members", "public"]}
+              handleSubmit={this.handleSubmit}
+              object={this.state.project}
+              handleChange={this.handleChange}
+              onDrop={this.onDrop}
+              singleImage={this.singleImage}
+              displayForm={this.state.displayForm}
+              textSubmit="Submit your new Project!"
+            />
+          </>
+        )}
+      </AuthConsumer>
     );
   }
 }

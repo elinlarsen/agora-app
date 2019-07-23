@@ -2,16 +2,22 @@ import React from "react";
 import styled from "styled-components";
 
 export default function Members(props) {
+  console.log(props.admin);
+  console.log(props.membersList);
+
   const listItemsUsernames = props.membersList.map(item => (
     <React.Fragment>
       <PictureAndNameContainer>
         <MemberPicture>
           {" "}
-          <img src={item.picture} width="100%" alt={item.name}/>
+          <img src={item.picture} width="100%" alt={item.name} />
         </MemberPicture>
         <MemberName>
           {" "}
-          <p> {item.username} </p>{" "}
+          <p>
+            {" "}
+            {item.username} {item._id == props.admin ? "(admin)" : ""}
+          </p>{" "}
         </MemberName>
       </PictureAndNameContainer>
     </React.Fragment>
