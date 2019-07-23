@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Members from "./Utils/Members.js";
 import Forum from "./Project/Forum.js";
-import styled from "styled-components";
 import ajaxHandler from "../utils/ajaxHandler.js";
 import Status from "./Project/Status.js";
 import {
@@ -34,7 +33,6 @@ export default class Projects extends Component {
 
   refreshState = () => {
     let expandItem = "members";
-    //console.log("expand item is " + expandItem);
     projectHandler.getOne(
       this.props.match.params.id,
       data => {
@@ -53,7 +51,6 @@ export default class Projects extends Component {
   };
 
   componentDidMount = () => {
-    //let expandItem = queryString.parse(this.props.location.search).expand;
     this.refreshState();
   };
 
@@ -91,13 +88,6 @@ export default class Projects extends Component {
       console.log(res);
       this.props.history.push("/projects");
     });
-
-    /*  let newState = this.state;
-    let indexToRemove = newState.projects.findIndex(
-      project => project._id === event.target.name
-    );
-    newState.projects.splice(indexToRemove, 1);
-    this.setState(newState); */
   };
 
   render() {
@@ -132,11 +122,7 @@ export default class Projects extends Component {
         <AuthConsumer>
           {({ user }) =>
             user.id == this.state.admin ? (
-              <ActionButton
-                to={"/projects"}
-                onClick={this.deleteItem}
-                name={this.state._id}
-              >
+              <ActionButton onClick={this.deleteItem} name={this.state._id}>
                 {" "}
                 Delete{" "}
               </ActionButton>

@@ -1,81 +1,77 @@
-import React from 'react'
-import {Link} from "react-router-dom";
-
-import styled from 'styled-components'
-
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 import { AuthConsumer } from "../Auth/Guard";
-
-const P=styled.div`
-margin-left : 2vw; 
-color : white;  
-text-transform: uppercase; 
-`
-const UserOptions=styled.div`
-display : flex; 
-flex-flow: row nowrap;
-justify-content: flex-end; 
-align-items: center;
-padding : 0 1vw; 
-`
-const UserProfile=styled.div`
-padding : 1vw; 
-color: white; 
-`
-const Img =styled.img`
-height: 5vh; 
-border-radius : 30px
-`
-
+import { UserP, UserOptions, UserProfile, Img } from "./StyledComponents";
 
 export default function UserStatus() {
-
-    const getUserStatus = (isloggedIn, signout) =>{
-        if (isloggedIn===true) {return (<span onClick={() => signout(res => console.log(res))}> LOG OUT </span>)}
-        else  {return (
+  const getUserStatus = (isloggedIn, signout) => {
+    if (isloggedIn === true) {
+      return (
+        <span onClick={() => signout(res => console.log(res))}> LOG OUT </span>
+      );
+    } else {
+      return (
         <>
-        <Link to="/signup" style={{ textDecoration: 'none' }}> <P> SIGN UP </P> </Link>
-        <Link to="/login" style={{ textDecoration: 'none' }}> <P> LOG IN </P> </Link>
+          <Link to="/signup" style={{ textDecoration: "none" }}>
+            {" "}
+            <UserP> SIGN UP </UserP>{" "}
+          </Link>
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            {" "}
+            <UserP> LOG IN </UserP>{" "}
+          </Link>
         </>
-        )}
+      );
     }
+  };
 
-    const createUserProfile = (isloggedIn, user) =>{     
-        if(isloggedIn===true){
+  const createUserProfile = (isloggedIn, user) => {
+    if (isloggedIn === true) {
+      return (
+        <UserOptions>
+          <UserProfile> {user.first_name}</UserProfile>
+          <Img src={user.picture} alt={user.first_name} />
+        </UserOptions>
+      );
+    }
+  };
+
+  return (
+    <>
+      <AuthConsumer>
+        {({ loginStatus, user, signout }) => {
+          if (loginStatus === true) {
             return (
+              <>
                 <UserOptions>
-                    <UserProfile> {user.first_name}</UserProfile>
-                    <Img src={user.picture} alt={user.first_name}/>
+                  <UserProfile> {user.first_name}</UserProfile>
+                  <Img src={user.picture} alt={user.first_name} />
+                  <UserP onClick={() => signout(res => console.log(res))}>
+                    {" "}
+                    LOG OUT{" "}
+                  </UserP>
                 </UserOptions>
-            )} 
-    }
-
-    return (
-        <>
-            <AuthConsumer>       
-                {({loginStatus, user, signout}) =>  {
-                    if (loginStatus===true) {
-                    return ( 
-                    <>       
-                        <UserOptions>
-                            <UserProfile> {user.first_name}</UserProfile>
-                            <Img src={user.picture} alt={user.first_name}/>
-                            <P onClick={() => signout(res => console.log(res))}> LOG OUT </P>
-                        </UserOptions> 
-                        
-                    </>
-                    )}
-                    else {return (
-                        <UserOptions>
-                            <Link to="/signup" style={{ textDecoration: 'none' }}> <P> SIGN UP </P> </Link>
-                            <Link to="/login" style={{ textDecoration: 'none' }}> <P> LOG IN </P> </Link>
-                        </UserOptions> 
-                    )}
-                    //createUserProfile(loginStatus, user)
-                    //getUserStatus(loginStatus, signout)
-                    }}             
-            </AuthConsumer>
-                
-        </>
-    )
+              </>
+            );
+          } else {
+            return (
+              <UserOptions>
+                <Link to="/signup" style={{ textDecoration: "none" }}>
+                  {" "}
+                  <UserP> SIGN UP </UserP>{" "}
+                </Link>
+                <Link to="/login" style={{ textDecoration: "none" }}>
+                  {" "}
+                  <UserP> LOG IN </UserP>{" "}
+                </Link>
+              </UserOptions>
+            );
+          }
+          //createUserProfile(loginStatus, user)
+          //getUserStatus(loginStatus, signout)
+        }}
+      </AuthConsumer>
+    </>
+  );
 }
-

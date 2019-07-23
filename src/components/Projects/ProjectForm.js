@@ -123,7 +123,6 @@ export default class ProjectForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-
     let formData = new FormData();
     let currentProject = this.state.project;
 
