@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 // Define Theme
 
 export const mainTheme = {
-  color1: "#4f3a65",
+  /* color1: "#4f3a65",
   color2: "#574f7d",
   color3: "#95adbe",
-  color4: "#dff0ea",
+  color4: "#dff0ea",*/
   defaultPaddingSmall: "5px",
   defaultPaddingLarge: "10px",
   fontSizeLarge: "20px",
@@ -16,7 +16,15 @@ export const mainTheme = {
   defaultBorderWidth: "0.5px",
   defaultBorderRadius: "5px",
   cardHeight: 600,
-  cardHeightWidthRatio: 2
+  cardHeightWidthRatio: 2,
+  color0: "#D32F2F" /* Main Primary color */,
+  color1: "#F44336",
+  color2: "#212121",
+  color3: "#FFFFFF",
+  color4: "#FF9800",
+  color5: "#212121",
+  color6: "#757575",
+  color7: "#BDBDBD"
 };
 
 // Define Utils Components
@@ -50,7 +58,107 @@ export const StyledTag = styled.div`
   text-align: center;
 `;
 
+export const StyledInput = styled.input`
+  width: 30vw;
+  border: 1px solid #0c214a;
+  border-radius: 10px;
+  padding: 1vh;
+  font-size: 1.2rem;
+  color: #0c214a;
+`;
+
+export const Label = styled.label`
+  text-align: center;
+  font-size: 1.3rem;
+  font-weigth: bold;
+  color: #0c214a;
+  padding: 2vh 0;
+`;
+
 // Define Specific Components
+
+// --Nav Components -- //
+
+export const NavContainer = styled.div`
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${props => props.theme.color1};
+  height: 10vh;
+  padding: 0 1vw;
+`;
+
+export const Logo = styled.div`
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+`;
+
+// -- User Components -- //
+
+export const UserP = styled.div`
+  margin-left: 2vw;
+  color: white;
+  text-transform: uppercase;
+`;
+export const UserOptions = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 1vw;
+`;
+export const UserProfile = styled.div`
+  padding: 1vw;
+  color: white;
+  font-size: 1.2rem;
+`;
+export const Img = styled.img`
+  height: 4vh;
+  width: 4vh;
+  border-radius: 30px;
+`;
+
+//Footer Components
+
+export const FooterContainer = styled.div`
+  position: fixed; /* Set the navbar to fixed position */
+  bottom: 0; /* Position the footer at the bottom of the page */
+  width: 100%; /* Full width */
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: ${props => props.theme.color1};
+  height: 5vh;
+  padding: 0 2vw;
+`;
+
+export const FooterP = styled.div`
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+`;
+
+// Search Bar Component
+
+export const SearchStyle = styled.input`
+width: 40vw; 
+border : 1px solid  #faf9f8;
+border-bottom : #0C214A
+border-left : #0C214A
+border-radius : 10px; 
+padding: 1vh;
+font-size : 1.3rem;
+color : #0C214A; 
+margin: 1vh;  
+box-shadow: 3px 3px 3px #0C214A; 
+
+`;
 
 // -- Home Page Components -- //
 
@@ -75,7 +183,7 @@ export const Banner = styled.div`
 
 export const BannerText = styled.p`
   font-size: 20px;
-  width: 100%;
+  width: 75%;
   text-align: center;
   font-weight: bold;
   font-size: 30px;
@@ -83,7 +191,7 @@ export const BannerText = styled.p`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 0px;
+  margin-bottom: 10px;
 `;
 
 export const BannerTextAndIcon = styled.div`
@@ -97,7 +205,7 @@ export const BannerTextAndIcon = styled.div`
 export const IconsAndTextContainer = styled.div`
   padding-top: 20px;
   font-size: 20px;
-  width: 40%;
+  width: 70%;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -106,7 +214,6 @@ export const IconsAndTextContainer = styled.div`
 
 export const IconsContainer = styled.div`
   height: 30%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -118,13 +225,16 @@ export const H1 = styled.h1`
   width: 70%;
   text-align: center;
   margin: 20px 0px 20px 0px;
+  color: ${props => props.theme.color2};
 `;
 
 export const P = styled.p`
   font-size: 20px;
-  text-align: center;
+  text-align: left;
   margin: 0px 0px 10px 0px;
   width: 70%;
+
+  color: ${props => props.theme.color2};
 `;
 
 export const PforIcon = styled.p`
@@ -132,15 +242,80 @@ export const PforIcon = styled.p`
   flex-direction: column;
   font-size: 20px;
   margin: 0px;
-  padding: 20px;
-  text-align: justify;
+  text-align: left;
+ 
   margin: auto;
   padding: 30px;
+  color: color:  ${props => props.theme.color2};
+  letter-spacing: 0.1px;
+  
 `;
 
 export const HRIcon = styled.hr`
   margin-top: 20px;
   width: 70%;
+  display: none;
+`;
+
+// Agora Util Components //
+
+export const MainBody = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 3vw;
+  height: 85vh;
+`;
+export const Wrapper = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const AgorasContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+// Agoras Page Components //
+
+export const MainBodyAgoras = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 1vw;
+  height: inherit;
+`;
+export const WrapperAgoras = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: inherit;
+`;
+
+export const CTAContainer = styled.div`
+  height: inherit;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weigth: bold;
+  font-size: 2rem;
+`;
+
+export const ContainerAgoras = styled.div`
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: inherit;
+  padding-bottom: 7vh;
 `;
 
 // --- Projects Page Components ---//
@@ -293,6 +468,43 @@ export const ForumTitle = styled.p`
   color: white;
   font-size: 20px;
   border-radius: 5px;
+`;
+
+// --- Members Components --- //
+
+export const PictureAndNameContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 5px 5px 5px 0px;
+`;
+export const MemberContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 26%;
+  border-style: solid;
+  border-color: darkgray;
+  border-radius: 5px;
+  padding: 10px 10px;
+`;
+
+export const MemberTitle = styled.p`
+  padding: 10px;
+  margin: 0px;
+  background-color: #21222a;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+`;
+
+export const MemberPicture = styled.div`
+  width: 20%;
+  border-radius: 5px;
+`;
+
+export const MemberName = styled.p`
+  padding: 10px 10px;
+  margin-top: auto;
 `;
 
 // --- Message Components ---//

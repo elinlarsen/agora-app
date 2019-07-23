@@ -37,7 +37,10 @@ export default class Projects extends Component {
     let emptyProjectCard = (
       <StyledEmptyProjectCard>
         {" "}
-        <Link to="projectcreate" style={{ textDecoration: "none" }}>
+        <Link
+          to={{ pathname: "/projectcreate", state: { action: "create" } }}
+          style={{ textDecoration: "none" }}
+        >
           {" "}
           <p>New Project </p>{" "}
         </Link>
