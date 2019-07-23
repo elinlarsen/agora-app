@@ -7,18 +7,20 @@ import { AuthConsumer } from "../Auth/Guard";
 export default class ProjectForm extends Component {
   constructor(props) {
     super(props);
+    this.action =this.props.location.state.action;
+    this.agora=this.props.location.state.agora;
     this.state = {
       project: {
         name: {
           label: "Name",
           name: "name",
-          value: "new project" + Math.random(),
+          value: "New project name" ,
           type: "text"
         },
         description: {
           label: "Description",
           name: "description",
-          value: "the description of your project",
+          value: "Description of your project",
           type: "text"
         },
         minimum_contribution: {
@@ -47,14 +49,14 @@ export default class ProjectForm extends Component {
         },
         tags: {
           name: "tags",
-          label: "tags",
+          label: "Tags",
           type: "div",
           children: Tags([]),
           value: []
         },
         status: {
           name: "status",
-          label: "status",
+          label: "Status",
           type: "select",
           children: StatusOptions(),
           value: "ideation"
@@ -70,6 +72,10 @@ export default class ProjectForm extends Component {
       projectHandler: new ajaxHandler(
         process.env.REACT_APP_API_URL_,
         "/projects"
+      ),
+      agoraHandler : new ajaxHandler(
+        process.env.REACT_APP_API_URL_,
+        "/agoras"
       )
     };
   }
@@ -143,22 +149,29 @@ export default class ProjectForm extends Component {
     formData.append("admin", event.target.id);
     formData.append("members", event.target.id);
 
-    if (this.props.match.params.id) {
+    if(this.action==="update"){
       this.state.projectHandler.updateOne(
         this.props.match.params.id,
         formData,
-        dbRes => {
-          this.setState({ displayForm: !this.state.displayForm });
-          this.props.history.push("/project/" + this.props.match.params.id);
-        }
+        dbRes => {this.props.history.push("/projects/"+ this.props.match.params._id); }
       );
-    } else {
-      this.state.createProjectHandler.createOne(formData, dbRes => {
-        this.setState({ displayForm: !this.state.displayForm });
-        this.props.history.push("/projects");
+    } else if (this.action==="create"){
+      this.state.createProjectHandler.createOne(formData, 
+          newProject => {
+            this.agora.projects.push(newProject)
+            this.state.agoraHandler.updateOne(this.agora._id, this.agora, 
+                updatedAgora => {
+                  console.log("updated agora:  ", updatedAgora)
+                  this.props.history.push({
+                    pathname : "/agora/"+this.agora._id,
+                    //state : {newProject}
+                  });
+          } )
       });
     }
   };
+
+
 
   onDrop = picture => {
     let stateCopy = { ...this.state };
@@ -183,7 +196,7 @@ export default class ProjectForm extends Component {
               onDrop={this.onDrop}
               singleImage={this.singleImage}
               displayForm={this.state.displayForm}
-              textSubmit="Submit your new Project!"
+              textSubmit="Submit your new project!"
             />
           </>
         )}
