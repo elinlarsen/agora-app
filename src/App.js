@@ -31,7 +31,7 @@ export default class App extends Component {
           <Nav />
           <div className="main-body">
             <Switch>
-              <Route exact path="/" render={props => <Home {...props} />} />
+              <Route exact path="/"  components={Home} />
               <Route exact path="/agoras" component={Agoras} />
               <Route exact path="/projects" component={Projects} />
               <Route exact path="/agora/:id" component={Agora} />
@@ -40,7 +40,7 @@ export default class App extends Component {
               <Route exact path="/projectcreate/:id" component={ProjectForm} />
               <Route exact path="/project/:id" component={Project} />
               <Route exact path="/user" component={User} />
-              <Route exact path={["/signup", "/login"]} component={Auth} />
+              <Route path={["/signup", "/login"]} component={Auth} />
             </Switch>
           </div>
           <Footer />

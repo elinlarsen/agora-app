@@ -24,7 +24,7 @@ flex-flow : column wrap;
 justify-content : center; 
 align-items:center; 
 padding : 1vh; 
-height: 150vh; 
+height: inherit; 
 `
 
 

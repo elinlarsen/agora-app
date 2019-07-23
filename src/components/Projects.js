@@ -13,7 +13,7 @@ export default class Projects extends Component {
     this.state = { projects: [] };
     this.projectHandler = new ajaxHandler(
       process.env.REACT_APP_API_URL_,
-      "projects"
+      "/projects"
     );
   }
 
