@@ -127,13 +127,16 @@ export default class Agora extends Component {
 
     componentDidMount = () => {
         let expandItem = "projects";
-
         this.state.agoraHandler.getOne(
             this.props.match.params.id,
-            data => this.setState({ agora :  data })
+            data => {
+                this.setState({ agora :  data }              
+                )}
             ,
             expandItem
         );
+
+    
       };
 
       handleDelete = (agora_id) => {
@@ -150,7 +153,12 @@ export default class Agora extends Component {
 
     handleJoinAgora =()=>{}
 
-    handleAddProject = () =>{}
+    handleAddProject = (newProject) =>{
+        let copy=this.state.agora
+        copy.projects.push(newProject._id)
+        this.setState({agora : copy}, () => console.log("agora with new project : ", this.state.agora))
+
+    }
 
     render() {
         console.log("this.state.agora----", this.state.agora)
@@ -158,21 +166,21 @@ export default class Agora extends Component {
         return (
             <Main>
                 <Info>
-                    <Title>Welcome to the Agora {this.state.agora.name} ! 
-                    <Link style={{textDecoration : 'none', color : '#0C214A' }} to={
-                                    {   pathname: '/agoracreate',
-                                        state: {
-                                            agoraID: this.state.agora._id,
-                                            action : "update", 
-                                        } }}>
+                    <Title> Welcome to the Agora {this.state.agora.name} ! 
+                    <Link   style={{textDecoration : 'none', color : '#0C214A' }} 
+                            to={{   pathname: '/agoracreate',
+                                    state: {
+                                        agoraID: this.state.agora._id,
+                                        action : "update", 
+                                        
+                                    } }}          
+                            onClick={this.handleAddProject} >
                                <IconButton type="button" ><FiEdit /></IconButton>                               
                     </Link> 
 
                     <IconButton  type="button" onClick={() => this.handleDelete(this.state.agora._id)}> <FiTrash /> </IconButton>
                     
-                    
-                    
-                    
+                               
                     </Title>
                     <SubTitle> {this.state.agora.description} </SubTitle>
                     <em> {this.state.agora.address}, {this.state.agora.city} </em> 
@@ -181,7 +189,14 @@ export default class Agora extends Component {
 
                 <CTAwrapper> 
                     <SearchBar handleChange={this.handleSearch} placeholder="Find a project by its name."/>
-                    <Button  type="button" onClick={() => this.handleAddProject(this.state.agora._id)}> Create a project </Button>
+
+                    <Link style={{ textDecoration: 'none', color: '#0C214A' }} 
+                          to={{ pathname: '/projectcreate', 
+                                state: { action: "create", 
+                                         agora : this.state.agora, } }}>
+                        Create a project! 
+                    </Link>
+
                 </CTAwrapper>
 
                 {this.state.agora.projects!==undefined}

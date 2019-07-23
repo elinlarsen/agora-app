@@ -31,7 +31,7 @@ export default class App extends Component {
           <Nav />
           <div className="main-body">
             <Switch>
-              <Route exact path="/"  components={Home} />
+              <Route exact path="/"  component={Home} />
               <Route exact path="/agoras" component={Agoras} />
               <Route exact path="/projects" component={Projects} />
               <Route exact path="/agora/:id" component={Agora} />
