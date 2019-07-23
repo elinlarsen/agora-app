@@ -144,48 +144,22 @@ export default class ProjectForm extends Component {
     formData.append("admin", event.target.id);
     formData.append("members", event.target.id);
 
-    console.log(event.target);
-
-    /*    console.log("FORM DATA IS");
-    for (var key of formData.keys()) {
-      console.log(key);
-      console.log(formData.getAll(key));
-    }*/
-
-    /* let values = {};
-    for (let key in this.state.project) {
-      values[key] = this.state.project[key].value;
-    }
-    values.picture = "../../images/trump.jpg";
-    values.members = ["5d2b484933e4882ce41a993b"]; */
-
     if (this.props.match.params.id) {
       this.state.projectHandler.updateOne(
         this.props.match.params.id,
         formData,
         dbRes => {
           this.setState({ displayForm: !this.state.displayForm });
-          this.props.history.push("/projects");
+          this.props.history.push("/project/" + this.props.match.params.id);
         }
       );
     } else {
-      /* let dataToPost = { ...formData };
-      dataToPost.admin = "5d35cd748a4b621cecf870c1";
-      console.log(dataToPost); */
-
       this.state.createProjectHandler.createOne(formData, dbRes => {
         this.setState({ displayForm: !this.state.displayForm });
         this.props.history.push("/projects");
       });
     }
   };
-
-  /*  this.state.newAgoraHandler.createOne(fd, dbres => {
-      let newAgora = dbres;
-      console.log("dbres ", newAgora);
-      this.props.addNewAgora(newAgora); //pass the new agora into the parent state
-    });
-  }; */
 
   onDrop = picture => {
     let stateCopy = { ...this.state };
@@ -225,7 +199,6 @@ const StatusOptions = props => {
   const items = enumList.map(enumItem => (
     <option value={enumItem}> {enumItem} </option>
   ));
-  //const items = <option value={"a"}> {"a"} </option>;
   return items;
 };
 

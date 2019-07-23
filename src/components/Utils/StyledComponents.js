@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 // Define Theme
 
 export const mainTheme = {
@@ -224,4 +225,113 @@ export const ButtonWrapper = styled.div`
   align-items: center;
   width: 100%;
   padding-top: 20px;
+`;
+
+// --- Single project Page Components --- //
+
+export const ProjectWrapper = styled.div`
+  width: 90%;
+  padding: 10px;
+`;
+
+export const ProjectTitle = styled.div`
+  padding: 10px;
+  background-color: #21222a;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+`;
+
+export const ProjectImageContainer = styled.div`
+  width: 26%;
+  border-style: solid;
+  border-color: darkgray;
+  border-radius: 5px;
+  margin: 10px 0px;
+`;
+
+export const ProjectDescriptionAndStatusWrapper = styled.div`
+  display: flex;
+  width: 72%;
+  justify-content: space-between;
+`;
+export const ProjectDescription = styled.p`
+  display: flex;
+  width: 80%;
+  heigth: 10%;
+  padding: 20px;
+  border-style: solid;
+  margin: 10px 0px;
+  border-style: solid;
+  border-color: darkgray;
+  font-size: 20px;
+  border-radius: 5px;
+`;
+export const ProjectDescriptionRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+// --- Forum Components ---//
+
+export const ForumContainer = styled.div`
+  width: 72%;
+  border-style: solid;
+  padding: 10px;
+  border-style: solid;
+  border-color: darkgray;
+  border-radius: 5px;
+`;
+
+export const ForumTitle = styled.p`
+  padding: 10px;
+  margin: 0px;
+  background-color: #21222a;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+`;
+
+// --- Message Components ---//
+
+export const MessageRow = styled.div`
+  display: flex;
+  padding: 5px;
+  justify-content: flex-start;
+`;
+
+export const MessagePicture = styled.div`
+  width: 3%;
+`;
+
+export const MessageUserName = styled.p`
+  font-weight: bold;
+  margin: 10px;
+  padding: 0px 5px;
+  width: 20%;
+`;
+
+export const MessageUserText = styled.p`
+  margin: 10px;
+  padding: 0px 5px;
+  width: 30%;
+`;
+
+export const MessageUserInput = styled.input`
+  margin: 10px;
+  padding: 5px 5px;
+  width: 100%;
+`;
+
+export const MessageInputForm = styled.form`
+  width: 30%;
+  display: flex;
+`;
+
+export const MessageInputButton = styled.input`
+  padding: 5px;
+  margin: 10px;
 `;

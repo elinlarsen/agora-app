@@ -4,9 +4,16 @@ import Forum from "./Project/Forum.js";
 import styled from "styled-components";
 import ajaxHandler from "../utils/ajaxHandler.js";
 import Status from "./Project/Status.js";
-import { ActionButton } from "./Utils/StyledComponents";
+import {
+  ActionButton,
+  ProjectWrapper,
+  ProjectTitle,
+  ProjectImageContainer,
+  ProjectDescriptionAndStatusWrapper,
+  ProjectDescription,
+  ProjectDescriptionRow
+} from "./Utils/StyledComponents";
 import { AuthConsumer } from "./Auth/Guard";
-//import queryString from "query-string";
 
 let projectHandler = new ajaxHandler(
   process.env.REACT_APP_API_URL_,
@@ -74,6 +81,25 @@ export default class Projects extends Component {
     }
   };
 
+  deleteItem = event => {
+    let projectHandler = new ajaxHandler(
+      process.env.REACT_APP_API_URL_,
+      "/projects"
+    );
+    console.log("ready to delete " + event.target.name);
+    projectHandler.deleteOne(event.target.name, res => {
+      console.log(res);
+      this.props.history.push("/projects");
+    });
+
+    /*  let newState = this.state;
+    let indexToRemove = newState.projects.findIndex(
+      project => project._id === event.target.name
+    );
+    newState.projects.splice(indexToRemove, 1);
+    this.setState(newState); */
+  };
+
   render() {
     return (
       <ProjectWrapper>
@@ -88,7 +114,35 @@ export default class Projects extends Component {
             ) : null
           }
         </AuthConsumer>
-
+        <AuthConsumer>
+          {({ user }) =>
+            user.id == this.state.admin ? (
+              <ActionButton
+                to={{
+                  pathname: "/projectcreate/" + this.state._id,
+                  state: { action: "update" }
+                }}
+              >
+                {" "}
+                Update{" "}
+              </ActionButton>
+            ) : null
+          }
+        </AuthConsumer>
+        <AuthConsumer>
+          {({ user }) =>
+            user.id == this.state.admin ? (
+              <ActionButton
+                to={"/projects"}
+                onClick={this.deleteItem}
+                name={this.state._id}
+              >
+                {" "}
+                Delete{" "}
+              </ActionButton>
+            ) : null
+          }
+        </AuthConsumer>
         <ProjectDescriptionRow>
           <ProjectImageContainer>
             {" "}
@@ -108,53 +162,20 @@ export default class Projects extends Component {
           <Members membersList={this.state.members} admin={this.state.admin}>
             {" "}
           </Members>
-          <Forum projectId={this.state._id}> </Forum>
+          <AuthConsumer>
+            {({ user }) => (
+              <Forum
+                projectId={this.state._id}
+                ableToPost={
+                  this.state.members.filter(a => a._id == user.id).length != 0
+                }
+              >
+                {" "}
+              </Forum>
+            )}
+          </AuthConsumer>
         </ProjectDescriptionRow>
       </ProjectWrapper>
     );
   }
 }
-
-const ProjectWrapper = styled.div`
-  width: 90%;
-  padding: 10px;
-`;
-const ProjectTitle = styled.div`
-  padding: 10px;
-  background-color: #21222a;
-  font-weight: bold;
-  color: white;
-  font-size: 20px;
-  border-radius: 5px;
-`;
-
-const ProjectImageContainer = styled.div`
-  width: 26%;
-  border-style: solid;
-  border-color: darkgray;
-  border-radius: 5px;
-  margin: 10px 0px;
-`;
-
-const ProjectDescriptionAndStatusWrapper = styled.div`
-  display: flex;
-  width: 72%;
-  justify-content: space-between;
-`;
-const ProjectDescription = styled.p`
-  display: flex;
-  width: 80%;
-  heigth: 10%;
-  padding: 20px;
-  border-style: solid;
-  margin: 10px 0px;
-  border-style: solid;
-  border-color: darkgray;
-  font-size: 20px;
-  border-radius: 5px;
-`;
-const ProjectDescriptionRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-`;
