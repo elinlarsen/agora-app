@@ -7,14 +7,14 @@ import { AuthConsumer } from "../Auth/Guard";
 export default class ProjectForm extends Component {
   constructor(props) {
     super(props);
-    this.action =this.props.location.state.action;
-    this.agora=this.props.location.state.agora;
+    this.action = this.props.location.state.action;
+    this.agora = this.props.location.state.agora;
     this.state = {
       project: {
         name: {
           label: "Name",
           name: "name",
-          value: "New project name" ,
+          value: "New project name",
           type: "text"
         },
         description: {
@@ -73,10 +73,7 @@ export default class ProjectForm extends Component {
         process.env.REACT_APP_API_URL_,
         "/projects"
       ),
-      agoraHandler : new ajaxHandler(
-        process.env.REACT_APP_API_URL_,
-        "/agoras"
-      )
+      agoraHandler: new ajaxHandler(process.env.REACT_APP_API_URL_, "/agoras")
     };
   }
 
@@ -149,29 +146,31 @@ export default class ProjectForm extends Component {
     formData.append("admin", event.target.id);
     formData.append("members", event.target.id);
 
-    if(this.action==="update"){
+    if (this.action === "update") {
       this.state.projectHandler.updateOne(
         this.props.match.params.id,
         formData,
-        dbRes => {this.props.history.push("/projects/"+ this.props.match.params._id); }
+        dbRes => {
+          this.props.history.push("/projects/");
+        }
       );
-    } else if (this.action==="create"){
-      this.state.createProjectHandler.createOne(formData, 
-          newProject => {
-            this.agora.projects.push(newProject)
-            this.state.agoraHandler.updateOne(this.agora._id, this.agora, 
-                updatedAgora => {
-                  console.log("updated agora:  ", updatedAgora)
-                  this.props.history.push({
-                    pathname : "/agora/"+this.agora._id,
-                    //state : {newProject}
-                  });
-          } )
+    } else if (this.action === "create") {
+      this.state.createProjectHandler.createOne(formData, newProject => {
+        this.agora.projects.push(newProject);
+        this.state.agoraHandler.updateOne(
+          this.agora._id,
+          this.agora,
+          updatedAgora => {
+            console.log("updated agora:  ", updatedAgora);
+            this.props.history.push({
+              pathname: "/agora/" + this.agora._id
+              //state : {newProject}
+            });
+          }
+        );
       });
     }
   };
-
-
 
   onDrop = picture => {
     let stateCopy = { ...this.state };
