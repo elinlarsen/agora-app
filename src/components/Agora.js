@@ -3,6 +3,12 @@ import React, { Component } from 'react'
 import {Link} from "react-router-dom";
 import styled from "styled-components";
 
+//icon
+import { FiTrash } from 'react-icons/fi';
+import { FiEdit } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
+import { FiMapPin } from "react-icons/fi";
+
 // axios handler
 import ajaxHandler from "../utils/ajaxHandler.js";
 
@@ -18,7 +24,9 @@ flex-flow : column wrap;
 justify-content : center; 
 align-items:center; 
 padding : 1vh; 
+height: 150vh; 
 `
+
 
 const ProjectsGrid = styled.div`
 display: grid;
@@ -36,7 +44,67 @@ text-align: center;
 color : #0C214A; 
 `
 
+const Button=styled.button`
+    width: 15vw; 
+    border : 1px solid #0C214A;
+    border-radius : 10px; 
+    padding: 1vh;
+    font-size : 1.2rem;
+    color : #0C214A; 
+    margin: 1vh;
+`
 
+const IconButton=styled(Button)`
+width: 3vw;
+border: none;
+background-color : #faf9f8
+padding: 1vh 0;
+margin: 1vh 0;
+font-size : 0.8rem;
+cursor : pointer; 
+`
+
+const Info=styled.div`
+display : flex; 
+flex-flow: column wrap;
+justify-content : space-around;
+align-items : center; 
+
+`
+
+const CTAwrapper = styled.div`
+
+display : flex; 
+flex-flow: row wrap;
+justify-content : space-around;
+align-items : center; 
+bakckground-color: white; 
+height : 15vh;
+
+
+  &:hover ${Button} {
+    background-color :  #0C214A
+    color :white;
+    cursor : pointer; 
+
+  }`
+
+  const MembersWrapper=styled.div`
+  width : 100vw;
+  `
+
+  const Number=styled.div`
+  width : inherit; 
+  height : 30vh; 
+  background-color: #0C214A; 
+  color : white;
+  font-size : 3rem; 
+  display : flex; 
+  flex-flow: column nowrap; 
+  justify-content: flex-start; 
+  align-items: center; 
+  padding-bottom : 5vh
+  `
 
 export default class Agora extends Component {
 
@@ -80,26 +148,41 @@ export default class Agora extends Component {
         })
     }
 
+    handleJoinAgora =()=>{}
+
+    handleAddProject = () =>{}
+
     render() {
         console.log("this.state.agora----", this.state.agora)
         console.log("filterProjects()", this.filterProjects())
         return (
             <Main>
-                <Title>Welcome to the Agora {this.state.agora.name} ! </Title>
-                <SubTitle> {this.state.agora.description} </SubTitle>
-                <div> 
-                        <Link style={{textDecoration : 'none', color : '#0C214A' }} to={
+                <Info>
+                    <Title>Welcome to the Agora {this.state.agora.name} ! 
+                    <Link style={{textDecoration : 'none', color : '#0C214A' }} to={
                                     {   pathname: '/agoracreate',
                                         state: {
                                             agoraID: this.state.agora._id,
                                             action : "update", 
-                                        } }}>Update</Link>      
-                        <CreateButton clbk={() => this.handleDelete(this.state.agora._id)}
-                                    text="Delete" 
-                                    disabled={false}>
-                        </CreateButton>
-                        <SearchBar handleChange={this.handleSearch} placeholder="Find a project by its name."/>
-                </div>
+                                        } }}>
+                               <IconButton type="button" ><FiEdit /></IconButton>                               
+                    </Link> 
+
+                    <IconButton  type="button" onClick={() => this.handleDelete(this.state.agora._id)}> <FiTrash /> </IconButton>
+                    
+                    
+                    
+                    
+                    </Title>
+                    <SubTitle> {this.state.agora.description} </SubTitle>
+                    <em> {this.state.agora.address}, {this.state.agora.city} </em> 
+              </Info>
+                                   
+
+                <CTAwrapper> 
+                    <SearchBar handleChange={this.handleSearch} placeholder="Find a project by its name."/>
+                    <Button  type="button" onClick={() => this.handleAddProject(this.state.agora._id)}> Create a project </Button>
+                </CTAwrapper>
 
                 {this.state.agora.projects!==undefined}
                 <ProjectsGrid> {
@@ -107,7 +190,17 @@ export default class Agora extends Component {
                         <ProjectCard project={projectItem} 
                                     key={projectItem._id}/>
                      ))}        
-                 </ProjectsGrid>;  
+                 </ProjectsGrid>
+
+                 <MembersWrapper> 
+                     <Number> 
+                            <p> {this.state.agora.members.length} members </p>
+                            <Button  type="button" onClick={() => this.handleJoinAgora(this.state.agora._id)}> Join now! </Button>                         
+                     </Number>
+
+
+                 </MembersWrapper>
+
             </Main>
         )
     }
