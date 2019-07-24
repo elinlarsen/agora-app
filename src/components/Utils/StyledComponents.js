@@ -18,13 +18,15 @@ export const mainTheme = {
   cardHeight: 600,
   cardHeightWidthRatio: 2,
   color0: "#D32F2F" /* Main Primary color */,
-  color1: "#F44336",
+  color1: "#f95d60", /* "f95d60","#F44336"*/
   color2: "#212121",
   color3: "#FFFFFF",
   color4: "#FF9800",
   color5: "#212121",
   color6: "#757575",
-  color7: "#BDBDBD"
+  color7: "#BDBDBD",
+  color8: "f95d64",
+  titleFont : "Vibur",
 };
 
 // Define Utils Components
@@ -87,15 +89,16 @@ export const NavContainer = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  background-color: ${props => props.theme.color1};
-  height: 10vh;
+  background-color: ${props => { return props.theme.color1}};
+  height: 12vh;
   padding: 0 1vw;
+  opacity : 0.9
 `;
 
 export const Logo = styled.div`
-  font-size: 3rem;
-  font-weight: bold;
+  font-size: 4rem;
   color: white;
+  font-family: ${props => props.theme.titleFont};
 `;
 
 // -- User Components -- //
@@ -104,6 +107,8 @@ export const UserP = styled.div`
   margin-left: 2vw;
   color: white;
   text-transform: uppercase;
+  font-weight: bold; 
+  font-size: 1.1rem; 
 `;
 export const UserOptions = styled.div`
   display: flex;
@@ -147,18 +152,18 @@ export const FooterP = styled.div`
 // Search Bar Component
 
 export const SearchStyle = styled.input`
-width: 40vw; 
+width: 100%; 
 border : 1px solid  #faf9f8;
-border-bottom : #0C214A
-border-left : #0C214A
 border-radius : 10px; 
-padding: 1vh;
+padding: 3vh;
 font-size : 1.3rem;
 color : #0C214A; 
-margin: 1vh;  
-box-shadow: 3px 3px 3px #0C214A; 
-
+margin-top: 2vh;  
+box-shadow: 3px 3px 3px #faf9f8; 
+text-align : center; 
 `;
+
+//F4EBBE
 
 // -- Home Page Components -- //
 
@@ -264,8 +269,7 @@ export const MainBody = styled.div`
   flex-flow: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 0 3vw;
-  height: 85vh;
+  height: inherit;
 `;
 export const Wrapper = styled.div`
   display: flex;
@@ -288,7 +292,6 @@ export const MainBodyAgoras = styled.div`
   flex-flow: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 0 1vw;
   height: inherit;
 `;
 export const WrapperAgoras = styled.div`
@@ -303,10 +306,12 @@ export const CTAContainer = styled.div`
   height: inherit;
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-flow: column nowrap; 
+  justify-content: space-around;
   align-items: center;
   font-weigth: bold;
   font-size: 2rem;
+  margin-top : 4vh ; 
 `;
 
 export const ContainerAgoras = styled.div`

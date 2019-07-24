@@ -102,7 +102,7 @@ export default class Agoras extends Component {
       <MainBodyAgoras>
         <CTAContainer>
           <Link
-            style={{ textDecoration: "none", color: "#f95d64", paddingBottom: "5vh" }}
+            style={{ textDecoration: "none", color: "#f95d64", margin: "2vh 0" }}
             to={{ pathname: "/agoracreate", state: { action: "create" } }}
           >
             Create your agora!
@@ -115,14 +115,6 @@ export default class Agoras extends Component {
         </CTAContainer>
 
         <WrapperAgoras>
-          {/*<AgorasContainer>
-                        <AgoraList agoras={this.filterAgoras()}
-                            handleDelete={this.handleDelete}
-                            displayForm={this.state.displayForm}
-                            handleUpdateAgora={this.handleUpdateAgora}
-                        />
-                    </AgorasContainer>*/}
-
           <AgoraMap
             style={{ position: "relative" }}
             agoras={this.filterAgoras()}
