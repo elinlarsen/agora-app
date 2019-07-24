@@ -18,13 +18,15 @@ export default class Projects extends Component {
   }
 
   componentDidMount = () => {
-    this.projectHandler.getAll(res => {
+    /*this.projectHandler.getAll(res => {
       this.setState({ projects: res });
-    });
+    });*/
+
+
   };
 
   render() {
-    let projectCards = this.state.projects.map(projectItem => (
+    let projectCards = this.props.projects.map(projectItem => (
       <ProjectCard
         project={projectItem}
         key={projectItem._id}
@@ -38,11 +40,13 @@ export default class Projects extends Component {
       <StyledEmptyProjectCard>
         {" "}
         <Link
-          to={{ pathname: "/projectcreate", state: { action: "create" } }}
+          to={{ pathname: "/projectcreate", 
+          state: { action: "create", 
+                   agora : this.props.agora } }}
           style={{ textDecoration: "none" }}
         >
           {" "}
-          <p>New Project </p>{" "}
+          <p>Create your project  now !</p>{" "}
         </Link>
       </StyledEmptyProjectCard>
     );

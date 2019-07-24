@@ -17,6 +17,7 @@ import ProjectCard from "./Projects/ProjectCard.js";
 import SearchBar from './Utils/SearchBar'
 import filterBy from '../utils/utilFunctions'
 import CreateButton from './Utils/CreateButton';
+import Projects from "./Projects"
 
 const Main= styled.div`
 display : flex; 
@@ -57,7 +58,7 @@ const Button=styled.button`
 const IconButton=styled(Button)`
 width: 3vw;
 border: none;
-background-color : #faf9f8
+background-color : #faf9f8;
 padding: 1vh 0;
 margin: 1vh 0;
 font-size : 0.8rem;
@@ -212,22 +213,27 @@ export default class Agora extends Component {
                 <CTAwrapper> 
                     <SearchBar handleChange={this.handleSearch} placeholder="Find a project by its name."/>
 
-                    <Link style={{ textDecoration: 'none', color: '#0C214A' }} 
+                    {/*<Link style={{ textDecoration: 'none', color: '#0C214A' }} 
                           to={{ pathname: '/projectcreate', 
                                 state: { action: "create", 
                                          agora : this.state.agora, } }}>
                         Create a project! 
-                    </Link>
+                        </Link>*/}
 
                 </CTAwrapper>
 
                 {this.state.agora.projects!==undefined}
-                <ProjectsGrid> {
+                <Projects projects={this.filterProjects()}
+                          agora={this.state.agora} />
+
+               {/*<ProjectsGrid> {
                         this.filterProjects().map(projectItem => (
                         <ProjectCard project={projectItem} 
                                     key={projectItem._id}/>
                      ))}        
-                 </ProjectsGrid>
+                </ProjectsGrid>*/}
+                
+
                  <MembersWrapper> 
                     <p> {this.state.agora.members.length} members </p>
                     <Button  type="button" onClick={() => this.handleJoinAgora(this.state.agora._id)}> Join now! </Button>                         

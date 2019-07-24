@@ -17,7 +17,6 @@ import {
   MainBodyAgoras,
   WrapperAgoras,
   CTAContainer,
-  ContainerAgoras
 } from "./Utils/StyledComponents";
 
 Geocode.enableDebug();
@@ -102,16 +101,17 @@ export default class Agoras extends Component {
     return (
       <MainBodyAgoras>
         <CTAContainer>
-          <SearchBar
-            handleChange={this.handleSearch}
-            placeholder="Search an agora by its zipcode."
-          />
           <Link
-            style={{ textDecoration: "none", color: "#0C214A" }}
+            style={{ textDecoration: "none", color: "#f95d64", paddingBottom: "5vh" }}
             to={{ pathname: "/agoracreate", state: { action: "create" } }}
           >
             Create your agora!
           </Link>
+
+          <SearchBar
+            handleChange={this.handleSearch}
+            placeholder="Search an agora by its zipcode."
+          />
         </CTAContainer>
 
         <WrapperAgoras>

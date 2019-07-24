@@ -11,13 +11,13 @@ position: relative; /* Set the navbar to fixed position */
 padding-top: 10vh; 
 display : flex; 
 width :100vw;
-height: 70vh;
+height: 60vh;
 `
 
 const ImageContainer=styled.div`
 display: flex;
-height: 25vh;
-width: 20vw; 
+height: 17vh;
+width: 25vw; 
 `
 const Container=styled.div`
 display : flex; 
@@ -33,7 +33,7 @@ flex-flow: column wrap;
 justify-content: flex-start; 
 align-items: flex-start;
 padding-left: 1vh;
-width: 40vh;
+width: 30vh;
 `
 
 const Members=styled.div`
@@ -81,12 +81,12 @@ function setMarkerAndPlace(props,marker,e, agora){
                 <InfoWindow
                     marker={selectedMarker}
                     visible={true}>              
-                    {<>
+                    {<InfoContainer>
                         <ImageContainer><img src={selectedAgora.picture} alt={selectedAgora.name} height="100%" width="100%" /></ImageContainer>
                         <Name>{selectedAgora.name}</Name>
                         <a style={{textDecoration : 'none', color : '#0C214A' }} href={`/agora/${selectedAgora._id}`}> Discover </a>
                         
-                    </>
+                    </InfoContainer>
                     }
                     </InfoWindow>           
             </Map>  
