@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import Members from "./Utils/Members.js";
 import Forum from "./Project/Forum.js";
 import ajaxHandler from "../utils/ajaxHandler.js";
+import styled from "styled-components";
 import Status from "./Project/Status.js";
 import {
   ActionButton,
   ProjectWrapper,
   ProjectTitle,
+  ProjectTitleText,
   ProjectImageContainer,
   ProjectDescriptionAndStatusWrapper,
   ProjectDescription,
-  ProjectDescriptionRow
+  ProjectDescriptionRow,
+  ButtonWrapper
 } from "./Utils/StyledComponents";
 import { AuthConsumer } from "./Auth/Guard";
 
@@ -91,44 +94,54 @@ export default class Projects extends Component {
   };
 
   render() {
+    const ActionButtonProject = styled(ActionButton)`
+      width: 40%;
+    `;
     return (
       <ProjectWrapper>
-        <ProjectTitle> {this.state.name} </ProjectTitle>
-        <AuthConsumer>
-          {({ user }) =>
-            this.state.members.filter(a => a._id == user.id).length == 0 ? (
-              <ActionButton id={user.id} onClick={this.addUser}>
-                {" "}
-                Join{" "}
-              </ActionButton>
-            ) : null
-          }
-        </AuthConsumer>
-        <AuthConsumer>
-          {({ user }) =>
-            user.id == this.state.admin ? (
-              <ActionButton
-                to={{
-                  pathname: "/projectcreate/" + this.state._id,
-                  state: { action: "update" }
-                }}
-              >
-                {" "}
-                Update{" "}
-              </ActionButton>
-            ) : null
-          }
-        </AuthConsumer>
-        <AuthConsumer>
-          {({ user }) =>
-            user.id == this.state.admin ? (
-              <ActionButton onClick={this.deleteItem} name={this.state._id}>
-                {" "}
-                Delete{" "}
-              </ActionButton>
-            ) : null
-          }
-        </AuthConsumer>
+        <ProjectTitle>
+          <ProjectTitleText> {this.state.name} </ProjectTitleText>
+          <ButtonWrapper width="10%">
+            <AuthConsumer>
+              {({ user }) =>
+                this.state.members.filter(a => a._id == user.id).length == 0 ? (
+                  <ActionButtonProject id={user.id} onClick={this.addUser}>
+                    {" "}
+                    Join{" "}
+                  </ActionButtonProject>
+                ) : null
+              }
+            </AuthConsumer>
+            <AuthConsumer>
+              {({ user }) =>
+                user.id == this.state.admin ? (
+                  <ActionButtonProject
+                    to={{
+                      pathname: "/projectcreate/" + this.state._id,
+                      state: { action: "update" }
+                    }}
+                  >
+                    {" "}
+                    Update{" "}
+                  </ActionButtonProject>
+                ) : null
+              }
+            </AuthConsumer>
+            <AuthConsumer>
+              {({ user }) =>
+                user.id == this.state.admin ? (
+                  <ActionButtonProject
+                    onClick={this.deleteItem}
+                    name={this.state._id}
+                  >
+                    {" "}
+                    Delete{" "}
+                  </ActionButtonProject>
+                ) : null
+              }
+            </AuthConsumer>
+          </ButtonWrapper>
+        </ProjectTitle>
         <ProjectDescriptionRow>
           <ProjectImageContainer>
             {" "}

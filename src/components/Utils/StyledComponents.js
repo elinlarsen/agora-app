@@ -31,7 +31,7 @@ export const mainTheme = {
 
 export const ActionButton = styled(Link)`
   display: block;
-  background-color: ${props => props.theme.color2};
+  background-color: ${props => props.theme.color1};
   padding: ${props => props.theme.defaultPaddingLarge};
   text-decoration: none;
   color: white;
@@ -398,24 +398,29 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
-  padding-top: 20px;
+  width: ${props => props.width};
 `;
 
 // --- Single project Page Components --- //
 
 export const ProjectWrapper = styled.div`
-  width: 90%;
+  width: 100%;
   padding: 10px;
 `;
 
 export const ProjectTitle = styled.div`
-  padding: 10px;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
   background-color: #21222a;
+`;
+
+export const ProjectTitleText = styled.p`
+  width: 60%;
+  padding: 10px;
   font-weight: bold;
   color: white;
   font-size: 20px;
-  border-radius: 5px;
 `;
 
 export const ProjectImageContainer = styled.div`
