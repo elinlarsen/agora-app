@@ -75,10 +75,10 @@ export default class Agoras extends Component {
             dbRes.forEach((agora, i) => {
               agora.geocode = codes[i];
             })
-            this.setState({ agoras: dbRes }, () => console.log("coucou agoras ----", this.state.agoras)); 
-         })
+            this.setState({ agoras: dbRes }, () => console.log("the agoras", this.state.agoras));
+          })
          .catch(err => console.error(err ,"------- error in getAll from agoras marker promise"));
-    });
+        });    
   }
 
   handleDisplayForm = () => {
