@@ -3,16 +3,13 @@ import { Link } from "react-router-dom";
 
 //components
 import SearchBar from "./Utils/SearchBar";
-import AgoraList from "./Agoras/AgoraList";
 import AgoraMap from "./Agoras/AgoraMap";
-//import AgoraForm from "./Agora/AgoraForm"
-//import CreateButton from "./Utils/CreateButton"
+import { AuthConsumer } from "./Auth/Guard";
 
 //utils
 import ajaxHandler from "../utils/ajaxHandler";
 import filterBy from "../utils/utilFunctions";
 import Geocode from "react-geocode";
-import styled from "styled-components";
 import {
   MainBodyAgoras,
   WrapperAgoras,
@@ -72,13 +69,13 @@ export default class Agoras extends Component {
     filterBy(this.state.search, this.state.agoras, "zipcode");
 
   componentDidMount() {
-    this.state.agoraHandler.getAll(async dbRes => {
+    this.state.agoraHandler.getAll( dbRes => {
       this.getCoordinatesAndMarkers(dbRes).then(codes => {
         dbRes.forEach((agora, i) => {
           agora.geocode = codes[i];
-        });
+        }).catch(err => console.error(err ,"------- error in getAll from agoras marker promise"));
         this.setState({ agoras: dbRes });
-      });
+      })
     });
   }
 
@@ -101,17 +98,23 @@ export default class Agoras extends Component {
     return (
       <MainBodyAgoras>
         <CTAContainer>
-          <Link
-            style={{ textDecoration: "none", color: "#f95d64", margin: "2vh 0" }}
-            to={{ pathname: "/agoracreate", state: { action: "create" } }}
-          >
-            Create your agora!
-          </Link>
-
+          <AuthConsumer>
+            {({ user }) => { return(      
+              <Link
+                style={{ textDecoration: "none", color:  "#f95d64"//"#85144b"
+                          , margin: "2vh 0", fontWeight: "bold" }}
+                to={{ pathname: "/agoracreate", 
+                state: { action: "create", currentUser : user } }}
+              >
+                Create your agora!
+              </Link>) 
+              }}
+          </AuthConsumer>
           <SearchBar
             handleChange={this.handleSearch}
             placeholder="Search an agora by its zipcode."
           />
+
         </CTAContainer>
 
         <WrapperAgoras>
