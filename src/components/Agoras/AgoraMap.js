@@ -8,10 +8,9 @@ require('dotenv').config()
 
 const MapParent=styled.div`
 position: relative; /* Set the navbar to fixed position */
-padding-top: 10vh; 
 display : flex; 
 width :100vw;
-height: 60vh;
+height: 65vh;
 `
 
 const ImageContainer=styled.div`

@@ -1,48 +1,18 @@
 import React, { Component } from "react";
-
+import { Marker } from "google-maps-react";
+import Geocode from "react-geocode";
+//Components
 import SearchBar from "./Utils/SearchBar";
 import AgoraList from "./Agoras/AgoraList";
 import AgoraMap from "./Agoras/AgoraMap";
 import AgoraForm from "./Agora/AgoraForm";
 import CreateButton from "./Utils/CreateButton";
-
+import { MainBody, Wrapper, AgorasContainer } from "../Utils/StyledComponents";
+//ajax
 import ajaxHandler from "../utils/ajaxHandler";
 
-import { Marker } from "google-maps-react";
-import Geocode from "react-geocode";
-
-import styled from "styled-components";
-import { MainBody, Wrapper, AgorasContainer } from "../Utils/StyledComponents";
-
-const MainBody = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0 3vw;
-  height: 85vh;
-`;
-const Wrapper = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-end;
-  align-items: center;
-`;
-
-const AgorasContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  align-items: center;
-`;
 
 export default class Agoras extends Component {
-  /*
-    state : 
-        - filtered pour la search bar
-        - agoraList (updated when edited and new agora added / deleted )
-    qui va être passer dans la list et la map 
-    */
 
   state = {
     search: "",

@@ -9,7 +9,7 @@ export default function Nav(props) {
     <NavContainer>
       <Link to="/" style={{ textDecoration: "none" }}>
         {" "}
-        <Logo>Agora</Logo>
+        <Logo>Agorae</Logo>
       </Link>
 
       <UserStatus />
