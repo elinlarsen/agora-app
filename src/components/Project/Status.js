@@ -8,14 +8,14 @@ export default function ProjectStatus(props) {
     margin: 10px 0px;
     width: 18%;
     border-style: solid;
-    border-color: darkgray;
-    border-radius: 5px;
+    border-color: ${props => props.theme.color2};
+    border-width: 0.5px;
   `;
 
   const Ideation = styled.div`
     display: flex;
     background-color: lightgreen;
-    width: 100%;
+    width:99.9%
     height: 20%;
     font-weight: bold;
     color: black;
@@ -24,7 +24,7 @@ export default function ProjectStatus(props) {
   const Planning = styled.div`
     display: flex;
     background-color: green;
-    width: 100%;
+    width:99.9%
     height: 40%;
     font-weight: bold;
     color: black;
@@ -33,7 +33,7 @@ export default function ProjectStatus(props) {
   const Financed = styled.div`
     display: flex;
     background-color: blue;
-    width: 100%;
+    width:99.9%
     height: 60%;
     font-weight: bold;
     color: black;
@@ -42,7 +42,7 @@ export default function ProjectStatus(props) {
   const Ongoing = styled.div`
     display: flex;
     background-color: lightblue;
-    width: 100%;
+    width:99.9%
     height: 80%;
     font-weight: bold;
     color: black;
@@ -51,7 +51,7 @@ export default function ProjectStatus(props) {
   const Done = styled.div`
     display: flex;
     background-color: turquoise;
-    width: 100%;
+    width:99.9%
     height: 100%;
     font-weight: bold;
     color: black;

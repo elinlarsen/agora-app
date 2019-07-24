@@ -46,7 +46,7 @@ export default function Message(props) {
               alt={props.messages[0].user.username}
             />{" "}
           </MessagePicture>
-          <MessageUserName> {props.messages[0].user.username} </MessageUserName>
+          <MessageUserName> {props.messageUserName} </MessageUserName>
           <MessageUserText> {""} </MessageUserText>
           <MessageInputForm
             onSubmit={props.handleMessageSubmit}
@@ -57,10 +57,9 @@ export default function Message(props) {
             {" "}
             <MessageUserInput
               value={props.text}
-              placeholder="Enter your contribution here"
               onChange={props.handleChange}
             />
-            <MessageInputButton type="submit" value="Submit" />
+            <MessageInputButton type="submit" value="Share" />
           </MessageInputForm>
         </MessageRow>
       );

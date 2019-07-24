@@ -101,7 +101,7 @@ export default class Projects extends Component {
       <ProjectWrapper>
         <ProjectTitle>
           <ProjectTitleText> {this.state.name} </ProjectTitleText>
-          <ButtonWrapper width="10%">
+          <ButtonWrapper width="15%">
             <AuthConsumer>
               {({ user }) =>
                 this.state.members.filter(a => a._id == user.id).length == 0 ? (

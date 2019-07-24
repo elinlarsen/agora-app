@@ -15,7 +15,10 @@ export default class Forum extends Component {
       currentPost: null
     };
 
-    this.messagesHandler = new ajaxHandler("http://localhost:5000", "/messages");
+    this.messagesHandler = new ajaxHandler(
+      "http://localhost:5000",
+      "/messages"
+    );
     this.messagesHandlerPost = new ajaxHandler(
       "http://localhost:5000",
       "/messages/new"
@@ -90,7 +93,7 @@ export default class Forum extends Component {
                 text={this.state.currentPost}
                 messageUserId={user.id}
                 messageUserPicture={user.picture}
-                messageUserUsername={user.username}
+                messageUserName={""}
                 messages={[
                   { user: { picture: user.picture, username: user.username } }
                 ]}

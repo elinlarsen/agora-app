@@ -18,7 +18,7 @@ export const mainTheme = {
   cardHeight: 600,
   cardHeightWidthRatio: 2,
   color0: "#D32F2F" /* Main Primary color */,
-  color1: "#f95d60", /* "f95d60","#F44336"*/
+  color1: "#f95d60" /* "f95d60","#F44336"*/,
   color2: "#212121",
   color3: "#FFFFFF",
   color4: "#FF9800",
@@ -26,7 +26,7 @@ export const mainTheme = {
   color6: "#757575",
   color7: "#BDBDBD",
   color8: "f95d64",
-  titleFont : "Vibur",
+  titleFont: "Vibur"
 };
 
 // Define Utils Components
@@ -89,10 +89,13 @@ export const NavContainer = styled.div`
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  background-color: ${props => { return props.theme.color1}};
+  background-color: ${props => {
+    return props.theme.color1;
+  }};
   height: 12vh;
   padding: 0 1vw;
-  opacity : 0.9
+  opacity: 0.9;
+  z-index: 1;
 `;
 
 export const Logo = styled.div`
@@ -107,8 +110,8 @@ export const UserP = styled.div`
   margin-left: 2vw;
   color: white;
   text-transform: uppercase;
-  font-weight: bold; 
-  font-size: 1.1rem; 
+  font-weight: bold;
+  font-size: 1.1rem;
 `;
 export const UserOptions = styled.div`
   display: flex;
@@ -152,15 +155,15 @@ export const FooterP = styled.div`
 // Search Bar Component
 
 export const SearchStyle = styled.input`
-width: 100%; 
-border : 1px solid  #faf9f8;
-border-radius : 10px; 
-padding: 3vh;
-font-size : 1.3rem;
-color : #0C214A; 
-margin-top: 2vh;  
-box-shadow: 3px 3px 3px #faf9f8; 
-text-align : center; 
+  width: 100%;
+  border: 1px solid #faf9f8;
+  border-radius: 10px;
+  padding: 3vh;
+  font-size: 1.3rem;
+  color: #0c214a;
+  margin-top: 2vh;
+  box-shadow: 3px 3px 3px #faf9f8;
+  text-align: center;
 `;
 
 //F4EBBE
@@ -171,6 +174,7 @@ export const VideoWrapper = styled.div`
   width: 100%;
   height: 30%;
   margin-top: -300px;
+  z-index: -1;
 `;
 
 export const B = styled.span`
@@ -306,12 +310,12 @@ export const CTAContainer = styled.div`
   height: inherit;
   width: 100%;
   display: flex;
-  flex-flow: column nowrap; 
+  flex-flow: column nowrap;
   justify-content: space-around;
   align-items: center;
   font-weigth: bold;
   font-size: 2rem;
-  margin-top : 4vh ; 
+  margin-top: 4vh;
 `;
 
 export const ContainerAgoras = styled.div`
@@ -430,9 +434,7 @@ export const ProjectTitleText = styled.p`
 
 export const ProjectImageContainer = styled.div`
   width: 26%;
-  border-style: solid;
-  border-color: darkgray;
-  border-radius: 5px;
+
   margin: 10px 0px;
 `;
 
@@ -446,12 +448,11 @@ export const ProjectDescription = styled.p`
   width: 80%;
   heigth: 10%;
   padding: 20px;
-  border-style: solid;
   margin: 10px 0px;
-  border-style: solid;
-  border-color: darkgray;
   font-size: 20px;
-  border-radius: 5px;
+  border-style: solid;
+  border-color: ${props => props.theme.color2};
+  border-width: 0.5px;
 `;
 export const ProjectDescriptionRow = styled.div`
   display: flex;
@@ -464,20 +465,21 @@ export const ProjectDescriptionRow = styled.div`
 export const ForumContainer = styled.div`
   width: 72%;
   border-style: solid;
-  padding: 10px;
+  padding: 0px 10px;
   border-style: solid;
-  border-color: darkgray;
-  border-radius: 5px;
+  border-color: ${props => props.theme.color2};
+  border-width: 0.5px;
 `;
 
 export const ForumTitle = styled.p`
-  padding: 10px;
-  margin: 0px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
   background-color: #21222a;
-  font-weight: bold;
   color: white;
+
+  font-weight: bold;
   font-size: 20px;
-  border-radius: 5px;
 `;
 
 // --- Members Components --- //
@@ -491,38 +493,44 @@ export const MemberContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 26%;
+
+  padding: 0px 10px;
   border-style: solid;
-  border-color: darkgray;
-  border-radius: 5px;
-  padding: 10px 10px;
+  border-color: ${props => props.theme.color2};
+  border-width: 0.5px;
 `;
 
 export const MemberTitle = styled.p`
-  padding: 10px;
-  margin: 0px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
   background-color: #21222a;
-  font-weight: bold;
   color: white;
+
+  font-weight: bold;
   font-size: 20px;
-  border-radius: 5px;
 `;
 
 export const MemberPicture = styled.div`
   width: 20%;
-  border-radius: 5px;
 `;
 
 export const MemberName = styled.p`
-  padding: 10px 10px;
+  padding: 0px 20px;
   margin-top: auto;
+  font-weight: bold;
+  font-size: 20px;
 `;
 
 // --- Message Components ---//
 
 export const MessageRow = styled.div`
   display: flex;
-  padding: 5px;
+  padding-top: 5px;
   justify-content: flex-start;
+  border-bottom-style: solid;
+  border-bottom-width: 0.5px;
+  width: 100%;
 `;
 
 export const MessagePicture = styled.div`
@@ -531,29 +539,34 @@ export const MessagePicture = styled.div`
 
 export const MessageUserName = styled.p`
   font-weight: bold;
-  margin: 10px;
-  padding: 0px 5px;
+  margin-top: auto;
+  padding: 0px 20px;
   width: 20%;
 `;
 
 export const MessageUserText = styled.p`
-  margin: 10px;
-  padding: 0px 5px;
-  width: 30%;
-`;
-
-export const MessageUserInput = styled.input`
-  margin: 10px;
-  padding: 5px 5px;
-  width: 100%;
+  margin-top: auto;
+  padding: 0px 20px;
+  width: 50%;
 `;
 
 export const MessageInputForm = styled.form`
-  width: 30%;
+  width: 50%;
+  height: 100%;
   display: flex;
+  align-items: center;
+  font-size: 14px;
+`;
+
+export const MessageUserInput = styled.input`
+  padding: 5px;
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
 `;
 
 export const MessageInputButton = styled.input`
   padding: 5px;
   margin: 10px;
+  height: 100%;
 `;

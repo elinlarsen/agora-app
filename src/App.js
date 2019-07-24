@@ -43,7 +43,6 @@ export default class App extends Component {
               <Route path={["/signup", "/login"]} component={Auth} />
             </Switch>
           </div>
-          <Footer />
         </React.Fragment>
       </ThemeProvider>
     );
