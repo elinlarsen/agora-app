@@ -27,7 +27,7 @@ export default function FormContainerProject(props) {
   }
 
   return (
-    <FormWrapper id={props.id} onSubmit={props.handleSubmit}>
+    <FormWrapper>
     <TitleForm >{props.titleForm}</TitleForm >
       {Object.keys(props.object).map(key => {
         if (!props.exceptions.includes(key))
@@ -55,8 +55,11 @@ export default function FormContainerProject(props) {
         />
       )}
       <CreateButton disabled={props.displayForm} 
+                    type="submit"
                     text={props.textSubmit} 
-                    clbk={props.handleSubmit}/>
+                    clbk={(event) => props.handleSubmit(event, props.currentUser._id)}
+                    //clbk={props.handleSubmit}
+                    />
     </FormWrapper>
   );
 }

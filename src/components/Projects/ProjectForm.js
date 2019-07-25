@@ -124,8 +124,9 @@ export default class ProjectForm extends Component {
     this.setState({ project: projectToUpdate });
   };
 
-  handleSubmit = event => {
+  handleSubmit = (event, currentUserID) => {
     event.preventDefault();
+    console.log("handle submit---------------------------")
     let formData = new FormData();
     let currentProject = this.state.project;
 
@@ -143,8 +144,8 @@ export default class ProjectForm extends Component {
       }
     });
 
-    formData.append("admin", event.target.id);
-    formData.append("members", event.target.id);
+    formData.append("admin", currentUserID);
+    formData.append("members", currentUserID);
 
     if (this.action === "update") {
       this.state.projectHandler.updateOne(
@@ -190,6 +191,7 @@ export default class ProjectForm extends Component {
           <>
             {this.state.displayForm}
             <FormContainerProject
+              currentUser={user}
               titleForm={title}
               id={user.id}
               exceptions={["picture", "members", "public"]}
