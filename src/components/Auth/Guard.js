@@ -60,9 +60,24 @@ class AuthProvider extends React.Component {
       })
       .catch(serverErr => {
         this.setState({ isLoggedIn: false })
-        console.log("error while logging in signin function - guard: ", serverErr)
+        console.log("error while logging in guard.js : ", serverErr)
     });
   };
+
+  signup = (clbk, data) => {
+    apiAuthHandler
+      .post("/signup", data)
+      .then(async serverRes => {
+        await this.updateState(serverRes.data); 
+        clbk(serverRes.data.loginStatus);
+      })
+      .catch(serverErr => {
+        this.setState({ isLoggedIn: false })
+        console.log("error while signing up in guard.js : ", serverErr)
+    });
+
+
+  }
 
   signout = clbk => {
     apiAuthHandler.post("/signout")
@@ -85,7 +100,8 @@ class AuthProvider extends React.Component {
           // exposed methods
           isLoggedIn: this.isLoggedIn,
           signin: this.signin,
-          signout: this.signout
+          signout: this.signout,
+          signup : this.signup,
         }}
       >
         {/* here, the provider children tags will be inserted */}

@@ -692,7 +692,7 @@ margin : 2vh 2vw;
 padding-bottom 2vh; 
 `
 
-export const FormWrapper=styled.div`
+export const FormWrapper=styled.form`
   margin: 5vh 5vw;
   padding : 2vh 2vw; 
   display: flex;

@@ -59,6 +59,7 @@ export default class UpdateAgoraForm extends Component {
         console.log("currentUser", this.currentUser)
 
         if(this.action==="create"){
+            console.log("coucou")
    
             Object.keys(agora).forEach(item =>{
                 for(let x of fd) console.log("form data --------",x)
@@ -72,6 +73,8 @@ export default class UpdateAgoraForm extends Component {
             fd.append("admin", this.currentUser._id);
             fd.append("members", this.currentUser._id);
 
+            for(let x in fd){console.log(x)}
+
             this.state.newAgoraHandler.createOne(fd, newAgora => {
                 console.log("created agora --", newAgora)
                 this.props.history.push("/agoras");
@@ -79,6 +82,7 @@ export default class UpdateAgoraForm extends Component {
         }   
 
         if(this.action==="update"){
+            console.log("coucou update")
 
              Object.keys(agora).forEach(item =>{
                 if(item === "picture")agora[item].forEach(key =>fd.set("picture", key, key.name))
@@ -116,6 +120,7 @@ export default class UpdateAgoraForm extends Component {
   
 
     render() {
+        
         let title; let submit; 
          if (this.action==="create") {
              title="Create your agora";
@@ -126,12 +131,13 @@ export default class UpdateAgoraForm extends Component {
             submit="Submit your updated agora"
          }
 
+         console.log("this action ---", this.action)
          console.log("this.currentUser ----" , this.currentUser)
         return (
             <>
             <FormContainer 
                  titleForm={title}
-                exceptions={["_id", "__v", "picture", "members", "projects", "admin"]}
+                exceptions={["_id", "__v", "picture", "members", "projects"]}
                 handleSubmit={this.handleSubmit}
                 object={this.state.agora}
                 handleChange={this.handleChange}

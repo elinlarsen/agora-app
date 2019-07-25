@@ -27,7 +27,7 @@ export default function Auth(props) {
             {wantToSignIn ? (
                 <LogInForm redirect={redirect} />
             ) : (
-                    <SignUpForm redirect={redirect} />
+                <SignUpForm redirect={redirect} />
                 )}
 
             <Link className="link" to={path}

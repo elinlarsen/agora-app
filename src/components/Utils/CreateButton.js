@@ -8,7 +8,7 @@ export default function CreateButton(props) {
   
     return (
         <WrapperButton>
-            <ActionButton disabled={props.disabled} onClick={props.clbk}>{props.text} 
+            <ActionButton type={props.type} disabled={props.disabled} onClick={props.clbk}>{props.text} 
             </ActionButton>     
         </WrapperButton>       
     )

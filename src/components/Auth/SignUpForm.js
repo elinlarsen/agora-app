@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import ajaxHandler from '../../utils/ajaxHandler'
 import FormContainerProject from "../Utils/FormContainerProject"
 
-const signUpHandler = new ajaxHandler (process.env.REACT_APP_API_URL_, "/signup");
+//const signUpHandler = new ajaxHandler (process.env.REACT_APP_API_URL_, "/signup");
+import { AuthConsumer } from "./Guard";
 
 export default class Signup extends Component {
   state = {
@@ -68,7 +69,7 @@ export default class Signup extends Component {
     this.setState({ user : copy });
   };
 
-  handleSubmit = evt => {
+  handleSubmit = (evt, signup) => {
     evt.preventDefault();
 
     if (!this.checkAllFields()) return console.warn("form incomplete");
@@ -89,10 +90,13 @@ export default class Signup extends Component {
 
     //for (let x of fd) (console.log("fd key value : ", x, "type of ", typeof x))
 
-    signUpHandler.createOne( fd, serverRes => {
+    signup( (status) => this.props.redirect("/agoras"), fd);
+
+
+    /*signUpHandler.createOne( fd, serverRes => {
         this.props.redirect("/agoras");
         console.log("serverRes-----", serverRes)
-    })
+    })*/
   };
 
 
@@ -100,19 +104,25 @@ export default class Signup extends Component {
     this.setState({user:{...this.state.user, picture: this.state.user.picture.concat(picture)}});
 }
 
-  render() {
-     return (
-      <FormContainerProject 
-        titleForm="Account Sign Up"
-        exceptions={["picture"]}
-        handleSubmit={this.handleSubmit}
-        object={this.state.user}
-        handleChange={this.handleChange}
-        onDrop={this.onDrop}
-        singleImage={true}
-        textSubmit={"Sign up !"}   
-      />
-
-    );
-  }
+render() {
+  let user=""
+  return (
+      <AuthConsumer>
+          {({ signup }) => (
+             
+             <FormContainerProject 
+                  currentUser={user}
+                  titleForm="Account Sign Up"
+                  exceptions={["picture"]}
+                  handleSubmit={evt => this.handleSubmit(evt, signup)}
+                  object={this.state.user}
+                  handleChange={this.handleChange}
+                  onDrop={this.onDrop}
+                  singleImage={true}
+                  textSubmit={"Sign up !"}   
+                  />         
+                      )}            
+      </AuthConsumer>
+  )}
 }
+
