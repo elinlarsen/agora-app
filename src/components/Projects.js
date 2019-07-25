@@ -21,8 +21,6 @@ export default class Projects extends Component {
     /*this.projectHandler.getAll(res => {
       this.setState({ projects: res });
     });*/
-
-
   };
 
   render() {
@@ -31,6 +29,7 @@ export default class Projects extends Component {
         project={projectItem}
         key={projectItem._id}
         deleteFunction={this.deleteItem}
+        agoraId={this.props.agoraId}
       >
         {" "}
       </ProjectCard>
@@ -40,13 +39,14 @@ export default class Projects extends Component {
       <StyledEmptyProjectCard>
         {" "}
         <Link
-          to={{ pathname: "/projectcreate", 
-          state: { action: "create", 
-                   agora : this.props.agora } }}
+          to={{
+            pathname: "/projectcreate",
+            state: { action: "create", agora: this.props.agora }
+          }}
           style={{ textDecoration: "none" }}
         >
           {" "}
-          <p>Create your project  now !</p>{" "}
+          <p>Create your project now !</p>{" "}
         </Link>
       </StyledEmptyProjectCard>
     );

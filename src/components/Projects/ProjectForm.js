@@ -9,6 +9,10 @@ export default class ProjectForm extends Component {
     super(props);
     this.action = this.props.location.state.action;
     this.agora = this.props.location.state.agora;
+    this.agoraId = this.props.location.state.agoraId;
+
+    console.log(this.agoraId);
+
     this.state = {
       project: {
         name: {
@@ -151,7 +155,7 @@ export default class ProjectForm extends Component {
         this.props.match.params.id,
         formData,
         dbRes => {
-          this.props.history.push("/projects/");
+          this.props.history.push("/agora/" + this.agoraId);
         }
       );
     } else if (this.action === "create") {
