@@ -637,16 +637,14 @@ export const MemberTitle = styled.p`
   font-size: 20px;
 `;
 
-/*export const MemberPicture = styled.div`
-  width: 20%;
-`;
+export const MemberPictureContainer = styled.div``; /*
 
 export const MemberName = styled.p`
   padding: 0px 20px;
   margin-top: auto;
   font-weight: bold;
   font-size: 20px;
-`;*/
+`; */
 
 // ---Auth --- //
 

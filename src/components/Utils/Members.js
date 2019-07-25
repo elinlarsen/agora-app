@@ -4,6 +4,7 @@ import {
   PictureAndNameContainer,
   MemberContainer,
   MemberTitle,
+  MemberPictureContainer,
   MemberPicture,
   MemberName
 } from "./StyledComponents";
@@ -15,7 +16,10 @@ export default function Members(props) {
   const listItemsUsernames = props.membersList.map(item => (
     <React.Fragment>
       <PictureAndNameContainer>
-          <MemberPicture src={item.picture} width="100%" alt={item.name} />
+        <MemberPictureContainer>
+          {" "}
+          <MemberPicture src={item.picture} width="10%" alt={item.name} />{" "}
+        </MemberPictureContainer>
         <MemberName>
           {" "}
           <p>
@@ -30,8 +34,7 @@ export default function Members(props) {
   return (
     <MemberContainer>
       {" "}
-      <MemberTitle> Current project members</MemberTitle> <MemberPicture />{" "}
-      {listItemsUsernames}
+      <MemberTitle> Current project members</MemberTitle> {listItemsUsernames}
     </MemberContainer>
   );
 }

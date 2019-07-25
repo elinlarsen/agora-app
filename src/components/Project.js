@@ -128,7 +128,6 @@ export default class Projects extends Component {
       <ProjectWrapper>
         <ProjectTitle>
           <ProjectTitleText> {this.state.name} </ProjectTitleText>
-
           <ButtonWrapper width="20%">
             <ActionButtonProject to={"/agora/" + this.state.agoraId}>
               {" "}
