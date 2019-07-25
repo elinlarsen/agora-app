@@ -5,24 +5,31 @@ import styled from "styled-components";
 import ImageUploader from "react-images-upload";
 
 //components
-import CreateButton from "./../Utils/CreateButton";
-import InputForm from "../Utils/InputForm";
+import CreateButton from "./CreateButton";
+import InputForm from "./InputForm";
 
-const Form = styled.form`
+//style 
+import {FormWrapper, TitleForm} from "./StyledComponents"
+
+/*const Form = styled.form`
   padding: 1vh;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   height: inherit;
-`;
+`;*/
 
 export default function FormContainer(props) {
   return (
-    <Form id={props.id} onSubmit={props.handleSubmit}>
+    <FormWrapper id={props.id} onSubmit={props.handleSubmit}>
+     
+     <TitleForm >{props.titleForm}</TitleForm >
+
       {Object.keys(props.object).map(key => {
         if (!props.exceptions.includes(key)) {
           return (
+            
             <InputForm
               label={key.toUpperCase()}
               text="text"
@@ -44,7 +51,10 @@ export default function FormContainer(props) {
         singleImage={props.singleImage}
       />
 
-      <CreateButton disabled={props.displayForm} text={props.textSubmit} />
-    </Form>
+      <CreateButton disabled={props.displayForm} 
+                    text={props.textSubmit} 
+                    clbk={props.handleSubmit}
+                    />
+    </FormWrapper>
   );
 }

@@ -8,14 +8,24 @@ const MainHome = styled.div`
   width: 100%;
   background-color: red;
 `;
+
+
+const HomeWrapper=styled.div`
+display: flex;
+flex-flow: column nowrap;
+justify-content: flex-start;
+align-items: center;
+height: inherit; 
+width : inherit; 
+`
 export default class Home extends Component {
   render() {
     return (
-      <React.Fragment>
+      <HomeWrapper>
         <VideoCover />
         <InfoCard />
         <CallToAction />
-      </React.Fragment>
+      </HomeWrapper>
     );
   }
 }

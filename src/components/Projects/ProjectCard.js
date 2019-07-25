@@ -9,8 +9,12 @@ import {
   ButtonWrapper,
   StyledTag,
   TagGrid,
-  GenericWrapper
+  GenericWrapper,
+  ProjectCardTitle
 } from "../Utils/StyledComponents.js";
+
+import { FiUsers } from "react-icons/fi";
+
 
 export default function ProjectCard(props) {
   return (
@@ -29,13 +33,10 @@ export default function ProjectCard(props) {
           />{" "}
         </ImageWrapper>
         <GenericWrapper>
-          <ProjectCardText> {props.project.name} </ProjectCardText> <HR />
+          <ProjectCardTitle> {props.project.name} </ProjectCardTitle> <HR />
           <ProjectTags tags={props.project.tags}> </ProjectTags>
           <HR />
-          <ProjectCardText>
-            {" "}
-            {"Number of contributors: "} {props.project.members.length}{" "}
-          </ProjectCardText>
+          <ProjectCardText> {props.project.members.length} <FiUsers /> </ProjectCardText>
         </GenericWrapper>
       </ProjectCardWrapper>
     </Link>

@@ -8,26 +8,38 @@ export const mainTheme = {
   color2: "#574f7d",
   color3: "#95adbe",
   color4: "#dff0ea",*/
-  defaultPaddingSmall: "5px",
-  defaultPaddingLarge: "10px",
-  fontSizeLarge: "20px",
-  fontSizeMedium: "14px",
-  fontSizeSmall: "10px",
+  defaultPaddingSmall: "1px",
+  defaultPaddingLarge: "2vh",
+  fontSizeLarge: "1.3rem",
+  fontSizeMedium: "1rem",
+  fontSizeSmall: "0.8rem",
   defaultBorderWidth: "0.5px",
-  defaultBorderRadius: "5px",
-  cardHeight: 600,
-  cardHeightWidthRatio: 2,
+  defaultBorderRadius: "20px",
+  cardHeight: 50,
+  cardHeightWidthRatio: 1.8,
   color0: "#D32F2F" /* Main Primary color */,
-  color1: "#f95d60" /* "f95d60","#F44336"*/,
-  color2: "#212121",
-  color3: "#FFFFFF",
+  color1:  "#85144b"/* "#f95d60" "f95d60","#F44336"*/,
+  color2: "#212121", /*dark for text*/
+  color3: "#FFFFFF", //white
   color4: "#FF9800",
   color5: "#212121",
   color6: "#757575",
   color7: "#BDBDBD",
-  color8: "f95d64",
+  color8: "#85144b", //dark purple; 
+  color9: "#faf9f8",  //light background 
   titleFont: "Vibur"
 };
+
+export const MainBody = styled.div`
+color: ${props => props.theme.color8}
+display : flex; 
+justify-content: center; 
+background-color: ${props => props.theme.color9};
+margin-top: 12vh; /*because of the fixed nav bar*/
+min-height: 100vh;
+max-height: min-content;
+
+`
 
 // Define Utils Components
 
@@ -36,14 +48,28 @@ export const ActionButton = styled(Link)`
   background-color: ${props => props.theme.color1};
   padding: ${props => props.theme.defaultPaddingLarge};
   text-decoration: none;
-  color: white;
+  color: ${props => props.theme.color3};
   font-weight: bold;
   text-align: center;
   font-size: ${props => props.theme.fontSizeMedium};
-  width: 32%;
+  width: 80%;
   border-radius: ${props => props.theme.defaultBorderRadius};
   cursor: pointer;
+  margin: 2vh 0; 
 `;
+
+export const WrapperButton = styled.div`
+  width : 100%; 
+  display : flex; 
+  flex-flow: row wrap; 
+  justify-content : center; 
+  align-items : center; 
+  &:hover ${ActionButton} {
+    background-color : ${props => props.theme.color3};
+    color : ${props => props.theme.color1};
+    border: solid 1px ${props => props.theme.color1};
+  }
+`
 
 export const StyledTag = styled.div`
   padding: ${props => props.theme.defaultPaddingSmall};
@@ -52,30 +78,15 @@ export const StyledTag = styled.div`
   border-radius: ${props => props.theme.defaultBorderRadius};
   border-color:${props => props.theme.color3}
     background-color: white;
-  font-weight: bold;
-  font-size: ${props => props.theme.fontSizeMedium};
-  color: ${props => props.theme.color1};
+  /*font-weight: bold;*/
+  font-size: ${props => props.theme.fontSizeSmall};
+  color: ${props => props.theme.color8};
   margin: auto;
-  width: 120px;
+  width: 100%;
   text-align: center;
 `;
 
-export const StyledInput = styled.input`
-  width: 30vw;
-  border: 1px solid #0c214a;
-  border-radius: 10px;
-  padding: 1vh;
-  font-size: 1.2rem;
-  color: #0c214a;
-`;
 
-export const Label = styled.label`
-  text-align: center;
-  font-size: 1.3rem;
-  font-weigth: bold;
-  color: #0c214a;
-  padding: 2vh 0;
-`;
 
 // Define Specific Components
 
@@ -92,16 +103,17 @@ export const NavContainer = styled.div`
   background-color: ${props => {
     return props.theme.color1;
   }};
-  height: 12vh;
+  height: 12vh; /*fit-content;*/
   padding: 0 1vw;
   opacity: 0.9;
   z-index: 1;
 `;
 
 export const Logo = styled.div`
-  font-size: 4rem;
+  font-size: 3rem;
   color: white;
   font-family: ${props => props.theme.titleFont};
+  margin :1vh 0; 
 `;
 
 // -- User Components -- //
@@ -114,6 +126,7 @@ export const UserP = styled.div`
   font-size: 1.1rem;
 `;
 export const UserOptions = styled.div`
+  height: inherit; 
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;
@@ -126,8 +139,7 @@ export const UserProfile = styled.div`
   font-size: 1.2rem;
 `;
 export const Img = styled.img`
-  height: 4vh;
-  width: 4vh;
+  width: 6vh;
   border-radius: 30px;
 `;
 
@@ -155,15 +167,17 @@ export const FooterP = styled.div`
 // Search Bar Component
 
 export const SearchStyle = styled.input`
-  width: 100%;
-  border: 1px solid #faf9f8;
-  border-radius: 10px;
+  width: 100vw;
+  color: ${props => props.theme.color8};
+  border: none; 
   padding: 3vh;
-  font-size: 1.3rem;
-  color: #0c214a;
-  margin-top: 2vh;
+  font-size: 1.3rem; 
   box-shadow: 3px 3px 3px #faf9f8;
   text-align: center;
+
+  ::placeholder{
+    color : ${props => props.theme.color8};
+  }
 `;
 
 //F4EBBE
@@ -171,10 +185,10 @@ export const SearchStyle = styled.input`
 // -- Home Page Components -- //
 
 export const VideoWrapper = styled.div`
-  width: 100%;
-  height: 30%;
-  margin-top: -300px;
-  z-index: -1;
+width: 100vw;
+height: 57vh;
+margin-top: -10vw; 
+z-index: auto;
 `;
 
 export const B = styled.span`
@@ -183,11 +197,13 @@ export const B = styled.span`
 
 export const Banner = styled.div`
   display: flex;
-  background-color: white;
-  justify-content: flex-start;
+  background-color:  ${props => props.theme.color3};
+  justify-content: cent;
   align-items: center;
   height: inherit;
-  flex-direction: column;
+  flex-flow: column nowrap;
+  padding-top : 8vh ; 
+  padding-bottom: 5vh
 `;
 
 export const BannerText = styled.p`
@@ -266,15 +282,120 @@ export const HRIcon = styled.hr`
   display: none;
 `;
 
+//Agora page //
+
+export const Main= styled.div`
+display : flex; 
+flex-flow : column wrap; 
+justify-content : center; 
+align-items:center; 
+height: inherit; 
+`
+
+export const Title= styled.h1`
+text-align: center; 
+color : ${props => props.theme.color3};
+font-weight: bold; 
+`
+export const SubTitle= styled.p`
+text-align: center; 
+color :${props => props.theme.color3};
+margin: 0.5vh 0; 
+`
+
+export const Loc= styled(SubTitle)`
+font-style: italic;
+`
+
+export const ButtonJoin=styled.button`
+    width: 20vw; 
+    border : 1px solid ${props => props.theme.color1};
+    border-radius : ${props => props.theme.defaultBorderRadius}; 
+    padding: 2vh;
+    font-size : 1.5rem;
+    font-weight: bold; 
+    color : ${props => props.theme.color1};
+    margin: 1vh;
+    cursor : pointer; 
+`
+
+export const IconButton=styled(ButtonJoin)`
+width: 3vw;
+border: none;
+background-color : ${props => props.theme.color1};
+color : ${props => props.theme.color3};
+padding: 1vh;
+margin: 1vh;
+font-size : 1rem;
+cursor : pointer; 
+`
+
+export const Info=styled.div`
+width : 100%; 
+display : flex; 
+flex-flow: column wrap;
+justify-content : space-around;
+align-items : center; 
+background-color : ${props => props.theme.color1};
+opacity: 0.9; 
+padding : 2vh 0; 
+border : 1px solid ${props => props.theme.color1} 0.9
+
+`
+export const MembersWrapper=styled.div`
+  height : fit-content; 
+  background-color: ${props => props.theme.color8};
+  display : flex; 
+  flex-flow: column nowrap; 
+  justify-content: flex-start; 
+  align-items: center; 
+  padding-bottom : 5vh
+  width : 100vw;
+  `
+export const MemberP=styled.p`
+color : ${props => props.theme.color3};
+font-size : 2.5rem; 
+margin: 0; 
+margin : 2vh 0;
+
+`
+  export const MemberList=styled.div`
+  width : 100vw;
+  display : flex; 
+ flex-flow : row nowrap; 
+ justify-content: center; 
+ align-items : center; 
+ margin: 1vh 0; 
+  `
+
+  export const MemberInfo=styled.div`
+  height : inherit; 
+  width : inherit; 
+  display : flex; 
+  flex-flow : column nowrap; 
+  justify-content: center; 
+  align-items : center; 
+  `
+
+  export const MemberPicture=styled.img`
+  height : 5vw; 
+  width : 5vw;
+  border-radius : 5vh; 
+  `
+  export const MemberName=styled.p`
+  font-size : 1.2rem; 
+  color : ${props => props.theme.color3};
+  `
+
 // Agora Util Components //
 
-export const MainBody = styled.div`
+/*export const MainBody = styled.div`
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
   align-items: center;
   height: inherit;
-`;
+`;*/
 export const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -313,7 +434,7 @@ export const CTAContainer = styled.div`
   flex-flow: column nowrap;
   justify-content: space-around;
   align-items: center;
-  font-weigth: bold;
+  font-weight: bold;
   font-size: 2rem;
   margin-top: 4vh;
 `;
@@ -343,14 +464,15 @@ export const StyledEmptyProjectCard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: ${props => props.theme.cardHeight + "px"};
+  height: ${props => props.theme.cardHeight + "vh"};
   width: ${props =>
-    props.theme.cardHeight / props.theme.cardHeightWidthRatio + "px"};
+    props.theme.cardHeight / props.theme.cardHeightWidthRatio + "vh"};
   font-size: 30px;
-  color: white;
+  color: ${props => props.theme.color3};
   font-weight: bold;
-  background-color: white;
-  box-shadow: 2px 2px 3px 0px #656565;
+  background-color: ${props => props.theme.color3};
+  box-shadow: 3px 3px 3px 0px #656565;
+  text-decoration : none; 
 `;
 
 // --- Projects Card Components ---//
@@ -358,17 +480,17 @@ export const StyledEmptyProjectCard = styled.div`
 export const ProjectCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: ${props => props.theme.cardHeight + "px"};
+  height: ${props => props.theme.cardHeight + "vh"};
   width: ${props =>
-    props.theme.cardHeight / props.theme.cardHeightWidthRatio + "px"};
+    props.theme.cardHeight / props.theme.cardHeightWidthRatio + "vh"};
   border-width: 1px;
-  background-color: white;
+  background-color: ${props => props.theme.color3};
   box-shadow: 2px 2px 3px 0px #656565;
 `;
 
 export const ImageWrapper = styled.div`
   display: flex;
-  height: ${props => props.theme.cardHeight / 1.5 + "px"};
+  height: ${props => props.theme.cardHeight / 1 + "vh"};
 `;
 
 export const GenericWrapper = styled.div`
@@ -381,7 +503,7 @@ export const TagGrid = styled.div`
   grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 5px 5px;
   width: 100%;
-  height: ${props => props.theme.cardHeight / 6 + "px"};
+  height: ${props => props.theme.cardHeight / 6 + "vh"};
   align-items: start;
 `;
 
@@ -390,12 +512,19 @@ export const ProjectCardText = styled.p`
   padding: ${props => props.theme.defaultPaddingLarge};
   justify-content: center;
   align-items: center;
-  font-size: 16px;
+  font-size: 1rem;
   text-align: center;
-  height: ${props => props.theme.cardHeight / 20 + "px"};
-  width: 90%;
+  height: ${props => props.theme.cardHeight / 20 + "vh"};
+  width: 100%;
   align-self: center;
+  color: ${props => props.theme.color2};
 `;
+
+export const ProjectCardTitle=styled(ProjectCardText)`
+font-weight : bold; 
+font-size : 1rem;
+text-align : left;
+`
 
 export const HR = styled.hr`
   border-style: solid;
@@ -408,6 +537,7 @@ export const ButtonWrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   width: ${props => props.width};
+  color : ${props => props.theme.color3};
 `;
 
 // --- Single project Page Components --- //
@@ -511,7 +641,7 @@ export const MemberTitle = styled.p`
   font-size: 20px;
 `;
 
-export const MemberPicture = styled.div`
+/*export const MemberPicture = styled.div`
   width: 20%;
 `;
 
@@ -520,7 +650,61 @@ export const MemberName = styled.p`
   margin-top: auto;
   font-weight: bold;
   font-size: 20px;
+`;*/
+
+// ---Auth --- //
+
+export const AuthWrapper= styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+`
+
+// --- Form utils  --- //
+
+
+export const StyledInput = styled.input`
+  width: 40vh;
+  border: 1px solid ${props => props.theme.color8};
+  border-radius: 20px;
+  padding: 1.5vh;
+  font-size: 1.2rem;
+  margin-bottom: 3vh; 
+  color: ${props => props.theme.color8};
+  background-color : ${props => props.theme.color3};
 `;
+
+export const Label = styled.label`
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: ${props => props.theme.color8};
+  padding: 2vh 0;
+`;
+
+
+export const TitleForm=styled.div`
+color : ${props => props.theme.color8};
+font-size: 2rem;
+margin : 2vh 2vw; 
+padding-bottom 2vh; 
+`
+
+export const FormWrapper=styled.div`
+  margin: 5vh 5vw;
+  padding : 2vh 2vw; 
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  background-color : ${props => props.theme.color3};     
+  width: fit-content; 
+  border-width: 1px;
+  box-shadow: 2px 2px 3px 0px #656565;
+`
 
 // --- Message Components ---//
 

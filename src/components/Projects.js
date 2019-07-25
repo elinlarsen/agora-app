@@ -7,6 +7,7 @@ import {
   StyledEmptyProjectCard
 } from "./Utils/StyledComponents.js";
 
+
 export default class Projects extends Component {
   constructor(props) {
     super(props);
@@ -43,10 +44,12 @@ export default class Projects extends Component {
           to={{ pathname: "/projectcreate", 
           state: { action: "create", 
                    agora : this.props.agora } }}
-          style={{ textDecoration: "none" }}
+          style={{ textDecoration: "none", 
+                    color : "#85144b",//"#f95d60", 
+                    fontWeight : "bold" }}
         >
           {" "}
-          <p>Create your project  now !</p>{" "}
+          <p>Create your project now !</p>{" "}
         </Link>
       </StyledEmptyProjectCard>
     );
