@@ -15,12 +15,9 @@ export default class Forum extends Component {
       currentPost: null
     };
 
-    this.messagesHandler = new ajaxHandler(
-      "http://localhost:5000",
-      "/messages"
-    );
+    this.messagesHandler = new ajaxHandler(REACT_APP_API_URL_, "/messages");
     this.messagesHandlerPost = new ajaxHandler(
-      "http://localhost:5000",
+      REACT_APP_API_URL_,
       "/messages/new"
     );
   }
