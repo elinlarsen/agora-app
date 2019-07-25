@@ -138,10 +138,7 @@ export const UserProfile = styled.div`
   color: white;
   font-size: 1.2rem;
 `;
-export const Img = styled.img`
-  width: 6vh;
-  border-radius: 30px;
-`;
+
 
 //Footer Components
 
@@ -378,8 +375,8 @@ margin : 2vh 0;
   `
 
   export const MemberPicture=styled.img`
-  height : 5vw; 
-  width : 5vw;
+  height : 4vw; 
+  width : 4vw;
   border-radius : 5vh; 
   `
   export const MemberName=styled.p`

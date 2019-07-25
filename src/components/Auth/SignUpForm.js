@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import ajaxHandler from '../../utils/ajaxHandler'
-import FormContainerProject from "../Utils/FormContainerProject"
 
-//const signUpHandler = new ajaxHandler (process.env.REACT_APP_API_URL_, "/signup");
+//components
+import FormContainerProject from "../Utils/FormContainerProject"
 import { AuthConsumer } from "./Guard";
 
 export default class Signup extends Component {
@@ -87,16 +86,7 @@ export default class Signup extends Component {
           console.log("user[item].value) -", user[item].value)
           fd.append(item, user[item].value)}
     })
-
-    //for (let x of fd) (console.log("fd key value : ", x, "type of ", typeof x))
-
-    signup( (status) => this.props.redirect("/agoras"), fd);
-
-
-    /*signUpHandler.createOne( fd, serverRes => {
-        this.props.redirect("/agoras");
-        console.log("serverRes-----", serverRes)
-    })*/
+    signup( () => {this.props.redirect("/agoras")}, fd);
   };
 
 

@@ -43,7 +43,6 @@ class AuthProvider extends React.Component {
     apiAuthHandler
       .get("/loggedin", null)
       .then(serverRes => {
-        console.log("serverRes in isLoggedIn -----", serverRes)
         this.updateState(serverRes.data)})
       .catch(serverErr => {
         console.error(serverErr);
@@ -59,7 +58,7 @@ class AuthProvider extends React.Component {
         clbk(serverRes.data.loginStatus);
       })
       .catch(serverErr => {
-        this.setState({ isLoggedIn: false })
+        this.setState({ loginStatus: false })
         console.log("error while logging in guard.js : ", serverErr)
     });
   };
@@ -68,22 +67,23 @@ class AuthProvider extends React.Component {
     apiAuthHandler
       .post("/signup", data)
       .then(async serverRes => {
-        await this.updateState(serverRes.data); 
+        await this.updateState({
+          loginStatus: true,
+          user : serverRes.data}
+          ); 
         clbk(serverRes.data.loginStatus);
       })
       .catch(serverErr => {
-        this.setState({ isLoggedIn: false })
+        this.setState({ loginStatus: false })
         console.log("error while signing up in guard.js : ", serverErr)
     });
-
-
   }
 
   signout = clbk => {
     apiAuthHandler.post("/signout")
     .then(serverRes => {
       this.setState({ loginStatus: false }, () => {
-        console.log( "signout info ---",serverRes )
+        console.log( "signout !" )
         clbk(this.isLoggedIn)});
     });
   };
