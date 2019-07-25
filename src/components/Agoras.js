@@ -16,6 +16,8 @@ import {
   CTAContainer,
 } from "./Utils/StyledComponents";
 
+
+
 Geocode.enableDebug();
 
 export default class Agoras extends Component {
@@ -78,7 +80,7 @@ export default class Agoras extends Component {
             this.setState({ agoras: dbRes }, () => console.log("the agoras", this.state.agoras));
           })
          .catch(err => console.error(err ,"------- error in getAll from agoras marker promise"));
-        });    
+        });     
   }
 
   handleDisplayForm = () => {
@@ -103,12 +105,14 @@ export default class Agoras extends Component {
           <AuthConsumer>
             {({ user }) => { return(      
               <Link
-                style={{ textDecoration: "none", color:  "#f95d64"//"#85144b"
-                          , margin: "2vh 0", fontWeight: "bold" }}
+                style={{ textDecoration: "none", 
+                          color:  "#85144b", //"#f95d64",
+                          margin: "2vh 0", 
+                          fontWeight: "bold" }}
                 to={{ pathname: "/agoracreate", 
                 state: { action: "create", currentUser : user } }}
               >
-                Create your agora!
+                  Create your agora! 
               </Link>) 
               }}
           </AuthConsumer>

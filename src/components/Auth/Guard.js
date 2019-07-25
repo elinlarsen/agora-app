@@ -14,11 +14,14 @@ class AuthProvider extends React.Component {
     this.state = {
       loginStatus: {},    
       user: {
-        first_name : "", 
-        last_name : "", 
+        agora: [],
+        email: "",
+        first_name: "",
+        interests: [],
+        last_name: "",
+        picture: "",
         username: "",
-        email : "", 
-        picture : ""
+        _id: "",
       }
     };
   }
@@ -39,7 +42,9 @@ class AuthProvider extends React.Component {
   isLoggedIn = () => {
     apiAuthHandler
       .get("/loggedin", null)
-      .then(serverRes => this.updateState(serverRes.data))
+      .then(serverRes => {
+        console.log("serverRes in isLoggedIn -----", serverRes)
+        this.updateState(serverRes.data)})
       .catch(serverErr => {
         console.error(serverErr);
         this.setState({ loginStatus: false });

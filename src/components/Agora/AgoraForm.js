@@ -80,9 +80,8 @@ export default class AgoraForm extends Component {
     render() {
         return (
             <>
-            <FormTitle> Create your Agora ! </FormTitle>
-            {this.props.displayForm}
             <FormContainer 
+                titleForm={"Create your Agora now !"}
                 exceptions={["picture", "members", "projects"]}
                 handleSubmit={this.handleSubmit}
                 object={this.state.newAgora}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import { AuthConsumer } from "./Guard";
 import FormContainerProject from "../Utils/FormContainerProject"
 
@@ -49,16 +50,19 @@ export default class LogIn extends Component {
         return (
             <AuthConsumer>
                 {({ signin }) => (
-                    <FormContainerProject 
-                        exceptions= {[""]}
-                        handleSubmit={evt => this.handleSubmit(evt, signin)}
-                        object={this.state.user}
-                        handleChange={this.handleChange}
-                        textSubmit="Log In !"
-                        imageUploader={false}
-                        />
-                        
-                        )}
+                   
+                        <FormContainerProject 
+                           titleForm="Account Log In"
+                            exceptions= {[""]}
+                            handleSubmit={evt => this.handleSubmit(evt, signin)}
+                            object={this.state.user}
+                            handleChange={this.handleChange}
+                            textSubmit="Log In !"
+                            imageUploader={false}
+                            />
+               
+                            )}
+                   
             </AuthConsumer>
         )
     }

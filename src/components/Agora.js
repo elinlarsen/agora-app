@@ -1,135 +1,22 @@
 //react librairies
 import React, { Component } from 'react'
 import {Link} from "react-router-dom";
-import styled from "styled-components";
+import {
+    Main,Title, SubTitle,ButtonJoin, IconButton, Info,  MemberName, MembersWrapper, 
+    MemberInfo,  MemberP, MemberPicture, MemberList, Loc
+  } from "./Utils/StyledComponents";
 
 //icon
 import { FiTrash } from 'react-icons/fi';
 import { FiEdit } from "react-icons/fi";
-import { FiPlus } from "react-icons/fi";
-import { FiMapPin } from "react-icons/fi";
 
 // axios handler
 import ajaxHandler from "../utils/ajaxHandler.js";
 
 //components
-import ProjectCard from "./Projects/ProjectCard.js";
 import SearchBar from './Utils/SearchBar'
 import filterBy from '../utils/utilFunctions'
-import CreateButton from './Utils/CreateButton';
 import Projects from "./Projects"
-
-const Main= styled.div`
-display : flex; 
-flex-flow : column wrap; 
-justify-content : center; 
-align-items:center; 
-padding : 1vh; 
-height: inherit; 
-`
-
-
-const ProjectsGrid = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr;
-grid-gap: 30px 0px;
-padding: 50px;
-`;
-
-const Title= styled.h1`
-text-align: center; 
-color : #0C214A; 
-`
-const SubTitle= styled.p`
-text-align: center; 
-color : #0C214A; 
-`
-
-const Button=styled.button`
-    width: 15vw; 
-    border : 1px solid #0C214A;
-    border-radius : 10px; 
-    padding: 1vh;
-    font-size : 1.2rem;
-    color : #0C214A; 
-    margin: 1vh;
-`
-
-const IconButton=styled(Button)`
-width: 3vw;
-border: none;
-background-color : #faf9f8;
-padding: 1vh 0;
-margin: 1vh 0;
-font-size : 0.8rem;
-cursor : pointer; 
-`
-
-const Info=styled.div`
-display : flex; 
-flex-flow: column wrap;
-justify-content : space-around;
-align-items : center; 
-
-`
-
-const CTAwrapper = styled.div`
-
-display : flex; 
-flex-flow: row wrap;
-justify-content : space-around;
-align-items : center; 
-bakckground-color: white; 
-height : 15vh;
-
-
-  &:hover ${Button} {
-    background-color :  #0C214A
-    color :white;
-    cursor : pointer; 
-
-  }`
-
-  const MembersWrapper=styled.div`
-  height : fit-content; 
-  background-color: #0C214A; 
-  color : white;
-  font-size : 3rem; 
-  display : flex; 
-  flex-flow: column nowrap; 
-  justify-content: flex-start; 
-  align-items: center; 
-  padding-bottom : 5vh
-  width : 100vw;
-  `
-
-  const MemberList=styled.div`
-  height: 30vh; 
-  width : 100vw;
-  display : flex; 
- flex-flow : row nowrap; 
- justify-content: center; 
- align-items : center; 
-  `
-
-  const MemberInfo=styled.div`
-  height : inherit; 
-  width : inherit; 
-  display : flex; 
-  flex-flow : column nowrap; 
-  justify-content: center; 
-  align-items : center; 
-  `
-
-  const MemberPic=styled.img`
-  height : 10vh; 
-  border-radius : 5vh; 
-  `
-  const MemberName=styled.p`
-  font-size : 1rem; 
-  `
-
-
 
 
 export default class Agora extends Component {
@@ -155,7 +42,6 @@ export default class Agora extends Component {
     componentDidMount = () => {
         let expandItem1 = "projects";
         let expandItem2 = "members";
-        let membersPopulated=[];
 
         this.state.agoraHandler.getOneExpandTwo(
             this.props.match.params.id,
@@ -164,23 +50,48 @@ export default class Agora extends Component {
             expandItem1, 
             expandItem2,
         );
-
-
     };
 
-      handleDelete = (agora_id) => {
+    handleDelete = (agora_id) => {
         this.state.agoraHandler.deleteOne(agora_id, dbRes => {
-            let deletedAgoraInDb = dbRes
+            this.props.history.push("/agoras")
+            /*let deletedAgoraInDb = dbRes
             let copy = [...this.state.agoras]
             let index = copy.indexOf(deletedAgoraInDb);
             copy.splice(index, 1)
             this.setState({
                 agoras: copy
             }, () => console.log("deleted in the state"))
+            */
         })
     }
 
-    handleJoinAgora =()=>{}
+    isJoined = () => {
+        let joined=false;
+        let members = this.state.agora.members;
+        let nbMembers=members.length;
+        let user=this.props.currentUser;
+        if(nbMembers !==0 && members.filter(m => m._id === user).length==0)joined=true
+        return joined
+    }
+
+    handleJoinAgora =(event)=>{
+        event.preventDefault()
+        let copy = this.state.agora
+        console.log("this.state.agora.members   ", this.state.agora.members)
+        console.log("this.isJoined ? ----", this.isJoined())
+        if (!this.isJoined())copy.members.push(this.props.currentUser)
+        
+        else{
+            let index = copy.members.indexOf(this.props.currentUser);
+            copy.members.splice(index, 1);
+        }
+
+        this.state.agoraHandler.updateOne(this.state.agora._id, {members : copy.members}, updatedAgora => {
+            this.setState({agora : copy}, () => console.log("member joined ? ", this.isJoined()))
+        }) 
+
+    }
 
 
     render() {
@@ -190,63 +101,42 @@ export default class Agora extends Component {
             <Main>
                 <Info>
                     <Title> Welcome to the Agora {this.state.agora.name} ! 
-                    <Link   style={{textDecoration : 'none', color : '#0C214A' }} 
-                            to={{   pathname: '/agoracreate',
-                                    state: {
-                                        agoraID: this.state.agora._id,
-                                        action : "update", 
-                                        
-                                    } }}          
-                            onClick={this.handleAddProject} >
-                               <IconButton type="button" ><FiEdit /></IconButton>                               
-                    </Link> 
+                            <Link   style={{textDecoration : 'none', color : '#0C214A' }} 
+                                    to={{   pathname: '/agoracreate',
+                                            state: {
+                                                agoraID: this.state.agora._id,
+                                                action : "update", 
+                                                
+                                            } }}          
+                                    onClick={this.handleAddProject} >
+                                    <IconButton type="button" ><FiEdit /></IconButton>                               
+                            </Link> 
 
-                    <IconButton  type="button" onClick={() => this.handleDelete(this.state.agora._id)}> <FiTrash /> </IconButton>
-                    
-                               
+                            <IconButton  type="button" onClick={() => this.handleDelete(this.state.agora._id)}> <FiTrash /> </IconButton>            
                     </Title>
                     <SubTitle> {this.state.agora.description} </SubTitle>
-                    <em> {this.state.agora.address}, {this.state.agora.city} </em> 
+                    <Loc> {this.state.agora.address}, {this.state.agora.city} </Loc> 
               </Info>
-                                   
-
-                <CTAwrapper> 
-                    <SearchBar handleChange={this.handleSearch} placeholder="Find a project by its name."/>
-
-                    {/*<Link style={{ textDecoration: 'none', color: '#0C214A' }} 
-                          to={{ pathname: '/projectcreate', 
-                                state: { action: "create", 
-                                         agora : this.state.agora, } }}>
-                        Create a project! 
-                        </Link>*/}
-
-                </CTAwrapper>
+                                
+               
+             <SearchBar handleChange={this.handleSearch} placeholder="Find a project by its name."/>
 
                 {this.state.agora.projects!==undefined}
                 <Projects projects={this.filterProjects()}
                           agora={this.state.agora} />
-
-               {/*<ProjectsGrid> {
-                        this.filterProjects().map(projectItem => (
-                        <ProjectCard project={projectItem} 
-                                    key={projectItem._id}/>
-                     ))}        
-                </ProjectsGrid>*/}
-                
-
                  <MembersWrapper> 
-                    <p> {this.state.agora.members.length} members </p>
-                    <Button  type="button" onClick={() => this.handleJoinAgora(this.state.agora._id)}> Join now! </Button>                         
+                    <MemberP> {this.state.agora.members.length} members </MemberP>
                      <MemberList> 
                          {this.state.agora.members.map ((m, index) => {
                             return(
                                     <MemberInfo key={index}>
-                                        < MemberPic src={m.picture}/>
+                                        < MemberPicture src={m.picture}/>
                                         < MemberName> {m.username} </ MemberName>
                                     </MemberInfo>
                          )})
                         }
                     </MemberList>
+                    <ButtonJoin  type="button" onClick={(event) => this.handleJoinAgora(event)}> Join now! </ButtonJoin>                         
                  </MembersWrapper>
 
             </Main>

@@ -15,13 +15,14 @@ import UpdateAgoraForm from "./components/Agora/UpdateAgoraForm.js";
 import Auth from "./components/Auth/Auth.js";
 import User from "./components/User.js";
 import Home from "./components/Home.js";
+import { AuthConsumer } from "./components/Auth/Guard";
 //import PageAuth from "./components/Auth/Auth";
 
 //---- custom auth component
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 
 import { ThemeProvider } from "styled-components";
-import { mainTheme } from "../src/components/Utils/StyledComponents";
+import { mainTheme, MainBody } from "../src/components/Utils/StyledComponents";
 
 export default class App extends Component {
   render() {
@@ -29,20 +30,29 @@ export default class App extends Component {
       <ThemeProvider theme={mainTheme}>
         <React.Fragment>
           <Nav />
-          <div className="main-body">
+          <MainBody>
+          {//<div className="main-body">
+          }
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/agoras" component={Agoras} />
               <Route exact path="/projects" component={Projects} />
-              <Route exact path="/agora/:id" component={Agora} />
-              <Route exact path="/agoracreate" component={UpdateAgoraForm} />
-              <Route exact path="/projectcreate" component={ProjectForm} />
-              <Route exact path="/projectcreate/:id" component={ProjectForm} />
-              <Route exact path="/project/:id" component={Project} />
+              <ProtectedRoute exact path="/agoracreate" component={UpdateAgoraForm} />
+              <ProtectedRoute exact path="/projectcreate" component={ProjectForm} />
+              <ProtectedRoute exact path="/projectcreate/:id" component={ProjectForm} />
+              <ProtectedRoute exact path="/project/:id" component={Project} />
               <Route exact path="/user" component={User} />
               <Route path={["/signup", "/login"]} component={Auth} />
+              <AuthConsumer>
+                { ({user}) => { return (
+                   <Route exact path="/agora/:id" render={(routeProps) => (<Agora {...routeProps} currentUser={user}/>)} />
+                )}}   
+              </AuthConsumer>
+
             </Switch>
-          </div>
+          {//</div>
+          }
+          </MainBody>
         </React.Fragment>
       </ThemeProvider>
     );

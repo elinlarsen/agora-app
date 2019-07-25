@@ -103,6 +103,7 @@ export default class Signup extends Component {
   render() {
      return (
       <FormContainerProject 
+        titleForm="Account Sign Up"
         exceptions={["picture"]}
         handleSubmit={this.handleSubmit}
         object={this.state.user}

@@ -18,6 +18,7 @@ text-align : center;
 export default class UpdateAgoraForm extends Component {
     constructor(props){
         super(props)
+        this.currentUser=this.props.location.state.currentUser;
         this.state = {
             agora: {
                 _id : "",
@@ -55,14 +56,11 @@ export default class UpdateAgoraForm extends Component {
         if (!this.checkAllFields()) return console.warn("form incomplete");
         var fd = new FormData();
 
+        console.log("currentUser", this.currentUser)
+
         if(this.action==="create"){
    
             Object.keys(agora).forEach(item =>{
-                /*if(typeof agora[item] === "object" && item !== "picture")fd.append([item], JSON.stringify(agora[item]))
-                else{
-                    fd.append([item], agora[item])
-                    if (item==="picture" && agora[item][0]!==undefined) fd.set("picture", agora[item][0], agora[item][0].name)
-                }*/
                 for(let x of fd) console.log("form data --------",x)
                 if(item === "picture")agora[item].forEach(key =>fd.set("picture", key, key.name))
 
@@ -70,6 +68,9 @@ export default class UpdateAgoraForm extends Component {
 
                 else {fd.append(item, agora[item])}
             })
+
+            fd.append("admin", this.currentUser._id);
+            fd.append("members", this.currentUser._id);
 
             this.state.newAgoraHandler.createOne(fd, newAgora => {
                 console.log("created agora --", newAgora)
@@ -84,9 +85,9 @@ export default class UpdateAgoraForm extends Component {
 
                 else if([ 'members', 'projects'].includes(item)) agora[item].forEach(key => fd.set([item], key))
 
-                else {fd.append(item, agora[item])}
+                else {fd.append(item, agora[item])                
+                }
             })
-            //for(let x of fd) console.log("form data --------",x)
 
             this.state.agoraHandler.updateOne(agora._id, fd,  updatedAgora => {
                 console.log("updatedAgora --", updatedAgora)
@@ -124,11 +125,13 @@ export default class UpdateAgoraForm extends Component {
             title="Update your agora";
             submit="Submit your updated agora"
          }
+
+         console.log("this.currentUser ----" , this.currentUser)
         return (
             <>
-            <FormTitle> {title} </FormTitle>
             <FormContainer 
-                exceptions={["_id", "__v", "picture", "members", "projects"]}
+                 titleForm={title}
+                exceptions={["_id", "__v", "picture", "members", "projects", "admin"]}
                 handleSubmit={this.handleSubmit}
                 object={this.state.agora}
                 handleChange={this.handleChange}
