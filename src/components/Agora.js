@@ -155,7 +155,11 @@ export default class Agora extends Component {
         />
 
         {this.state.agora.projects !== undefined}
-        <Projects projects={this.filterProjects()} agora={this.state.agora} />
+        <Projects
+          projects={this.filterProjects()}
+          agoraId={this.state.agora._id}
+          agora={this.state.agora}
+        />
         <MembersWrapper>
           <MemberP> {this.state.agora.members.length} members </MemberP>
           <MemberList>

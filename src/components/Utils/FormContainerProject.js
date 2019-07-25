@@ -7,7 +7,7 @@ import ImageUploader from "react-images-upload";
 //components
 import CreateButton from "./CreateButton";
 import InputFormProject from "./InputFormProject";
-import {FormWrapper, TitleForm} from "./StyledComponents"
+import { FormWrapper, TitleForm } from "./StyledComponents";
 
 const Form = styled.form`
   height: inherit;
@@ -28,7 +28,7 @@ export default function FormContainerProject(props) {
 
   return (
     <FormWrapper id={props.id} onSubmit={props.handleSubmit}>
-    <TitleForm >{props.titleForm}</TitleForm >
+      <TitleForm>{props.titleForm}</TitleForm>
       {Object.keys(props.object).map(key => {
         if (!props.exceptions.includes(key))
           return (
@@ -54,9 +54,7 @@ export default function FormContainerProject(props) {
           singleImage={props.singleImage}
         />
       )}
-      <CreateButton disabled={props.displayForm} 
-                    text={props.textSubmit} 
-                    clbk={props.handleSubmit}/>
+      <CreateButton disabled={props.displayForm} text={props.textSubmit} />
     </FormWrapper>
   );
 }

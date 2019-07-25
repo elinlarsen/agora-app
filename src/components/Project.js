@@ -136,13 +136,14 @@ export default class Projects extends Component {
             </ActionButtonProject>
             <AuthConsumer>
               {({ user }) =>
-                this.state.members.filter(a => a._id == user.id).length == 0 ? (
-                  <ActionButtonProject id={user.id} onClick={this.addUser}>
+                this.state.members.filter(a => a._id == user._id).length ==
+                0 ? (
+                  <ActionButtonProject id={user._id} onClick={this.addUser}>
                     {" "}
                     Join{" "}
                   </ActionButtonProject>
                 ) : (
-                  <ActionButtonProject id={user.id} onClick={this.removeUser}>
+                  <ActionButtonProject id={user._id} onClick={this.removeUser}>
                     {" "}
                     Leave{" "}
                   </ActionButtonProject>
@@ -151,7 +152,7 @@ export default class Projects extends Component {
             </AuthConsumer>
             <AuthConsumer>
               {({ user }) =>
-                user.id == this.state.admin ? (
+                user._id == this.state.admin ? (
                   <ActionButtonProject
                     to={{
                       pathname: "/projectcreate/" + this.state._id,
@@ -169,7 +170,7 @@ export default class Projects extends Component {
             </AuthConsumer>
             <AuthConsumer>
               {({ user }) =>
-                user.id == this.state.admin ? (
+                user._id == this.state.admin ? (
                   <ActionButtonProject
                     onClick={this.deleteItem}
                     name={this.state._id}
@@ -206,7 +207,7 @@ export default class Projects extends Component {
               <Forum
                 projectId={this.state._id}
                 ableToPost={
-                  this.state.members.filter(a => a._id == user.id).length != 0
+                  this.state.members.filter(a => a._id == user._id).length != 0
                 }
               >
                 {" "}

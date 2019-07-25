@@ -147,6 +147,7 @@ export default class ProjectForm extends Component {
       }
     });
 
+    console.log("the form is " + event.target);
     formData.append("admin", event.target.id);
     formData.append("members", event.target.id);
 
@@ -185,9 +186,13 @@ export default class ProjectForm extends Component {
   };
 
   render() {
-    let title; 
-    if (this.action==="create"){title="Create your project"}
-    else{title="Update your project"}
+    let title;
+    if (this.action === "create") {
+      title = "Create your project";
+    } else {
+      title = "Update your project";
+    }
+
     return (
       <AuthConsumer>
         {({ user }) => (
@@ -195,7 +200,7 @@ export default class ProjectForm extends Component {
             {this.state.displayForm}
             <FormContainerProject
               titleForm={title}
-              id={user.id}
+              id={user._id}
               exceptions={["picture", "members", "public"]}
               handleSubmit={this.handleSubmit}
               object={this.state.project}
