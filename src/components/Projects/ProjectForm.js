@@ -9,6 +9,10 @@ export default class ProjectForm extends Component {
     super(props);
     this.action = this.props.location.state.action;
     this.agora = this.props.location.state.agora;
+    this.agoraId = this.props.location.state.agoraId;
+
+    console.log(this.agoraId);
+
     this.state = {
       project: {
         name: {
@@ -126,7 +130,7 @@ export default class ProjectForm extends Component {
 
   handleSubmit = (event, currentUserID) => {
     event.preventDefault();
-    console.log("handle submit---------------------------")
+    console.log("handle submit---------------------------");
     let formData = new FormData();
     let currentProject = this.state.project;
 
@@ -152,7 +156,7 @@ export default class ProjectForm extends Component {
         this.props.match.params.id,
         formData,
         dbRes => {
-          this.props.history.push("/projects/");
+          this.props.history.push("/agora/" + this.agoraId);
         }
       );
     } else if (this.action === "create") {
@@ -182,9 +186,13 @@ export default class ProjectForm extends Component {
   };
 
   render() {
-    let title; 
-    if (this.action==="create"){title="Create your project"}
-    else{title="Update your project"}
+    let title;
+    if (this.action === "create") {
+      title = "Create your project";
+    } else {
+      title = "Update your project";
+    }
+
     return (
       <AuthConsumer>
         {({ user }) => (
@@ -193,7 +201,7 @@ export default class ProjectForm extends Component {
             <FormContainerProject
               currentUser={user}
               titleForm={title}
-              id={user.id}
+              id={user._id}
               exceptions={["picture", "members", "public"]}
               handleSubmit={this.handleSubmit}
               object={this.state.project}

@@ -23,16 +23,22 @@ let projectHandler = new ajaxHandler(
 );
 
 export default class Projects extends Component {
-  state = {
-    _id: this.props.match.params.id,
-    name: null,
-    description: null,
-    picture: null,
-    members: [],
-    status: null,
-    admin: null,
-    agora: null
-  };
+  constructor(props) {
+    super(props);
+    //this.agoraId = this.props.location.state.agoraId;
+
+    this.state = {
+      _id: this.props.match.params.id,
+      agoraId: this.props.location.state.agoraId,
+      name: null,
+      description: null,
+      picture: null,
+      members: [],
+      status: null,
+      admin: null,
+      agora: null
+    };
+  }
 
   refreshState = () => {
     let expandItem = "members";
@@ -41,6 +47,7 @@ export default class Projects extends Component {
       data => {
         this.setState({
           _id: data._id,
+          agoraId: this.state.agoraId,
           name: data.name,
           description: data.description,
           picture: data.picture,
@@ -74,11 +81,32 @@ export default class Projects extends Component {
           this.refreshState();
         }
       );
-
-      let stateCopy = { ...this.state };
-      stateCopy.members = newMembers;
-      this.setState(stateCopy);
     }
+  };
+
+  removeUser = e => {
+    let newMembers = this.state.members;
+    console.log("new members before removing is ");
+    console.log(newMembers);
+
+    newMembers.splice(newMembers.indexOf(e.target.id), 1);
+    console.log("new members after removing is ");
+    console.log(newMembers);
+
+    projectHandler.updateOne(
+      this.state._id,
+      {
+        members: newMembers
+      },
+      res => {
+        console.log(res);
+        this.refreshState();
+      }
+    );
+
+    let stateCopy = { ...this.state };
+    stateCopy.members = newMembers;
+    this.setState(stateCopy);
   };
 
   deleteItem = event => {
@@ -86,39 +114,51 @@ export default class Projects extends Component {
       process.env.REACT_APP_API_URL_,
       "/projects"
     );
+    let agoraIdToRedirect = this.state.agoraId;
     console.log("ready to delete " + event.target.name);
     projectHandler.deleteOne(event.target.name, res => {
       console.log(res);
-      this.props.history.push("/projects");
+      this.props.history.push("/agora/" + agoraIdToRedirect);
     });
   };
 
   render() {
-    const ActionButtonProject = styled(ActionButton)`
-      width: 40%;
-    `;
+    const ActionButtonProject = styled(ActionButton)``;
     return (
       <ProjectWrapper>
         <ProjectTitle>
           <ProjectTitleText> {this.state.name} </ProjectTitleText>
-          <ButtonWrapper width="15%">
+          <ButtonWrapper width="20%">
+            <ActionButtonProject to={"/agora/" + this.state.agoraId}>
+              {" "}
+              Back to Agora >>{" "}
+            </ActionButtonProject>
             <AuthConsumer>
               {({ user }) =>
-                this.state.members.filter(a => a._id == user.id).length == 0 ? (
-                  <ActionButtonProject id={user.id} onClick={this.addUser}>
+                this.state.members.filter(a => a._id == user._id).length ==
+                0 ? (
+                  <ActionButtonProject id={user._id} onClick={this.addUser}>
                     {" "}
                     Join{" "}
                   </ActionButtonProject>
-                ) : null
+                ) : (
+                  <ActionButtonProject id={user._id} onClick={this.removeUser}>
+                    {" "}
+                    Leave{" "}
+                  </ActionButtonProject>
+                )
               }
             </AuthConsumer>
             <AuthConsumer>
               {({ user }) =>
-                user.id == this.state.admin ? (
+                user._id == this.state.admin ? (
                   <ActionButtonProject
                     to={{
                       pathname: "/projectcreate/" + this.state._id,
-                      state: { action: "update" }
+                      state: {
+                        action: "update",
+                        agoraId: this.state.agoraId
+                      }
                     }}
                   >
                     {" "}
@@ -129,7 +169,7 @@ export default class Projects extends Component {
             </AuthConsumer>
             <AuthConsumer>
               {({ user }) =>
-                user.id == this.state.admin ? (
+                user._id == this.state.admin ? (
                   <ActionButtonProject
                     onClick={this.deleteItem}
                     name={this.state._id}
@@ -166,7 +206,7 @@ export default class Projects extends Component {
               <Forum
                 projectId={this.state._id}
                 ableToPost={
-                  this.state.members.filter(a => a._id == user.id).length != 0
+                  this.state.members.filter(a => a._id == user._id).length != 0
                 }
               >
                 {" "}

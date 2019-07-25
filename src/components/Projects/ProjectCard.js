@@ -19,7 +19,10 @@ import { FiUsers } from "react-icons/fi";
 export default function ProjectCard(props) {
   return (
     <Link
-      to={"/project/" + props.project._id}
+      to={{
+        pathname: "/project/" + props.project._id,
+        state: { agoraId: props.agoraId }
+      }}
       style={{ textDecoration: "none" }}
     >
       <ProjectCardWrapper>

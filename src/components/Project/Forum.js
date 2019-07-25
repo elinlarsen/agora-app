@@ -91,7 +91,7 @@ export default class Forum extends Component {
               <Message
                 type="empty"
                 text={this.state.currentPost}
-                messageUserId={user.id}
+                messageUserId={user._id}
                 messageUserPicture={user.picture}
                 messageUserName={""}
                 messages={[

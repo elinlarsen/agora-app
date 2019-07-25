@@ -18,15 +18,15 @@ export const mainTheme = {
   cardHeight: 50,
   cardHeightWidthRatio: 1.8,
   color0: "#D32F2F" /* Main Primary color */,
-  color1:  "#85144b"/* "#f95d60" "f95d60","#F44336"*/,
-  color2: "#212121", /*dark for text*/
+  color1: "#85144b" /* "#f95d60" "f95d60","#F44336"*/,
+  color2: "#212121" /*dark for text*/,
   color3: "#FFFFFF", //white
   color4: "#FF9800",
   color5: "#212121",
   color6: "#757575",
   color7: "#BDBDBD",
-  color8: "#85144b", //dark purple; 
-  color9: "#faf9f8",  //light background 
+  color8: "#85144b", //dark purple;
+  color9: "#faf9f8", //light background
   titleFont: "Vibur"
 };
 
@@ -39,7 +39,7 @@ margin-top: 12vh; /*because of the fixed nav bar*/
 min-height: 100vh;
 max-height: min-content;
 
-`
+`;
 
 // Define Utils Components
 
@@ -55,21 +55,21 @@ export const ActionButton = styled(Link)`
   width: 80%;
   border-radius: ${props => props.theme.defaultBorderRadius};
   cursor: pointer;
-  margin: 2vh 0; 
+  margin: 2vh 0;
 `;
 
 export const WrapperButton = styled.div`
-  width : 100%; 
-  display : flex; 
-  flex-flow: row wrap; 
-  justify-content : center; 
-  align-items : center; 
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
   &:hover ${ActionButton} {
-    background-color : ${props => props.theme.color3};
-    color : ${props => props.theme.color1};
+    background-color: ${props => props.theme.color3};
+    color: ${props => props.theme.color1};
     border: solid 1px ${props => props.theme.color1};
   }
-`
+`;
 
 export const StyledTag = styled.div`
   padding: ${props => props.theme.defaultPaddingSmall};
@@ -85,8 +85,6 @@ export const StyledTag = styled.div`
   width: 100%;
   text-align: center;
 `;
-
-
 
 // Define Specific Components
 
@@ -113,7 +111,7 @@ export const Logo = styled.div`
   font-size: 3rem;
   color: white;
   font-family: ${props => props.theme.titleFont};
-  margin :1vh 0; 
+  margin: 1vh 0;
 `;
 
 // -- User Components -- //
@@ -126,7 +124,7 @@ export const UserP = styled.div`
   font-size: 1.1rem;
 `;
 export const UserOptions = styled.div`
-  height: inherit; 
+  height: inherit;
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-end;
@@ -166,14 +164,14 @@ export const FooterP = styled.div`
 export const SearchStyle = styled.input`
   width: 100vw;
   color: ${props => props.theme.color8};
-  border: none; 
+  border: none;
   padding: 3vh;
-  font-size: 1.3rem; 
+  font-size: 1.3rem;
   box-shadow: 3px 3px 3px #faf9f8;
   text-align: center;
 
-  ::placeholder{
-    color : ${props => props.theme.color8};
+  ::placeholder {
+    color: ${props => props.theme.color8};
   }
 `;
 
@@ -182,10 +180,10 @@ export const SearchStyle = styled.input`
 // -- Home Page Components -- //
 
 export const VideoWrapper = styled.div`
-width: 100vw;
-height: 57vh;
-margin-top: -10vw; 
-z-index: auto;
+  width: 100vw;
+  height: 57vh;
+  margin-top: -10vw;
+  z-index: auto;
 `;
 
 export const B = styled.span`
@@ -194,13 +192,13 @@ export const B = styled.span`
 
 export const Banner = styled.div`
   display: flex;
-  background-color:  ${props => props.theme.color3};
+  background-color: ${props => props.theme.color3};
   justify-content: cent;
   align-items: center;
   height: inherit;
   flex-flow: column nowrap;
-  padding-top : 8vh ; 
-  padding-bottom: 5vh
+  padding-top: 8vh;
+  padding-bottom: 5vh;
 `;
 
 export const BannerText = styled.p`
@@ -281,65 +279,64 @@ export const HRIcon = styled.hr`
 
 //Agora page //
 
-export const Main= styled.div`
-display : flex; 
-flex-flow : column wrap; 
-justify-content : center; 
-align-items:center; 
-height: inherit; 
-`
+export const Main = styled.div`
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+`;
 
-export const Title= styled.h1`
-text-align: center; 
-color : ${props => props.theme.color3};
-font-weight: bold; 
-`
-export const SubTitle= styled.p`
-text-align: center; 
-color :${props => props.theme.color3};
-margin: 0.5vh 0; 
-`
+export const Title = styled.h1`
+  text-align: center;
+  color: ${props => props.theme.color3};
+  font-weight: bold;
+`;
+export const SubTitle = styled.p`
+  text-align: center;
+  color: ${props => props.theme.color3};
+  margin: 0.5vh 0;
+`;
 
-export const Loc= styled(SubTitle)`
-font-style: italic;
-`
+export const Loc = styled(SubTitle)`
+  font-style: italic;
+`;
 
-export const ButtonJoin=styled.button`
-    width: 20vw; 
-    border : 1px solid ${props => props.theme.color1};
-    border-radius : ${props => props.theme.defaultBorderRadius}; 
-    padding: 2vh;
-    font-size : 1.5rem;
-    font-weight: bold; 
-    color : ${props => props.theme.color1};
-    margin: 1vh;
-    cursor : pointer; 
-`
+export const ButtonJoin = styled.button`
+  width: 20vw;
+  border: 1px solid ${props => props.theme.color1};
+  border-radius: ${props => props.theme.defaultBorderRadius};
+  padding: 2vh;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: ${props => props.theme.color1};
+  margin: 1vh;
+  cursor: pointer;
+`;
 
-export const IconButton=styled(ButtonJoin)`
-width: 3vw;
-border: none;
-background-color : ${props => props.theme.color1};
-color : ${props => props.theme.color3};
-padding: 1vh;
-margin: 1vh;
-font-size : 1rem;
-cursor : pointer; 
-`
+export const IconButton = styled(ButtonJoin)`
+  width: 3vw;
+  border: none;
+  background-color: ${props => props.theme.color1};
+  color: ${props => props.theme.color3};
+  padding: 1vh;
+  margin: 1vh;
+  font-size: 1rem;
+  cursor: pointer;
+`;
 
-export const Info=styled.div`
-width : 100%; 
-display : flex; 
-flex-flow: column wrap;
-justify-content : space-around;
-align-items : center; 
-background-color : ${props => props.theme.color1};
-opacity: 0.9; 
-padding : 2vh 0; 
-border : 1px solid ${props => props.theme.color1} 0.9
-
-`
-export const MembersWrapper=styled.div`
+export const Info = styled.div`
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: ${props => props.theme.color1};
+  opacity: 0.9;
+  padding: 2vh 0;
+  border: 1px solid ${props => props.theme.color1} 0.9;
+`;
+export const MembersWrapper = styled.div`
   height : fit-content; 
   background-color: ${props => props.theme.color8};
   display : flex; 
@@ -469,7 +466,7 @@ export const StyledEmptyProjectCard = styled.div`
   font-weight: bold;
   background-color: ${props => props.theme.color3};
   box-shadow: 3px 3px 3px 0px #656565;
-  text-decoration : none; 
+  text-decoration: none;
 `;
 
 // --- Projects Card Components ---//
@@ -517,11 +514,11 @@ export const ProjectCardText = styled.p`
   color: ${props => props.theme.color2};
 `;
 
-export const ProjectCardTitle=styled(ProjectCardText)`
-font-weight : bold; 
-font-size : 1rem;
-text-align : left;
-`
+export const ProjectCardTitle = styled(ProjectCardText)`
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: left;
+`;
 
 export const HR = styled.hr`
   border-style: solid;
@@ -534,7 +531,7 @@ export const ButtonWrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   width: ${props => props.width};
-  color : ${props => props.theme.color3};
+  color: ${props => props.theme.color3};
 `;
 
 // --- Single project Page Components --- //
@@ -638,29 +635,26 @@ export const MemberTitle = styled.p`
   font-size: 20px;
 `;
 
-/*export const MemberPicture = styled.div`
-  width: 20%;
-`;
+export const MemberPictureContainer = styled.div``; /*
 
 export const MemberName = styled.p`
   padding: 0px 20px;
   margin-top: auto;
   font-weight: bold;
   font-size: 20px;
-`;*/
+`; */
 
 // ---Auth --- //
 
-export const AuthWrapper= styled.div`
+export const AuthWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   height: inherit;
-`
+`;
 
 // --- Form utils  --- //
-
 
 export const StyledInput = styled.input`
   width: 40vh;
@@ -668,9 +662,9 @@ export const StyledInput = styled.input`
   border-radius: 20px;
   padding: 1.5vh;
   font-size: 1.2rem;
-  margin-bottom: 3vh; 
+  margin-bottom: 3vh;
   color: ${props => props.theme.color8};
-  background-color : ${props => props.theme.color3};
+  background-color: ${props => props.theme.color3};
 `;
 
 export const Label = styled.label`
@@ -681,27 +675,26 @@ export const Label = styled.label`
   padding: 2vh 0;
 `;
 
-
-export const TitleForm=styled.div`
+export const TitleForm = styled.div`
 color : ${props => props.theme.color8};
 font-size: 2rem;
 margin : 2vh 2vw; 
 padding-bottom 2vh; 
-`
+`;
 
-export const FormWrapper=styled.form`
+export const FormWrapper = styled.form`
   margin: 5vh 5vw;
-  padding : 2vh 2vw; 
+  padding: 2vh 2vw;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   height: inherit;
-  background-color : ${props => props.theme.color3};     
-  width: fit-content; 
+  background-color: ${props => props.theme.color3};
+  width: fit-content;
   border-width: 1px;
   box-shadow: 2px 2px 3px 0px #656565;
-`
+`;
 
 // --- Message Components ---//
 

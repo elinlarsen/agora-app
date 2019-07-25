@@ -7,7 +7,6 @@ import {
   StyledEmptyProjectCard
 } from "./Utils/StyledComponents.js";
 
-
 export default class Projects extends Component {
   constructor(props) {
     super(props);
@@ -22,8 +21,6 @@ export default class Projects extends Component {
     /*this.projectHandler.getAll(res => {
       this.setState({ projects: res });
     });*/
-
-
   };
 
   render() {
@@ -32,6 +29,7 @@ export default class Projects extends Component {
         project={projectItem}
         key={projectItem._id}
         deleteFunction={this.deleteItem}
+        agoraId={this.props.agoraId}
       >
         {" "}
       </ProjectCard>
@@ -41,12 +39,15 @@ export default class Projects extends Component {
       <StyledEmptyProjectCard>
         {" "}
         <Link
-          to={{ pathname: "/projectcreate", 
-          state: { action: "create", 
-                   agora : this.props.agora } }}
-          style={{ textDecoration: "none", 
-                    color : "#85144b",//"#f95d60", 
-                    fontWeight : "bold" }}
+          to={{
+            pathname: "/projectcreate",
+            state: { action: "create", agora: this.props.agora }
+          }}
+          style={{
+            textDecoration: "none",
+            color: "#85144b", //"#f95d60",
+            fontWeight: "bold"
+          }}
         >
           {" "}
           <p>Create your project now !</p>{" "}
