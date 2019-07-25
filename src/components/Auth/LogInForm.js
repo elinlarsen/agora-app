@@ -46,13 +46,14 @@ export default class LogIn extends Component {
       };
 
     render() {
-
+        let user=""
         return (
             <AuthConsumer>
                 {({ signin }) => (
                    
                         <FormContainerProject 
-                           titleForm="Account Log In"
+                            currentUser={user}
+                            titleForm="Account Log In"
                             exceptions= {[""]}
                             handleSubmit={evt => this.handleSubmit(evt, signin)}
                             object={this.state.user}
