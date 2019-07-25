@@ -185,12 +185,16 @@ export default class ProjectForm extends Component {
   };
 
   render() {
+    let title; 
+    if (this.action==="create"){title="Create your project"}
+    else{title="Update your project"}
     return (
       <AuthConsumer>
         {({ user }) => (
           <>
             {this.state.displayForm}
             <FormContainerProject
+              titleForm={title}
               id={user.id}
               exceptions={["picture", "members", "public"]}
               handleSubmit={this.handleSubmit}
@@ -199,7 +203,7 @@ export default class ProjectForm extends Component {
               onDrop={this.onDrop}
               singleImage={this.singleImage}
               displayForm={this.state.displayForm}
-              textSubmit="Submit your new project!"
+              textSubmit="Submit your project!"
             />
           </>
         )}

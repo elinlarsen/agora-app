@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+//components
 import LogInForm from "./LogInForm";
 import SignUpForm from "./SignUpForm";
+
+//style
+import {AuthWrapper} from "../Utils/StyledComponents"
 
 export default function Auth(props) {
     const wantToSignIn = props.location.pathname === "/login";
@@ -18,19 +23,18 @@ export default function Auth(props) {
     }
 
     return (
-        <React.Fragment>
-            <p>
-                <Link className="link" to={path}>
-                    {message} ?
-                </Link>
-            </p>
-
+         <AuthWrapper>
             {wantToSignIn ? (
                 <LogInForm redirect={redirect} />
             ) : (
                     <SignUpForm redirect={redirect} />
                 )}
 
-        </React.Fragment>
+            <Link className="link" to={path}
+                        style = {{textDecoration : "none", color : "#212121"}}>
+                        {message} ?
+            </Link>          
+
+        </AuthWrapper> 
     );
 }

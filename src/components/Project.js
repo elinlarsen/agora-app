@@ -19,7 +19,7 @@ import { AuthConsumer } from "./Auth/Guard";
 
 let projectHandler = new ajaxHandler(
   process.env.REACT_APP_API_URL_,
-  "projects"
+  "/projects"
 );
 
 export default class Projects extends Component {

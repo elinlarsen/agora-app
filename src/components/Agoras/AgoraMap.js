@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { Map, GoogleApiWrapper,  Marker, InfoWindow} from 'google-maps-react';
 
-import Geocode from "react-geocode";
 import styled from 'styled-components'
 
 require('dotenv').config()
@@ -71,10 +70,10 @@ function setMarkerAndPlace(props,marker,e, agora){
             >           
                 {props.agoras.map((agora, index) => {                           
                     return( <Marker onClick={(props, marker, e) => setMarkerAndPlace(props, marker, e,agora)}
-                                            key={index+"-marker"}
-                                            position={{ lat: agora.geocode.lat, 
-                                                        lng: agora.geocode.lng }}
-                                            name = {agora.name}>
+                                    key={index+"-marker"}
+                                    position={{ lat: agora.geocode.lat, 
+                                                lng: agora.geocode.lng }}
+                                    name = {agora.name}>
                                         </Marker> )                     
                 })} 
                 <InfoWindow

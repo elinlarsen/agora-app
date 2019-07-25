@@ -30,7 +30,7 @@ export default function InfoCard() {
       <BannerTextAndIcon>
         <IconsAndTextContainer>
           <IconsContainer>
-            <img src="../images/community.png" width="15%" />
+            <img src="https://res.cloudinary.com/dzlcu5kcg/image/upload/v1563900038/agora/community.png.png" width="15%" />
           </IconsContainer>
           <PforIcon>
             {" "}
@@ -41,7 +41,7 @@ export default function InfoCard() {
         </IconsAndTextContainer>
         <IconsAndTextContainer>
           <IconsContainer>
-            <img src="../images/toolbox.Png" width="15%" />
+            <img src="https://res.cloudinary.com/dzlcu5kcg/image/upload/v1563894868/agora/toolbox.png.png" width="15%" />
           </IconsContainer>
           <PforIcon>
             {" "}
@@ -51,7 +51,7 @@ export default function InfoCard() {
         </IconsAndTextContainer>
         <IconsAndTextContainer>
           <IconsContainer>
-            <img src="../images/cloud.Png" width="15%" />
+            <img src="https://res.cloudinary.com/dzlcu5kcg/image/upload/v1563894895/agora/cloud.png.png" width="15%" />
           </IconsContainer>
           <PforIcon>
             {" "}

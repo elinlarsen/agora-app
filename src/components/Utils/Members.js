@@ -15,10 +15,7 @@ export default function Members(props) {
   const listItemsUsernames = props.membersList.map(item => (
     <React.Fragment>
       <PictureAndNameContainer>
-        <MemberPicture>
-          {" "}
-          <img src={item.picture} width="100%" alt={item.name} />
-        </MemberPicture>
+          <MemberPicture src={item.picture} width="100%" alt={item.name} />
         <MemberName>
           {" "}
           <p>
