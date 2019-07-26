@@ -111,6 +111,12 @@ export default class Agora extends Component {
   };
 
   render() {
+    let nb=this.state.agora.members.length;
+    let mem;
+    nb>1 ? mem="members": mem="member"
+
+    let textJoin; 
+    this.isJoined() ? textJoin="Leave this agora." : textJoin="Join now !"
     console.log("this.state.agora----", this.state.agora);
     console.log("members ---", this.state.agora.members);
     return (
@@ -161,7 +167,7 @@ export default class Agora extends Component {
           agora={this.state.agora}
         />
         <MembersWrapper>
-          <MemberP> {this.state.agora.members.length} members </MemberP>
+          <MemberP> {this.state.agora.members.length} {mem} </MemberP>
           <MemberList>
             {this.state.agora.members.map((m, index) => {
               return (
@@ -176,8 +182,7 @@ export default class Agora extends Component {
             type="button"
             onClick={event => this.handleJoinAgora(event)}
           >
-            {" "}
-            Join now!{" "}
+            {textJoin}
           </ButtonJoin>
         </MembersWrapper>
       </Main>

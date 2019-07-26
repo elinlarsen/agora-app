@@ -325,7 +325,7 @@ export const ButtonJoin = styled.button`
   border: 1px solid ${props => props.theme.color1};
   border-radius: ${props => props.theme.defaultBorderRadius};
   padding: 2vh;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   color: ${props => props.theme.color1};
   margin: 1vh;
@@ -515,7 +515,7 @@ export const GenericWrapper = styled.div`
 export const TagGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   grid-gap: 5px 5px;
   width: 100%;
   height: ${props => props.theme.cardHeight / 6 + "vh"};
@@ -582,12 +582,13 @@ margin: 0;
 `;
 
 export const ProjectImageContainer = styled.div`
-  width: 20%;
+  width: 25%;
+  min-height : 35vh; 
 `;
 
 export const ProjectDescriptionAndStatusWrapper = styled.div`
   display: flex;
-  width: 80%;
+  width: 75%;
   justify-content: space-between;
 `;
 export const ProjectDescription = styled.p`
