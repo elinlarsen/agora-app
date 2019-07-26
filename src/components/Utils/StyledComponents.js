@@ -363,7 +363,7 @@ export const MembersWrapper = styled.div`
   height : fit-content; 
   background-color: ${props => props.theme.color8};
   display : flex; 
-  flex-flow: column nowrap; 
+  flex-flow: row nowrap; 
   justify-content: flex-start; 
   align-items: center; 
   padding-bottom : 5vh
