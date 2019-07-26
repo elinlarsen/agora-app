@@ -3,6 +3,9 @@ import { Map, GoogleApiWrapper,  Marker, InfoWindow} from 'google-maps-react';
 
 import styled from 'styled-components'
 
+//icon
+import { FiUsers } from "react-icons/fi";
+
 require('dotenv').config()
 
 const MapParent=styled.div`
@@ -11,6 +14,7 @@ display : flex;
 width :100vw;
 height: 65vh;
 `
+
 
 const ImageContainer=styled.div`
 display: flex;
@@ -34,13 +38,16 @@ padding-left: 1vh;
 width: 30vh;
 `
 
-const Members=styled.div`
+const NbMembersAgora=styled.p`
+margin: 0.5vh 0; 
+font-size: 0.8rem; 
+color: #0C214A;
 `
-const Location=styled.div``
 
 const Name=styled.h3`
 color : #0C214A;
 font-size: 1.2rem;
+margin: 0.5vh 0; 
 `
 
 const mapStyles = { 
@@ -58,6 +65,8 @@ function setMarkerAndPlace(props,marker,e, agora){
     setMarker(marker)
     setAgora(agora)
 }
+
+
 
     return (
         <MapParent>
@@ -82,7 +91,8 @@ function setMarkerAndPlace(props,marker,e, agora){
                     {<InfoContainer>
                         <ImageContainer><img src={selectedAgora.picture} alt={selectedAgora.name} height="100%" width="100%" /></ImageContainer>
                         <Name>{selectedAgora.name}</Name>
-                        <a style={{textDecoration : 'none', color : '#0C214A' }} href={`/agora/${selectedAgora._id}`}> Discover </a>
+                        <NbMembersAgora> {selectedAgora.members!==undefined ? selectedAgora.members.length : 0} <FiUsers /> </NbMembersAgora>
+                        <a style={{textDecoration : 'none', color : '#0C214A', fontSize : "0.8rem" }} href={`/agora/${selectedAgora._id}`}> Discover </a>
                         
                     </InfoContainer>
                     }

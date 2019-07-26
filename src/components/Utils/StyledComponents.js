@@ -132,6 +132,11 @@ export const Logo = styled.div`
   margin: 1vh 0;
 `;
 
+export const AgorasLink=styled.p`
+font-size : 1rem; 
+color : ${props => props.theme.color3}; 
+`
+
 // -- User Components -- //
 
 export const UserP = styled.div`
