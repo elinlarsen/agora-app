@@ -14,6 +14,7 @@ import {
   ProjectDescription,
   ProjectDescriptionRow,
   ButtonWrapper, 
+  BigMembersWrapper,
   MembersWrapper,
   MemberP,
 } from "./Utils/StyledComponents";
@@ -203,26 +204,29 @@ export default class Projects extends Component {
           </AuthConsumer>
         </ProjectDescriptionRow>
 
-        <MembersWrapper>
+        <BigMembersWrapper>
           <MemberP> {this.state.members.length} {mem} </MemberP>
-          <Members membersList={this.state.members} admin={this.state.admin}></Members>
-          <AuthConsumer>
-              {({ user }) =>
-                this.state.members.filter(a => a._id == user._id).length ==
-                0 ? (
-                  <ActionButtonProject id={user._id} onClick={this.addUser}>
-                    {" "}
-                    Join{" "}
-                  </ActionButtonProject>
-                ) : (
-                  <ActionButtonProject id={user._id} onClick={this.removeUser}>
-                    {" "}
-                    Leave{" "}
-                  </ActionButtonProject>
-                )
-              }
-            </AuthConsumer>
-        </MembersWrapper>
+          <MembersWrapper>
+              <Members membersList={this.state.members} admin={this.state.admin}></Members>
+          </MembersWrapper>
+              <AuthConsumer>
+                  {({ user }) =>
+                    this.state.members.filter(a => a._id == user._id).length ==
+                    0 ? (
+                      <ActionButtonProject id={user._id} onClick={this.addUser}>
+                        {" "}
+                        Join{" "}
+                      </ActionButtonProject>
+                    ) : (
+                      <ActionButtonProject id={user._id} onClick={this.removeUser}>
+                        {" "}
+                        Leave{" "}
+                      </ActionButtonProject>
+                    )
+                  }
+                </AuthConsumer>
+          
+        </BigMembersWrapper>
 
       </ProjectWrapper>
     );

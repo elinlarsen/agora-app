@@ -359,14 +359,24 @@ export const Info = styled.div`
   padding: 2vh 0;
   border: 1px solid ${props => props.theme.color1} 0.9;
 `;
+
+export const BigMembersWrapper=styled.div`
+height : fit-content; 
+background-color: ${props => props.theme.color8};
+display : flex; 
+flex-flow: column nowrap; 
+justify-content: flex-start; 
+align-items: center; 
+padding-bottom : 5vh
+width : 100vw;
+`
 export const MembersWrapper = styled.div`
   height : fit-content; 
   background-color: ${props => props.theme.color8};
   display : flex; 
   flex-flow: row nowrap; 
-  justify-content: flex-start; 
+  justify-content: center; 
   align-items: center; 
-  padding-bottom : 5vh
   width : 100vw;
   `
 export const MemberP=styled.p`
@@ -748,7 +758,7 @@ width: 10%
 `
 
 export const MessagePicture = styled.div`
-  height: 3vh; 
+  height: inherit; 
   width: 40%;
 `;
 

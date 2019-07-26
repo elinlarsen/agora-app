@@ -9,6 +9,7 @@ import {
   IconButton,
   Info,
   MemberName,
+  BigMembersWrapper,
   MembersWrapper,
   MemberInfo,
   MemberP,
@@ -166,8 +167,10 @@ export default class Agora extends Component {
           agoraId={this.state.agora._id}
           agora={this.state.agora}
         />
-        <MembersWrapper>
+        <BigMembersWrapper>
+        
           <MemberP> {this.state.agora.members.length} {mem} </MemberP>
+          
           <MemberList>
             {this.state.agora.members.map((m, index) => {
               return (
@@ -178,13 +181,15 @@ export default class Agora extends Component {
               );
             })}
           </MemberList>
+          
           <ButtonJoin
             type="button"
             onClick={event => this.handleJoinAgora(event)}
           >
             {textJoin}
           </ButtonJoin>
-        </MembersWrapper>
+        
+      </BigMembersWrapper>
       </Main>
     );
   }
