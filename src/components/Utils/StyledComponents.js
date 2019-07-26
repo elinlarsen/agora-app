@@ -748,7 +748,7 @@ width: 10%
 `
 
 export const MessagePicture = styled.div`
-  max-height: 5vh; 
+  height: 3vh; 
   width: 40%;
 `;
 
