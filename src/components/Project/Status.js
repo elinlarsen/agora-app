@@ -5,11 +5,12 @@ export default function ProjectStatus(props) {
   const StatusBar = styled.div`
     display: flex;
     flex-direction: column-reverse;
-    margin: 10px 0px;
+    width: 20%;
+    /*margin: 10px 0px;
     width: 18%;
     border-style: solid;
     border-color: ${props => props.theme.color2};
-    border-width: 0.5px;
+    border-width: 0.5px;*/
   `;
 
   const Ideation = styled.div`

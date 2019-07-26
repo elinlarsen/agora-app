@@ -85,7 +85,7 @@ export default class Forum extends Component {
         {({ user }) => (
           <ForumContainer>
             {" "}
-            <ForumTitle> Recent contributions </ForumTitle>{" "}
+            <ForumTitle> Forum </ForumTitle>{" "}
             <Message messages={this.state.messages} />
             {this.props.ableToPost ? (
               <Message

@@ -16,25 +16,20 @@ export default function Members(props) {
   const listItemsUsernames = props.membersList.map(item => (
     <React.Fragment>
       <PictureAndNameContainer>
-        <MemberPictureContainer>
-          {" "}
-          <MemberPicture src={item.picture} width="10%" alt={item.name} />{" "}
-        </MemberPictureContainer>
+        <MemberPicture src={item.picture} width="10%" alt={item.name} />{" "}
         <MemberName>
-          {" "}
-          <p>
-            {" "}
             {item.username} {item._id == props.admin ? "(admin)" : ""}
-          </p>{" "}
         </MemberName>
       </PictureAndNameContainer>
     </React.Fragment>
   ));
 
   return (
-    <MemberContainer>
-      {" "}
-      <MemberTitle> Current project members</MemberTitle> {listItemsUsernames}
-    </MemberContainer>
+   <>
+   {listItemsUsernames}
+   </>
+
   );
 }
+
+

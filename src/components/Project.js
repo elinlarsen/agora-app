@@ -5,7 +5,8 @@ import ajaxHandler from "../utils/ajaxHandler.js";
 import styled from "styled-components";
 import Status from "./Project/Status.js";
 import {
-  ActionButton,
+  IconButtonProject,
+  ActionButtonProject,
   ProjectWrapper,
   ProjectTitle,
   ProjectTitleText,
@@ -13,14 +14,17 @@ import {
   ProjectDescriptionAndStatusWrapper,
   ProjectDescription,
   ProjectDescriptionRow,
-  ButtonWrapper
+  ButtonWrapper, 
+  MembersWrapper,
+  MemberP,
 } from "./Utils/StyledComponents";
+
+import { FiTrash } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
+
 import { AuthConsumer } from "./Auth/Guard";
 
-let projectHandler = new ajaxHandler(
-  process.env.REACT_APP_API_URL_,
-  "/projects"
-);
+let projectHandler = new ajaxHandler(process.env.REACT_APP_API_URL_,"/projects");
 
 export default class Projects extends Component {
   constructor(props) {
@@ -67,9 +71,9 @@ export default class Projects extends Component {
   addUser = e => {
     let newMembers = this.state.members;
 
-    console.log(newMembers.filter(a => a._id == e.target.id).length);
+    console.log(newMembers.filter(a => a._id === e.target.id).length);
 
-    if (newMembers.filter(a => a._id == e.target.id).length == 0) {
+    if (newMembers.filter(a => a._id === e.target.id).length === 0) {
       newMembers.push(e.target.id);
       projectHandler.updateOne(
         this.state._id,
@@ -123,36 +127,18 @@ export default class Projects extends Component {
   };
 
   render() {
-    const ActionButtonProject = styled(ActionButton)``;
+    let nb=this.state.members.length;
+    let mem;
+    nb>1 ? mem="members": mem="member"
+
     return (
       <ProjectWrapper>
         <ProjectTitle>
-          <ProjectTitleText> {this.state.name} </ProjectTitleText>
-          <ButtonWrapper width="20%">
-            <ActionButtonProject to={"/agora/" + this.state.agoraId}>
-              {" "}
-              Back to Agora >>{" "}
-            </ActionButtonProject>
-            <AuthConsumer>
-              {({ user }) =>
-                this.state.members.filter(a => a._id == user._id).length ==
-                0 ? (
-                  <ActionButtonProject id={user._id} onClick={this.addUser}>
-                    {" "}
-                    Join{" "}
-                  </ActionButtonProject>
-                ) : (
-                  <ActionButtonProject id={user._id} onClick={this.removeUser}>
-                    {" "}
-                    Leave{" "}
-                  </ActionButtonProject>
-                )
-              }
-            </AuthConsumer>
+          <ProjectTitleText> {this.state.name}       
             <AuthConsumer>
               {({ user }) =>
                 user._id == this.state.admin ? (
-                  <ActionButtonProject
+                  <IconButtonProject
                     to={{
                       pathname: "/projectcreate/" + this.state._id,
                       state: {
@@ -160,28 +146,33 @@ export default class Projects extends Component {
                         agoraId: this.state.agoraId
                       }
                     }}
-                  >
-                    {" "}
-                    Update{" "}
-                  </ActionButtonProject>
+                  >                   
+                      <FiEdit />            
+                  </IconButtonProject>
                 ) : null
               }
             </AuthConsumer>
             <AuthConsumer>
               {({ user }) =>
                 user._id == this.state.admin ? (
-                  <ActionButtonProject
+                  <IconButtonProject
                     onClick={this.deleteItem}
                     name={this.state._id}
                   >
-                    {" "}
-                    Delete{" "}
-                  </ActionButtonProject>
+                      <FiTrash />
+                  </IconButtonProject>
                 ) : null
               }
             </AuthConsumer>
+          
+          </ProjectTitleText>
+          
+          <ButtonWrapper width="14%">
+            <ActionButtonProject to={"/agora/" + this.state.agoraId}>Back to Agora</ActionButtonProject>
           </ButtonWrapper>
         </ProjectTitle>
+
+
         <ProjectDescriptionRow>
           <ProjectImageContainer>
             {" "}
@@ -197,10 +188,8 @@ export default class Projects extends Component {
             <Status status={this.state.status}> </Status>
           </ProjectDescriptionAndStatusWrapper>
         </ProjectDescriptionRow>
+
         <ProjectDescriptionRow>
-          <Members membersList={this.state.members} admin={this.state.admin}>
-            {" "}
-          </Members>
           <AuthConsumer>
             {({ user }) => (
               <Forum
@@ -214,6 +203,28 @@ export default class Projects extends Component {
             )}
           </AuthConsumer>
         </ProjectDescriptionRow>
+
+        <MembersWrapper>
+          <MemberP> {this.state.members.length} {mem} </MemberP>
+          <Members membersList={this.state.members} admin={this.state.admin}></Members>
+          <AuthConsumer>
+              {({ user }) =>
+                this.state.members.filter(a => a._id == user._id).length ==
+                0 ? (
+                  <ActionButtonProject id={user._id} onClick={this.addUser}>
+                    {" "}
+                    Join{" "}
+                  </ActionButtonProject>
+                ) : (
+                  <ActionButtonProject id={user._id} onClick={this.removeUser}>
+                    {" "}
+                    Leave{" "}
+                  </ActionButtonProject>
+                )
+              }
+            </AuthConsumer>
+        </MembersWrapper>
+
       </ProjectWrapper>
     );
   }

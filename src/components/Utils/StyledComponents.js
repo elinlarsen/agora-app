@@ -19,7 +19,7 @@ export const mainTheme = {
   cardHeightWidthRatio: 1.8,
   color0: "#D32F2F" /* Main Primary color */,
   color1: "#85144b" /* "#f95d60" "f95d60","#F44336"*/,
-  color2: "#212121" /*dark for text*/,
+  color2: "#21222a" /*dark for text*/,
   color3: "#FFFFFF", //white
   color4: "#FF9800",
   color5: "#212121",
@@ -58,6 +58,24 @@ export const ActionButton = styled(Link)`
   margin: 2vh 0;
 `;
 
+export const ActionButtonProject = styled(ActionButton)`
+border : 1px solid ${props => props.theme.color3}; 
+font-size: 0.8rem; 
+width : fit-content; 
+margin-top: 2vh; 
+margin-right: 1vw; 
+`;
+
+export const IconButtonProject = styled(Link)`
+width: 3vw;
+border: none;
+color: ${props => props.theme.color3};
+padding: 1vh;
+margin: 1vh;
+font-size: 1rem;
+cursor: pointer;
+
+`
 export const WrapperButton = styled.div`
   width: 100%;
   display: flex;
@@ -377,6 +395,7 @@ margin : 2vh 0;
   border-radius : 5vh; 
   `
   export const MemberName=styled.p`
+  margin : 0; 
   font-size : 1.2rem; 
   color : ${props => props.theme.color3};
   `
@@ -448,9 +467,11 @@ export const ProjectsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 30px 30px;
-  padding: 50px;
+  padding: 3vh 3vw;
   text-align: center;
-  justify-items: center;
+  /*justify-items: center;*/
+  justify-content : center; 
+  align-items : center; 
 `;
 
 export const StyledEmptyProjectCard = styled.div`
@@ -502,6 +523,7 @@ export const TagGrid = styled.div`
 `;
 
 export const ProjectCardText = styled.p`
+  margin: 0; 
   display: flex;
   padding: ${props => props.theme.defaultPaddingLarge};
   justify-content: center;
@@ -518,6 +540,7 @@ export const ProjectCardTitle = styled(ProjectCardText)`
   font-weight: bold;
   font-size: 1rem;
   text-align: left;
+  margin : 0; 
 `;
 
 export const HR = styled.hr`
@@ -538,45 +561,46 @@ export const ButtonWrapper = styled.div`
 
 export const ProjectWrapper = styled.div`
   width: 100%;
-  padding: 10px;
 `;
 
-export const ProjectTitle = styled.div`
-  padding: 0px 20px;
+export const ProjectTitle = styled.div` 
   display: flex;
-  justify-content: space-between;
-  background-color: #21222a;
+  flex-flow : row nowrap;
+  justify-content: space-around;
+  align-items: center; 
+  background-color: ${props => props.theme.color2};
 `;
 
 export const ProjectTitleText = styled.p`
-  width: 60%;
-  padding: 10px;
+margin: 0;  
+  width: 100%;
   font-weight: bold;
   color: white;
-  font-size: 20px;
+  font-size: 2rem;
+  text-align: left; 
+  padding-left : 2vw; 
 `;
 
 export const ProjectImageContainer = styled.div`
-  width: 26%;
-
-  margin: 10px 0px;
+  width: 20%;
 `;
 
 export const ProjectDescriptionAndStatusWrapper = styled.div`
   display: flex;
-  width: 72%;
+  width: 80%;
   justify-content: space-between;
 `;
 export const ProjectDescription = styled.p`
   display: flex;
   width: 80%;
-  heigth: 10%;
-  padding: 20px;
-  margin: 10px 0px;
+  font-size : 1.5rem; 
+  text-align: center; 
+  align-items: center; 
+  /*heigth: 10%;
   font-size: 20px;
   border-style: solid;
   border-color: ${props => props.theme.color2};
-  border-width: 0.5px;
+  border-width: 0.5px;*/
 `;
 export const ProjectDescriptionRow = styled.div`
   display: flex;
@@ -587,37 +611,36 @@ export const ProjectDescriptionRow = styled.div`
 // --- Forum Components ---//
 
 export const ForumContainer = styled.div`
-  width: 72%;
-  border-style: solid;
+  width: 100%;
+  /*border-style: solid;
   padding: 0px 10px;
   border-style: solid;
   border-color: ${props => props.theme.color2};
-  border-width: 0.5px;
+  border-width: 0.5px;*/
 `;
 
 export const ForumTitle = styled.p`
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  background-color: #21222a;
-  color: white;
-
+  margin: 0
+  padding: 1vh 2vw;
+  background-color: ${props => props.theme.color2};
+  color: ${props => props.theme.color3};
   font-weight: bold;
-  font-size: 20px;
+  font-size: 2rem;
+  text-align : left; 
 `;
 
 // --- Members Components --- //
 
 export const PictureAndNameContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  padding: 5px 5px 5px 0px;
+  flex-flow: column wrap;
+  justify-content : center; 
+  align-items : center; 
 `;
 export const MemberContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 26%;
-
   padding: 0px 10px;
   border-style: solid;
   border-color: ${props => props.theme.color2};
@@ -628,9 +651,8 @@ export const MemberTitle = styled.p`
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
-  background-color: #21222a;
-  color: white;
-
+  background-color: ${props => props.theme.color2};
+  color: ${props => props.theme.color3};
   font-weight: bold;
   font-size: 20px;
 `;
@@ -700,47 +722,71 @@ export const FormWrapper = styled.form`
 
 export const MessageRow = styled.div`
   display: flex;
-  padding-top: 5px;
+  flex-flow : row nowrap; 
+  padding-top: 0.5vh;
+  padding-left : 1vw; 
   justify-content: flex-start;
+  align-items: center; 
   border-bottom-style: solid;
   border-bottom-width: 0.5px;
   width: 100%;
 `;
 
+export const MessageUserInfo=styled.div`
+display : flex; 
+flex-flow : column nowrap; 
+justify-content : center; 
+align-item: flex-start; 
+width: 10%
+
+`
+
 export const MessagePicture = styled.div`
-  width: 3%;
+  width: 40%;
 `;
 
 export const MessageUserName = styled.p`
+  font-size: 0.8rem; 
   font-weight: bold;
-  margin-top: auto;
-  padding: 0px 20px;
-  width: 20%;
+  margin: 0;
+  width: 100%;
 `;
+
+export const MessageDate=styled.p`
+margin-top: auto;
+width: 20%;
+font-size : 0.8rem; 
+`
 
 export const MessageUserText = styled.p`
   margin-top: auto;
-  padding: 0px 20px;
-  width: 50%;
+  width: 100%;
 `;
 
 export const MessageInputForm = styled.form`
-  width: 50%;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 1rem;
+  border-radius : 20px; 
 `;
 
 export const MessageUserInput = styled.input`
   padding: 5px;
   width: 100%;
   height: 100%;
-  font-size: 14px;
+  font-size: 1rem;
+  border : 1px solid ${props => props.theme.color8};
+  border-shadow: none; 
+  border-radius : 20px; 
 `;
 
 export const MessageInputButton = styled.input`
   padding: 5px;
   margin: 10px;
   height: 100%;
+  border : 1px solid ${props => props.theme.color8};
+  border-radius : 5px; 
+  color : ${props => props.theme.color8};
 `;
