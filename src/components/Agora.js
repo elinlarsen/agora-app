@@ -83,7 +83,7 @@ export default class Agora extends Component {
     let members = this.state.agora.members;
     let nbMembers = members.length;
     let user = this.props.currentUser;
-    if (nbMembers !== 0 && members.filter(m => m._id === user).length == 0)
+    if (nbMembers !== 0 && members.filter(m => m._id === user).length !== 0)
       joined = true;
     return joined;
   };
