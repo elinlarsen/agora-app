@@ -62,6 +62,7 @@ export default function ProjectStatus(props) {
     margin: auto;
     color: white;
     font-size: 20px;
+    opacity : 0.2; 
   `;
 
   function renderStatus(props) {
@@ -75,7 +76,6 @@ export default function ProjectStatus(props) {
     } else if (props.status === "planning") {
       return (
         <Planning>
-          {" "}
           <CenteredWhiteText> Planning </CenteredWhiteText>{" "}
         </Planning>
       );

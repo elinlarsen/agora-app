@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Members from "./Utils/Members.js";
 import Forum from "./Project/Forum.js";
 import ajaxHandler from "../utils/ajaxHandler.js";
-import styled from "styled-components";
-import Status from "./Project/Status.js";
+import Status from "./Project/NewStatus.js";
 import {
   IconButtonProject,
   ActionButtonProject,
@@ -130,7 +129,7 @@ export default class Projects extends Component {
     let nb=this.state.members.length;
     let mem;
     nb>1 ? mem="members": mem="member"
-
+    console.log("this state ------", this.state)
     return (
       <ProjectWrapper>
         <ProjectTitle>

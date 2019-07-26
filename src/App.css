@@ -10,13 +10,15 @@ body {
   padding: 0;
 }
 
-.main-body {
-  color: #0c214a;
+/*.main-body {
+  color: #85144b;
+  display : flex; 
+  justify-content: center; 
   background-color: #faf9f8;
-  padding-top: 12vh; /*because of the fixed nav bar*/
+  padding-top: 12vh; 
   min-height: 100vh;
   max-height: min-content;
-}
+}*/
 
 input::-webkit-input-placeholder {
   color: #0c214a;

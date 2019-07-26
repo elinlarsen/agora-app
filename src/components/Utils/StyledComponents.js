@@ -724,7 +724,7 @@ export const MessageRow = styled.div`
   display: flex;
   flex-flow : row nowrap; 
   padding-top: 0.5vh;
-  padding-left : 1vw; 
+  padding-left : 2vw; 
   justify-content: flex-start;
   align-items: center; 
   border-bottom-style: solid;
@@ -770,6 +770,7 @@ export const MessageInputForm = styled.form`
   align-items: center;
   font-size: 1rem;
   border-radius : 20px; 
+  margin: 1vh;
 `;
 
 export const MessageUserInput = styled.input`
@@ -779,14 +780,17 @@ export const MessageUserInput = styled.input`
   font-size: 1rem;
   border : 1px solid ${props => props.theme.color8};
   border-shadow: none; 
-  border-radius : 20px; 
+  border-radius : 20px;
+  padding: 1vh 1vw;
+
 `;
 
 export const MessageInputButton = styled.input`
-  padding: 5px;
+  padding: 1vh 1vw;
   margin: 10px;
   height: 100%;
   border : 1px solid ${props => props.theme.color8};
-  border-radius : 5px; 
+  border-radius : 10px; 
   color : ${props => props.theme.color8};
+  font-size: 1rem; 
 `;
