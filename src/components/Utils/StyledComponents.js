@@ -408,6 +408,7 @@ margin : 2vh 0;
   height : 4vw; 
   width : 4vw;
   border-radius : 5vh; 
+  margin: 1vh 1vw; 
   `
   export const MemberName=styled.p`
   margin : 0; 
