@@ -34,7 +34,7 @@ export default class Signup extends Component {
         picture: [],
         password: {
             name  : "password", 
-            label: "A (safe) password",
+            label: "A password (>7 characters)",
             value : "Ahydzd78NF",
             type : "password",
         },

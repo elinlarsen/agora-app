@@ -14,14 +14,14 @@ export default function Members(props) {
   console.log(props.membersList);
 
   const listItemsUsernames = props.membersList.map(item => (
-    <React.Fragment>
+
       <PictureAndNameContainer>
         <MemberPicture src={item.picture} width="10%" alt={item.name} />{" "}
         <MemberName>
             {item.username} {item._id == props.admin ? "(admin)" : ""}
         </MemberName>
       </PictureAndNameContainer>
-    </React.Fragment>
+
   ));
 
   return (

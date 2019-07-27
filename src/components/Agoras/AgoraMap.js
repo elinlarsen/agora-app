@@ -12,7 +12,7 @@ const MapParent=styled.div`
 position: relative; /* Set the navbar to fixed position */
 display : flex; 
 width :100vw;
-height: 65vh;
+height: 68vh;
 `
 
 

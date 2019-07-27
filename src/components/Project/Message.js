@@ -21,7 +21,7 @@ export default function Message(props) {
           {" "}
           <MessageUserInfo>
             <MessageUserName> {item.user.username} </MessageUserName>
-            <MessagePicture><img src={item.user.picture} width="100%" alt={item.user.username}/></MessagePicture> 
+            <MessagePicture src={item.user.picture} alt={item.user.username}/>
           </MessageUserInfo>
           <MessageDate>
             {new Date(item.post_date).toDateString() + " " + new Date(item.post_date).toLocaleTimeString()}
@@ -33,13 +33,12 @@ export default function Message(props) {
       messagesList = (
         <MessageRow>
           <MessageUserInfo>
-              <MessagePicture>
-                <img
+            
+                <MessagePicture
                   src={props.messages[0].user.picture}
-                  width="100%"
+                  
                   alt={props.messages[0].user.username}
-                />{" "}
-              </MessagePicture>
+                />
             </MessageUserInfo>
           {//<MessageUserText> {""} </MessageUserText>
           }

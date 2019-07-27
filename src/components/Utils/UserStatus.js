@@ -13,8 +13,8 @@ export default function UserStatus() {
             return (
               <>
                 <UserOptions>
-                  <UserProfile> {user.first_name}</UserProfile>
-                  <MemberPicture src={user.picture} alt={user.first_name} />
+                  <UserProfile> {user.username}</UserProfile>
+                  <MemberPicture src={user.picture} alt={user.username} />
                   <UserP onClick={() => signout(res => console.log(res))}>
                     {" "}
                     LOG OUT{" "}

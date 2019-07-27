@@ -8,14 +8,14 @@ export const mainTheme = {
   color2: "#574f7d",
   color3: "#95adbe",
   color4: "#dff0ea",*/
-  defaultPaddingSmall: "1px",
+  defaultPaddingSmall: "1vh",
   defaultPaddingLarge: "2vh",
   fontSizeLarge: "1.3rem",
   fontSizeMedium: "1rem",
   fontSizeSmall: "0.8rem",
   defaultBorderWidth: "0.5px",
   defaultBorderRadius: "20px",
-  cardHeight: 50,
+  cardHeight: 40,
   cardHeightWidthRatio: 1.8,
   color0: "#D32F2F" /* Main Primary color */,
   color1: "#85144b" /* "#f95d60" "f95d60","#F44336"*/,
@@ -35,9 +35,9 @@ color: ${props => props.theme.color8}
 display : flex; 
 justify-content: center; 
 background-color: ${props => props.theme.color9};
-margin-top: 12vh; /*because of the fixed nav bar*/
-min-height: 100vh;
-max-height: min-content;
+/*margin-top: 12vh; because of the fixed nav bar*/
+
+height: min-content;
 
 `;
 
@@ -46,7 +46,7 @@ max-height: min-content;
 export const ActionButton = styled(Link)`
   display: block;
   background-color: ${props => props.theme.color1};
-  padding: ${props => props.theme.defaultPaddingLarge};
+  padding: ${props => props.theme.defaultPaddingSmall};
   text-decoration: none;
   color: ${props => props.theme.color3};
   font-weight: bold;
@@ -62,9 +62,12 @@ export const ActionButtonProject = styled(ActionButton)`
 border : 1px solid ${props => props.theme.color3}; 
 font-size: 0.8rem; 
 width : fit-content; 
-margin-top: 2vh; 
-margin-right: 1vw; 
+
 `;
+
+export const ActionButtonBack=styled(ActionButtonProject)`
+background-color: ${props => props.theme.color2};
+`
 
 export const IconButtonProject = styled(Link)`
 width: 3vw;
@@ -109,9 +112,9 @@ export const StyledTag = styled.div`
 // --Nav Components -- //
 
 export const NavContainer = styled.div`
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
+  /*position: fixed; 
+  top: 0;  */
+  width: 100%; 
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -120,7 +123,7 @@ export const NavContainer = styled.div`
     return props.theme.color1;
   }};
   height: 12vh; /*fit-content;*/
-  padding: 0 1vw;
+  padding: 0 2vw;
   opacity: 0.9;
   z-index: 1;
 `;
@@ -204,8 +207,8 @@ export const SearchStyle = styled.input`
 
 export const VideoWrapper = styled.div`
   width: 100vw;
-  height: 57vh;
-  margin-top: -10vw;
+  max-height: 40vh;
+  margin-top: 0vw;
   z-index: auto;
 `;
 
@@ -220,13 +223,13 @@ export const Banner = styled.div`
   align-items: center;
   height: inherit;
   flex-flow: column nowrap;
-  padding-top: 8vh;
-  padding-bottom: 5vh;
+  z-index: 1; 
+
 `;
 
 export const BannerText = styled.p`
   font-size: 20px;
-  width: 75%;
+  width: 80%;
   text-align: center;
   font-weight: bold;
   font-size: 30px;
@@ -234,7 +237,7 @@ export const BannerText = styled.p`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: 10px;
+  margin-bottom: 1vh;
 `;
 
 export const BannerTextAndIcon = styled.div`
@@ -285,8 +288,7 @@ export const PforIcon = styled.p`
   flex-direction: column;
   font-size: 20px;
   margin: 0px;
-  text-align: left;
- 
+  text-align: left; 
   margin: auto;
   padding: 30px;
   color: color:  ${props => props.theme.color2};
@@ -314,11 +316,14 @@ export const Title = styled.h1`
   text-align: center;
   color: ${props => props.theme.color3};
   font-weight: bold;
+  margin: 0.5vh 0;
+
 `;
 export const SubTitle = styled.p`
   text-align: center;
   color: ${props => props.theme.color3};
   margin: 0.5vh 0;
+  padding : 0 2vw;
 `;
 
 export const Loc = styled(SubTitle)`
@@ -329,11 +334,11 @@ export const ButtonJoin = styled.button`
   width: 20vw;
   border: 1px solid ${props => props.theme.color1};
   border-radius: ${props => props.theme.defaultBorderRadius};
-  padding: 2vh;
-  font-size: 1.2rem;
+  padding: 1vh 0;
+  font-size: 1rem;
   font-weight: bold;
   color: ${props => props.theme.color1};
-  margin: 1vh;
+  margin: 0;
   cursor: pointer;
 `;
 
@@ -367,7 +372,7 @@ display : flex;
 flex-flow: column nowrap; 
 justify-content: flex-start; 
 align-items: center; 
-padding-bottom : 5vh
+padding-bottom : 1vh;
 width : 100vw;
 `
 export const MembersWrapper = styled.div`
@@ -376,12 +381,12 @@ export const MembersWrapper = styled.div`
   display : flex; 
   flex-flow: row nowrap; 
   justify-content: center; 
-  align-items: center; 
+  align-items: flex-start; 
   width : 100vw;
   `
 export const MemberP=styled.p`
 color : ${props => props.theme.color3};
-font-size : 2.5rem; 
+font-size : 2rem; 
 margin: 0; 
 margin : 2vh 0;
 
@@ -408,23 +413,17 @@ margin : 2vh 0;
   height : 4vw; 
   width : 4vw;
   border-radius : 5vh; 
-  margin: 1vh 1vw; 
+  margin: 0.5vh 0; 
   `
   export const MemberName=styled.p`
   margin : 0; 
-  font-size : 1.2rem; 
+  font-size : 1rem; 
   color : ${props => props.theme.color3};
+  text-align : center; 
   `
 
 // Agora Util Components //
 
-/*export const MainBody = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  align-items: center;
-  height: inherit;
-`;*/
 export const Wrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -465,7 +464,7 @@ export const CTAContainer = styled.div`
   align-items: center;
   font-weight: bold;
   font-size: 2rem;
-  margin-top: 4vh;
+  margin-top: 1vh;
 `;
 
 export const ContainerAgoras = styled.div`
@@ -481,8 +480,8 @@ export const ContainerAgoras = styled.div`
 
 export const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 30px 30px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 3vw 3vw;
   padding: 3vh 3vw;
   text-align: center;
   /*justify-items: center;*/
@@ -498,7 +497,7 @@ export const StyledEmptyProjectCard = styled.div`
   height: ${props => props.theme.cardHeight + "vh"};
   width: ${props =>
     props.theme.cardHeight / props.theme.cardHeightWidthRatio + "vh"};
-  font-size: 30px;
+  font-size: 2rem;
   color: ${props => props.theme.color3};
   font-weight: bold;
   background-color: ${props => props.theme.color3};
@@ -585,6 +584,7 @@ export const ProjectTitle = styled.div`
   justify-content: space-around;
   align-items: center; 
   background-color: ${props => props.theme.color2};
+  padding : 0 2vw; 
 `;
 
 export const ProjectTitleText = styled.p`
@@ -592,28 +592,29 @@ margin: 0;
   width: 100%;
   font-weight: bold;
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align: left; 
-  padding-left : 2vw; 
+
 `;
 
 export const ProjectImageContainer = styled.div`
-  width: 20%;
-  min-height : 30vh; 
+  width: 25%;
+  max-height : 40vh; 
 `;
 
 export const ProjectDescriptionAndStatusWrapper = styled.div`
   display: flex;
-  width: 80%;
+  width: 75%;
   justify-content: space-between;
 `;
 export const ProjectDescription = styled.p`
   display: flex;
   width: 80%;
-  font-size : 1.5rem; 
+  font-size : 1.2rem; 
   text-align: center; 
   align-items: center; 
-  /*heigth: 10%;
+  padding: 5vh 5vw; 
+  /*height: 10%;
   font-size: 20px;
   border-style: solid;
   border-color: ${props => props.theme.color2};
@@ -642,7 +643,7 @@ export const ForumTitle = styled.p`
   background-color: ${props => props.theme.color2};
   color: ${props => props.theme.color3};
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.5rem;
   text-align : left; 
 `;
 
@@ -651,8 +652,10 @@ export const ForumTitle = styled.p`
 export const PictureAndNameContainer = styled.div`
   display: flex;
   flex-flow: column wrap;
-  justify-content : center; 
-  align-items : center; 
+  justify-content: center;
+  align-items: center; 
+  width: fit-content; 
+  margin: 0 2vw; 
 `;
 export const MemberContainer = styled.div`
   display: flex;
@@ -740,27 +743,25 @@ export const FormWrapper = styled.form`
 export const MessageRow = styled.div`
   display: flex;
   flex-flow : row nowrap; 
-  padding-top: 0.5vh;
   padding-left : 2vw; 
   justify-content: flex-start;
-  align-items: center; 
+  align-items: stretch; 
   border-bottom-style: solid;
   border-bottom-width: 0.5px;
-  width: 100%;
+  width: 100vw;
 `;
 
 export const MessageUserInfo=styled.div`
 display : flex; 
 flex-flow : column nowrap; 
 justify-content : center; 
-align-item: flex-start; 
-width: 10%
+align-items: center; 
+width: 10vw;
 
 `
 
-export const MessagePicture = styled.div`
-  height: inherit; 
-  width: 40%;
+export const MessagePicture = styled(MemberPicture)`
+  
 `;
 
 export const MessageUserName = styled.p`
@@ -768,31 +769,35 @@ export const MessageUserName = styled.p`
   font-weight: bold;
   margin: 0;
   width: 100%;
+  text-align : center; 
+  margin-top: 1vh;
 `;
 
 export const MessageDate=styled.p`
 margin-top: auto;
-width: 20%;
-font-size : 0.8rem; 
+padding: 0 1vw; 
+width: 20vw;
+font-size : 0.9rem; 
+text-align: center; 
 `
 
 export const MessageUserText = styled.p`
   margin-top: auto;
-  width: 100%;
+  width: 70vw;
+  padding : 0 2vw; 
 `;
 
 export const MessageInputForm = styled.form`
-  width: 100%;
+  width: 80vw;
   height: 100%;
   display: flex;
   align-items: center;
   font-size: 1rem;
   border-radius : 20px; 
-  margin: 1vh;
+  margin: 1vh 1vw;
 `;
 
 export const MessageUserInput = styled.input`
-  padding: 5px;
   width: 100%;
   height: 100%;
   font-size: 1rem;
@@ -805,7 +810,7 @@ export const MessageUserInput = styled.input`
 
 export const MessageInputButton = styled.input`
   padding: 1vh 1vw;
-  margin: 10px;
+  margin: 1vh 2vw;
   height: 100%;
   border : 1px solid ${props => props.theme.color8};
   border-radius : 10px; 

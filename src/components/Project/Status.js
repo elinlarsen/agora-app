@@ -5,7 +5,8 @@ export default function ProjectStatus(props) {
   const StatusBar = styled.div`
     display: flex;
     flex-direction: column-reverse;
-    width: 20%;
+    height: inherit; 
+    width: 20vw;
     /*margin: 10px 0px;
     width: 18%;
     border-style: solid;

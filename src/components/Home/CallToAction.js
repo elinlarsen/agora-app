@@ -4,9 +4,9 @@ import { ButtonWrapper, ActionButton, WrapperButton } from "../Utils/StyledCompo
 const ButtonWrapperResized = styled(ButtonWrapper)`
   height: 100px;
   width: 70%;
-  margin: 5vh;
-  margin-bottom: 8vh;
-  padding: 5vh;
+  margin: 2vh;
+  margin-bottom: 2vh;
+  padding: 1vh;
   align-items: center;
 `;
 const ActionButtonResized = styled(ActionButton)`

@@ -6,6 +6,7 @@ import Status from "./Project/NewStatus.js";
 import {
   IconButtonProject,
   ActionButtonProject,
+  ActionButtonBack,
   ProjectWrapper,
   ProjectTitle,
   ProjectTitleText,
@@ -168,7 +169,7 @@ export default class Projects extends Component {
           </ProjectTitleText>
           
           <ButtonWrapper width="14%">
-            <ActionButtonProject to={"/agora/" + this.state.agoraId}>Back to Agora</ActionButtonProject>
+            <ActionButtonBack to={"/agora/" + this.state.agoraId}>Back to Agora</ActionButtonBack>
           </ButtonWrapper>
         </ProjectTitle>
 
