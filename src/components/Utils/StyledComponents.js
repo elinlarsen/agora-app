@@ -598,13 +598,13 @@ margin: 0;
 `;
 
 export const ProjectImageContainer = styled.div`
-  width: 25%;
-  min-height : 35vh; 
+  width: 20%;
+  min-height : 30vh; 
 `;
 
 export const ProjectDescriptionAndStatusWrapper = styled.div`
   display: flex;
-  width: 75%;
+  width: 80%;
   justify-content: space-between;
 `;
 export const ProjectDescription = styled.p`
