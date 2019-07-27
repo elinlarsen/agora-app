@@ -33,10 +33,11 @@ export const mainTheme = {
 export const MainBody = styled.div`
 color: ${props => props.theme.color8}
 display : flex; 
+align-items :center; 
 justify-content: center; 
 background-color: ${props => props.theme.color9};
 /*margin-top: 12vh; because of the fixed nav bar*/
-
+min-height: 88vh; /*100vh minus the height of the nav*/
 height: min-content;
 
 `;
@@ -531,31 +532,31 @@ export const TagGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-gap: 5px 5px;
+  grid-gap: 0.5vw 0.5vw;
   width: 100%;
   height: ${props => props.theme.cardHeight / 6 + "vh"};
   align-items: start;
 `;
 
 export const ProjectCardText = styled.p`
-  margin: 0; 
+  margin : 0
+  margin-top: 1vh; 
   display: flex;
-  padding: ${props => props.theme.defaultPaddingLarge};
+  padding: ${props => props.theme.defaultPaddingMedium};
   justify-content: center;
   align-items: center;
   font-size: 1rem;
   text-align: center;
-  height: ${props => props.theme.cardHeight / 20 + "vh"};
+  height: ${props => props.theme.cardHeight / 15 + "vh"};
   width: 100%;
-  align-self: center;
   color: ${props => props.theme.color2};
 `;
 
 export const ProjectCardTitle = styled(ProjectCardText)`
   font-weight: bold;
   font-size: 1rem;
-  text-align: left;
-  margin : 0; 
+  text-align: center;
+  margin : 1vh 0vw; 
 `;
 
 export const HR = styled.hr`

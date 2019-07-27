@@ -31,7 +31,7 @@ export default function Auth(props) {
                 )}
 
             <Link className="link" to={path}
-                        style = {{textDecoration : "none", color : "#212121"}}>
+                        style = {{textDecoration : "none", color : "#212121", marginBottom: "2vh"}}>
                         {message} ?
             </Link>          
 

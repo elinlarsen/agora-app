@@ -84,16 +84,13 @@ export default class Agora extends Component {
     let members = this.state.agora.members;
     let nbMembers = members.length;
     let user = this.props.currentUser;
-    if (nbMembers !== 0 && members.filter(m => m._id === user).length !== 0)
-      joined = true;
+    if (nbMembers !== 0 && members.filter(m => m._id === user._id).length !== 0) joined = true;
     return joined;
   };
 
   handleJoinAgora = event => {
     event.preventDefault();
     let copy = this.state.agora;
-    console.log("this.state.agora.members   ", this.state.agora.members);
-    console.log("this.isJoined ? ----", this.isJoined());
     if (!this.isJoined()) copy.members.push(this.props.currentUser);
     else {
       let index = copy.members.indexOf(this.props.currentUser);
