@@ -9,6 +9,7 @@ export const mainTheme = {
   color3: "#95adbe",
   color4: "#dff0ea",*/
   defaultPaddingSmall: "1vh",
+  defaultPaddingMedium: "1.5vh",
   defaultPaddingLarge: "2vh",
   fontSizeLarge: "1.3rem",
   fontSizeMedium: "1rem",
@@ -16,7 +17,7 @@ export const mainTheme = {
   defaultBorderWidth: "0.5px",
   defaultBorderRadius: "20px",
   cardHeight: 40,
-  cardHeightWidthRatio: 1.8,
+  cardHeightWidthRatio: 1.6,
   color0: "#D32F2F" /* Main Primary color */,
   color1: "#85144b" /* "#f95d60" "f95d60","#F44336"*/,
   color2: "#21222a" /*dark for text*/,
@@ -31,11 +32,11 @@ export const mainTheme = {
 };
 
 export const MainBody = styled.div`
-color: ${props => props.theme.color8}
+color: ${props => props.theme.color3}; /* default text color */
 display : flex; 
 align-items :center; 
 justify-content: center; 
-background-color: ${props => props.theme.color9};
+background-color: ${props => props.theme.color8};
 /*margin-top: 12vh; because of the fixed nav bar*/
 min-height: 88vh; /*100vh minus the height of the nav*/
 height: min-content;
@@ -47,23 +48,22 @@ height: min-content;
 export const ActionButton = styled(Link)`
   display: block;
   background-color: ${props => props.theme.color1};
-  padding: ${props => props.theme.defaultPaddingSmall};
+  padding: ${props => props.theme.defaultPaddingMedium};
   text-decoration: none;
   color: ${props => props.theme.color3};
   font-weight: bold;
   text-align: center;
   font-size: ${props => props.theme.fontSizeMedium};
-  width: 80%;
+  width: 100%;
   border-radius: ${props => props.theme.defaultBorderRadius};
   cursor: pointer;
-  margin: 2vh 0;
+  margin: 2vh 0vw;
 `;
 
 export const ActionButtonProject = styled(ActionButton)`
 border : 1px solid ${props => props.theme.color3}; 
 font-size: 0.8rem; 
 width : fit-content; 
-
 `;
 
 export const ActionButtonBack=styled(ActionButtonProject)`
@@ -94,16 +94,11 @@ export const WrapperButton = styled.div`
 `;
 
 export const StyledTag = styled.div`
-  padding: ${props => props.theme.defaultPaddingSmall};
-  border-style: solid;
-  border-width: ${props => props.theme.defaultBorderWidth};
-  border-radius: ${props => props.theme.defaultBorderRadius};
-  border-color:${props => props.theme.color3}
-    background-color: white;
-  /*font-weight: bold;*/
+  padding: 0;
+  margin: 0;
+  background-color: ${props => props.theme.color3};
   font-size: ${props => props.theme.fontSizeSmall};
-  color: ${props => props.theme.color8};
-  margin: auto;
+  color: ${props => props.theme.color8};  
   width: 100%;
   text-align: center;
 `;
@@ -125,7 +120,6 @@ export const NavContainer = styled.div`
   }};
   height: 12vh; /*fit-content;*/
   padding: 0 2vw;
-  opacity: 0.9;
   z-index: 1;
 `;
 
@@ -229,16 +223,13 @@ export const Banner = styled.div`
 `;
 
 export const BannerText = styled.p`
-  font-size: 20px;
   width: 80%;
-  text-align: center;
-  font-weight: bold;
-  font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin-bottom: 1vh;
+  
 `;
 
 export const BannerTextAndIcon = styled.div`
@@ -253,10 +244,11 @@ export const IconsAndTextContainer = styled.div`
   padding-top: 20px;
   font-size: 20px;
   width: 70%;
-  text-align: center;
+  text-align: justify;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  color : ${props => props.theme.color8}
 `;
 
 export const IconsContainer = styled.div`
@@ -481,13 +473,15 @@ export const ContainerAgoras = styled.div`
 
 export const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 3vw 3vw;
   padding: 3vh 3vw;
   text-align: center;
   /*justify-items: center;*/
   justify-content : center; 
   align-items : center; 
+  align-self: center; 
+  justify-self: center; 
 `;
 
 export const StyledEmptyProjectCard = styled.div`
@@ -498,7 +492,7 @@ export const StyledEmptyProjectCard = styled.div`
   height: ${props => props.theme.cardHeight + "vh"};
   width: ${props =>
     props.theme.cardHeight / props.theme.cardHeightWidthRatio + "vh"};
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: ${props => props.theme.color3};
   font-weight: bold;
   background-color: ${props => props.theme.color3};
@@ -553,10 +547,10 @@ export const ProjectCardText = styled.p`
 `;
 
 export const ProjectCardTitle = styled(ProjectCardText)`
-  font-weight: bold;
   font-size: 1rem;
   text-align: center;
-  margin : 1vh 0vw; 
+  margin : 0;
+  margin-bottom: 2vh 
 `;
 
 export const HR = styled.hr`
@@ -585,16 +579,18 @@ export const ProjectTitle = styled.div`
   justify-content: space-around;
   align-items: center; 
   background-color: ${props => props.theme.color2};
-  padding : 0 2vw; 
+  padding : 0 3vw;
+   
 `;
 
 export const ProjectTitleText = styled.p`
-margin: 0;  
+  margin: 0;  
   width: 100%;
   font-weight: bold;
   color: white;
   font-size: 1.5rem;
-  text-align: left; 
+  text-align: center; 
+  padding-left : 10vw; 
 
 `;
 
@@ -607,6 +603,7 @@ export const ProjectDescriptionAndStatusWrapper = styled.div`
   display: flex;
   width: 75%;
   justify-content: space-between;
+  background-color: ${props => props.theme.color2};
 `;
 export const ProjectDescription = styled.p`
   display: flex;
@@ -627,25 +624,49 @@ export const ProjectDescriptionRow = styled.div`
   width: 100%;
 `;
 
+// --- Status --- //
+
+export const StatusBar = styled.div`
+    display: flex;
+    flex-direction: column-reverse;
+    width: 20%;
+    height: inherit; 
+  `;
+
+  export  const CenteredWhiteText = styled.div`
+    margin: auto;
+    font-size: 1.3rem;
+    text-align : left; 
+  `;
+
+  export  const Block = styled.div`
+    display: flex;
+    background-color: inherit; 
+    width:99.9%;
+    height: 20%; 
+  `;
+
+  export   const BlockOpacity=styled(Block)`
+    opacity : 0.5; 
+  `
+
 // --- Forum Components ---//
 
 export const ForumContainer = styled.div`
-  width: 100%;
-  /*border-style: solid;
-  padding: 0px 10px;
-  border-style: solid;
-  border-color: ${props => props.theme.color2};
-  border-width: 0.5px;*/
+  width: 100vw;
+  padding : 1vh 2vw; 
+  background-color :${props => props.theme.color2};
 `;
 
 export const ForumTitle = styled.p`
-  margin: 0
-  padding: 1vh 2vw;
+  margin: 0;
+  padding: 1vh 0; 
   background-color: ${props => props.theme.color2};
   color: ${props => props.theme.color3};
   font-weight: bold;
   font-size: 1.5rem;
-  text-align : left; 
+  text-align : center; 
+
 `;
 
 // --- Members Components --- //
@@ -656,11 +677,13 @@ export const PictureAndNameContainer = styled.div`
   justify-content: center;
   align-items: center; 
   width: fit-content; 
-  margin: 0 2vw; 
+  margin: 2vh 2vw; 
 `;
 export const MemberContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content : space-between; 
+  height: inherit; 
   width: 26%;
   padding: 0px 10px;
   border-style: solid;
@@ -736,20 +759,17 @@ export const FormWrapper = styled.form`
   background-color: ${props => props.theme.color3};
   width: fit-content;
   border-width: 1px;
-  box-shadow: 2px 2px 3px 0px #656565;
+  box-shadow: 5px 5px 5px 0px ${props => props.theme.color8};
 `;
 
 // --- Message Components ---//
 
 export const MessageRow = styled.div`
   display: flex;
-  flex-flow : row nowrap; 
-  padding-left : 2vw; 
+  flex-flow : row nowrap;  
   justify-content: flex-start;
-  align-items: stretch; 
-  border-bottom-style: solid;
-  border-bottom-width: 0.5px;
-  width: 100vw;
+  align-items: center; 
+
 `;
 
 export const MessageUserInfo=styled.div`
@@ -761,8 +781,7 @@ width: 10vw;
 
 `
 
-export const MessagePicture = styled(MemberPicture)`
-  
+export const MessagePicture = styled(MemberPicture)`  
 `;
 
 export const MessageUserName = styled.p`
@@ -775,22 +794,24 @@ export const MessageUserName = styled.p`
 `;
 
 export const MessageDate=styled.p`
-margin-top: auto;
-padding: 0 1vw; 
-width: 20vw;
+margin: 0;
+padding: 0 2vw; 
+width: fit-content;
 font-size : 0.9rem; 
 text-align: center; 
 `
 
 export const MessageUserText = styled.p`
-  margin-top: auto;
-  width: 70vw;
-  padding : 0 2vw; 
+  font-size: 1.2rem;
+  margin: 0;
+  width: 80vw;
+  padding-left : 2vw; 
+  text-align
 `;
 
 export const MessageInputForm = styled.form`
-  width: 80vw;
-  height: 100%;
+  width: inherit;
+  height: inherit;
   display: flex;
   align-items: center;
   font-size: 1rem;
@@ -801,8 +822,8 @@ export const MessageInputForm = styled.form`
 export const MessageUserInput = styled.input`
   width: 100%;
   height: 100%;
-  font-size: 1rem;
-  border : 1px solid ${props => props.theme.color8};
+  font-size: 1.2rem;
+  border : 1px solid ${props => props.theme.color3};
   border-shadow: none; 
   border-radius : 20px;
   padding: 1vh 1vw;
@@ -811,10 +832,10 @@ export const MessageUserInput = styled.input`
 
 export const MessageInputButton = styled.input`
   padding: 1vh 1vw;
-  margin: 1vh 2vw;
+  margin-left: 6vw;
   height: 100%;
-  border : 1px solid ${props => props.theme.color8};
+  border : 1px solid ${props => props.theme.color3};
   border-radius : 10px; 
-  color : ${props => props.theme.color8};
+  color : ${props => props.theme.color2};
   font-size: 1rem; 
 `;

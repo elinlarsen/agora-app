@@ -168,9 +168,9 @@ export default class Projects extends Component {
           
           </ProjectTitleText>
           
-          <ButtonWrapper width="14%">
+          
             <ActionButtonBack to={"/agora/" + this.state.agoraId}>Back to Agora</ActionButtonBack>
-          </ButtonWrapper>
+         
         </ProjectTitle>
 
 

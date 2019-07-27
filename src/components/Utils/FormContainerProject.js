@@ -49,7 +49,7 @@ export default function FormContainerProject(props) {
           withIcon={true}
           buttonText="Upload an image"
           onChange={props.onDrop}
-          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+          imgExtension={[".jpg", ".gif", ".png", ".jpeg"]}
           maxFileSize={5242880}
           singleImage={props.singleImage}
         />

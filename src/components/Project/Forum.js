@@ -93,7 +93,7 @@ export default class Forum extends Component {
                 text={this.state.currentPost}
                 messageUserId={user._id}
                 messageUserPicture={user.picture}
-                messageUserName={""}
+                messageUserName={user.username}
                 messages={[
                   { user: { picture: user.picture, username: user.username } }
                 ]}

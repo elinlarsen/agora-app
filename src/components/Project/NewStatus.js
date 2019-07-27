@@ -1,30 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import {StatusBar, CenteredWhiteText, Block, BlockOpacity } from "./../Utils/StyledComponents";
 
 export default function ProjectStatus(props) {
-
-  const StatusBar = styled.div`
-    display: flex;
-    flex-direction: column-reverse;
-    width: 20%;
-  `;
-
-  const CenteredWhiteText = styled.div`
-    margin: auto;
-    color: white;
-    font-size: 1.3rem;
-  `;
-
-  const Block = styled.div`
-    display: flex;
-    background-color: #85144b; 
-    width:99.9%;
-    height: 20%; 
-  `;
-
-  const BlockOpacity=styled(Block)`
-    opacity : 0.5; 
-  `
   
   function renderAll(props){
     if (props.status === "ideation") {

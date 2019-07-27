@@ -12,7 +12,7 @@ export default function Nav(props) {
         {({ loginStatus }) => {
            if (loginStatus === true) {
               return(        
-                <NavContainer>
+                <NavContainer >
                 <Link to="/agoras" style={{ textDecoration: "none" }}><Logo>Agorae</Logo></Link>
                 <UserStatus />
               </NavContainer> 

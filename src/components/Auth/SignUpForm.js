@@ -11,37 +11,37 @@ export default class Signup extends Component {
         first_name: {
             name : "first_name",
             label : "Your firstname", 
-            value: "Anne",
+            value: "",
             type : "text",
         },
         last_name: {
             name : "last_name",
             label: "Your lastname",
-            value : "Hidalgo",
+            value : "",
             type : "text"},
         username: {
             name : "username",
             label: "Choose an username",
-            value : "testusername",
+            value : "",
             type : "text"
         },
         email:  {
                 name : "email",
                 label : "Your email",
-                value : "first_last@email.com",
+                value : "",
                 type : "text"
                 },         
         picture: [],
         password: {
             name  : "password", 
             label: "A password (>7 characters)",
-            value : "Ahydzd78NF",
+            value : "",
             type : "password",
         },
         passwordConfirm: {
             name  : "passwordConfirm", 
             label: "Confirm your password",
-            value : "Ahydzd78NF",
+            value : "",
             type : "password",
         }
     }

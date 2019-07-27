@@ -23,37 +23,43 @@ export default function Message(props) {
             <MessageUserName> {item.user.username} </MessageUserName>
             <MessagePicture src={item.user.picture} alt={item.user.username}/>
           </MessageUserInfo>
-          <MessageDate>
-            {new Date(item.post_date).toDateString() + " " + new Date(item.post_date).toLocaleTimeString()}
-          </MessageDate>
-          <MessageUserText> {item.text} </MessageUserText>
+
+
+
+          <MessageUserText> 
+                {item.text} 
+                <MessageDate>
+                    {new Date(item.post_date).toDateString() + " " + new Date(item.post_date).toLocaleTimeString()}
+                </MessageDate>
+          
+          
+          </MessageUserText>
         </MessageRow>
       ));
     } else {
       messagesList = (
         <MessageRow>
+
           <MessageUserInfo>
-            
-                <MessagePicture
-                  src={props.messages[0].user.picture}
-                  
-                  alt={props.messages[0].user.username}
-                />
-            </MessageUserInfo>
-          {//<MessageUserText> {""} </MessageUserText>
-          }
-          <MessageInputForm
-            onSubmit={props.handleMessageSubmit}
-            id={props.messageUserId}
-            picture={props.messageUserPicture}
-            username={props.messageUserUsername}
-          >
-            {" "}
-            <MessageUserInput
-              value={props.text}
-              onChange={props.handleChange}
-            />
-            <MessageInputButton type="submit" value="Share" /> </MessageInputForm>
+                <MessageUserName> {props.messages[0].user.username} </MessageUserName>
+                <MessagePicture src={props.messages[0].user.picture} alt={props.messages[0].user.username}/>
+          </MessageUserInfo>
+
+          <MessageUserText>
+
+              <MessageInputForm
+                    onSubmit={props.handleMessageSubmit}
+                    id={props.messageUserId}
+                    picture={props.messageUserPicture}
+                    username={props.messageUserUsername}
+                  >           
+                      <MessageUserInput value={props.text} onChange={props.handleChange}/>
+                      <MessageInputButton type="submit" value="Share" /> 
+                
+                </MessageInputForm>
+
+            </MessageUserText>
+
         </MessageRow>
       );
     }

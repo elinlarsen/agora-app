@@ -106,7 +106,7 @@ export default class Agoras extends Component {
             {({ user }) => { return(      
               <Link
                 style={{ textDecoration: "none", 
-                          color:  "#85144b", //"#f95d64",
+                          color: "white" , //"#f95d64" "#85144b",
                           margin: "3vh 0", 
                           fontWeight: "bold" }}
                 to={{ pathname: "/agoracreate", 
