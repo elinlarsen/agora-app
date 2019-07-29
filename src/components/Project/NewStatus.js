@@ -1,5 +1,5 @@
 import React from "react";
-import {StatusBar, CenteredWhiteText, Block, BlockOpacity } from "./../Utils/StyledComponents";
+import {StatusBar, CenteredBoldText, CenteredWhiteText, Block, BlockOpacity } from "./../Utils/StyledComponents";
 
 export default function ProjectStatus(props) {
   
@@ -7,7 +7,7 @@ export default function ProjectStatus(props) {
     if (props.status === "ideation") {
     return(
       <>
-        <Block><CenteredWhiteText> Ideation </CenteredWhiteText></Block>
+        <Block><CenteredBoldText> Ideation </CenteredBoldText></Block>
         <BlockOpacity><CenteredWhiteText> Planning </CenteredWhiteText></BlockOpacity>
         <BlockOpacity><CenteredWhiteText> Financed </CenteredWhiteText></BlockOpacity>
         <BlockOpacity><CenteredWhiteText> Ongoing </CenteredWhiteText> </BlockOpacity>
@@ -18,7 +18,7 @@ export default function ProjectStatus(props) {
       return(
         <>
           <BlockOpacity><CenteredWhiteText> Ideation </CenteredWhiteText></BlockOpacity>
-          <Block><CenteredWhiteText> Planning </CenteredWhiteText></Block>
+          <Block><CenteredBoldText> Planning </CenteredBoldText></Block>
           <BlockOpacity><CenteredWhiteText> Financed </CenteredWhiteText></BlockOpacity>
           <BlockOpacity><CenteredWhiteText> Ongoing </CenteredWhiteText> </BlockOpacity>
           <BlockOpacity><CenteredWhiteText> Done </CenteredWhiteText></BlockOpacity>
@@ -29,7 +29,7 @@ export default function ProjectStatus(props) {
           <>
             <BlockOpacity><CenteredWhiteText> Ideation </CenteredWhiteText></BlockOpacity>
             <BlockOpacity><CenteredWhiteText> Planning </CenteredWhiteText></BlockOpacity>
-            <Block><CenteredWhiteText> Financed </CenteredWhiteText></Block>
+            <Block><CenteredBoldText> Financed </CenteredBoldText></Block>
             <BlockOpacity><CenteredWhiteText> Ongoing </CenteredWhiteText> </BlockOpacity>
             <BlockOpacity><CenteredWhiteText> Done </CenteredWhiteText></BlockOpacity>
           </>
@@ -40,7 +40,7 @@ export default function ProjectStatus(props) {
             <BlockOpacity><CenteredWhiteText> Ideation </CenteredWhiteText></BlockOpacity>
             <BlockOpacity><CenteredWhiteText> Planning </CenteredWhiteText></BlockOpacity>
             <BlockOpacity><CenteredWhiteText> Financed </CenteredWhiteText></BlockOpacity>
-            <Block><CenteredWhiteText> Ongoing </CenteredWhiteText> </Block>
+            <Block><CenteredBoldText> Ongoing </CenteredBoldText> </Block>
             <BlockOpacity><CenteredWhiteText> Done </CenteredWhiteText></BlockOpacity>
           </>
         );}
@@ -51,7 +51,7 @@ export default function ProjectStatus(props) {
             <BlockOpacity><CenteredWhiteText> Planning </CenteredWhiteText></BlockOpacity>
             <BlockOpacity><CenteredWhiteText> Financed </CenteredWhiteText></BlockOpacity>
             <BlockOpacity><CenteredWhiteText> Ongoing </CenteredWhiteText> </BlockOpacity>
-            <Block><CenteredWhiteText> Done </CenteredWhiteText></Block>
+            <Block><CenteredBoldText> Done </CenteredBoldText></Block>
           </>
         );}
     }

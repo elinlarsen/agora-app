@@ -188,7 +188,6 @@ export const SearchStyle = styled.input`
   border: none;
   padding: 3vh;
   font-size: 1.3rem;
-  box-shadow: 3px 3px 3px #faf9f8;
   text-align: center;
 
   ::placeholder {
@@ -496,7 +495,6 @@ export const StyledEmptyProjectCard = styled.div`
   color: ${props => props.theme.color3};
   font-weight: bold;
   background-color: ${props => props.theme.color3};
-  box-shadow: 3px 3px 3px 0px #656565;
   text-decoration: none;
 `;
 
@@ -510,7 +508,6 @@ export const ProjectCardWrapper = styled.div`
     props.theme.cardHeight / props.theme.cardHeightWidthRatio + "vh"};
   border-width: 1px;
   background-color: ${props => props.theme.color3};
-  box-shadow: 2px 2px 3px 0px #656565;
 `;
 
 export const ImageWrapper = styled.div`
@@ -588,7 +585,7 @@ export const ProjectTitleText = styled.p`
   width: 100%;
   font-weight: bold;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   text-align: center; 
   padding-left : 10vw; 
 
@@ -608,7 +605,7 @@ export const ProjectDescriptionAndStatusWrapper = styled.div`
 export const ProjectDescription = styled.p`
   display: flex;
   width: 80%;
-  font-size : 1.2rem; 
+  font-size : 1.5rem; 
   text-align: center; 
   align-items: center; 
   padding: 5vh 5vw; 
@@ -635,15 +632,21 @@ export const StatusBar = styled.div`
 
   export  const CenteredWhiteText = styled.div`
     margin: auto;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     text-align : left; 
   `;
+
+  export const CenteredBoldText=styled(CenteredWhiteText)`
+  font-weight: bold; 
+  `
 
   export  const Block = styled.div`
     display: flex;
     background-color: inherit; 
     width:99.9%;
     height: 20%; 
+    font-weight : bold; 
+    font-size : 1.4rem; 
   `;
 
   export   const BlockOpacity=styled(Block)`
