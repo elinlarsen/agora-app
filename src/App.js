@@ -4,7 +4,7 @@ import "./App.css";
 import { Switch, Route } from "react-router-dom";
 
 import Nav from "./components/Utils/Nav.js";
-import Footer from "./components/Utils/Footer.js";
+//import Footer from "./components/Utils/Footer.js";
 import Agoras from "./components/Agoras.js";
 import Agora from "./components/Agora.js";
 import Project from "./components/Project.js";
@@ -16,6 +16,7 @@ import Auth from "./components/Auth/Auth.js";
 import User from "./components/User.js";
 import Home from "./components/Home.js";
 import { AuthConsumer } from "./components/Auth/Guard";
+import ErrorPage from "./components/Utils/ErrorPage.js"
 //import PageAuth from "./components/Auth/Auth";
 
 //---- custom auth component
@@ -43,12 +44,16 @@ export default class App extends Component {
               <ProtectedRoute exact path="/project/:id" component={Project} />
               <Route exact path="/user" component={User} />
               <Route path={["/signup", "/login"]} component={Auth} />
+              
               <AuthConsumer>
                 { ({user}) => { return (
+                  <>
                    <Route exact path="/agora/:id" render={(routeProps) => (<Agora {...routeProps} currentUser={user}/>)} />
+                   <Route component={ErrorPage} />
+                  </>
                 )}}   
               </AuthConsumer>
-
+              
             </Switch>
           {//</div>
           }
