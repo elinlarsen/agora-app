@@ -46,14 +46,9 @@ export default class App extends Component {
               <Route path={["/signup", "/login"]} component={Auth} />
               
               <AuthConsumer>
-                { ({user}) => { return (
-                  <>
-                   <Route exact path="/agora/:id" render={(routeProps) => (<Agora {...routeProps} currentUser={user}/>)} />
-                   <Route component={ErrorPage} />
-                  </>
-                )}}   
+                { ({user}) => { return (<Route exact path="/agora/:id" render={(routeProps) => (<Agora {...routeProps} currentUser={user}/>)} />)}}   
               </AuthConsumer>
-              
+              <Route component={ErrorPage} />
             </Switch>
           {//</div>
           }
