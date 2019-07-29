@@ -77,11 +77,13 @@ function setMarkerAndPlace(props,marker,e, agora){
                 initialCenter={{ lat: 48.866667, lng: 2.333333}}
                 defaultOptions={{draggable: true, }}
             >           
-                {props.agoras.map((agora, index) => {                           
+                {props.agoras.map((agora, index) => {   
+                    console.log("agora.members.length.toString() --", agora.members.length.toString())                        
                     return( <Marker onClick={(props, marker, e) => setMarkerAndPlace(props, marker, e,agora)}
                                     key={index+"-marker"}
                                     position={{ lat: agora.geocode.lat, 
                                                 lng: agora.geocode.lng }}
+                                    label={agora.members.length.toString()}
                                     name = {agora.name}>
                                         </Marker> )                     
                 })} 
