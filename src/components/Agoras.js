@@ -53,7 +53,10 @@ export default class Agoras extends Component {
     return new Promise((resolve, reject) => {
       agoras.forEach(async (agora, i) => {
         try {
-          const geocode = await Geocode.fromAddress(agora.zipcode);
+          let fullAddress=[agora.address, agora.zipcode, agora.city].join(',')
+          console.log('fullAddress --', fullAddress)
+          const geocode = await Geocode.fromAddress(fullAddress);
+          //const geocode = await Geocode.fromAddress(agora.zipcode);
           codes[i] = geocode.results[0].geometry.location;
           const count = codes.reduce((acc, v) => {
             if (v) acc += 1;
