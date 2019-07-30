@@ -13,7 +13,8 @@ export default function UserStatus() {
             return (
               <>
                 <UserOptions>
-                  <UserProfile> {user.username}</UserProfile>
+                  {//<UserProfile> {user.username}</UserProfile>
+                  }
                   <MemberPicture src={user.picture} alt={user.username} />
                   <UserP onClick={() => signout(res => console.log(res))}>
                     {" "}

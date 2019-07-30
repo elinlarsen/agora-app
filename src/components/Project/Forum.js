@@ -84,8 +84,8 @@ export default class Forum extends Component {
       <AuthConsumer>
         {({ user }) => (
           <ForumContainer>
-            {" "}
-            <ForumTitle> Forum </ForumTitle>{" "}
+            {//<ForumTitle> Forum </ForumTitle>
+            }
             <Message messages={this.state.messages} />
             {this.props.ableToPost ? (
               <Message

@@ -1,54 +1,14 @@
 import React, {useState} from 'react'
 import { Map, GoogleApiWrapper,  Marker, InfoWindow} from 'google-maps-react';
 
-import styled from 'styled-components'
+import {MapParent, ImageContainer, Container, InfoContainer, NbMembersAgora, Name} from "../Utils/StyledComponents"
 
 //icon
 import { FiUsers } from "react-icons/fi";
 
 require('dotenv').config()
 
-const MapParent=styled.div`
-position: relative; /* Set the navbar to fixed position */
-display : flex; 
-width :100vw;
-height: 68vh;
-`
 
-
-const ImageContainer=styled.div`
-display: flex;
-height: 17vh;
-width: 25vw; 
-`
-const Container=styled.div`
-display : flex; 
-flex-flow: row; 
-justify-content: flex-start; 
-align-items: center;
-padding : 1vh 0`
-
-
-const InfoContainer=styled.div`
-display : flex; 
-flex-flow: column wrap;
-justify-content: flex-start; 
-align-items: flex-start;
-padding-left: 1vh;
-width: 30vh;
-`
-
-const NbMembersAgora=styled.p`
-margin: 0.5vh 0; 
-font-size: 0.8rem; 
-color: #0C214A;
-`
-
-const Name=styled.h3`
-color : #0C214A;
-font-size: 1.2rem;
-margin: 0.5vh 0; 
-`
 
 const mapStyles = { 
     width: '100%',
@@ -81,6 +41,7 @@ function setMarkerAndPlace(props,marker,e, agora){
                     console.log("agora.members.length.toString() --", agora.members.length.toString())                        
                     return( <Marker onClick={(props, marker, e) => setMarkerAndPlace(props, marker, e,agora)}
                                     key={index+"-marker"}
+                                
                                     position={{ lat: agora.geocode.lat, 
                                                 lng: agora.geocode.lng }}
                                     label={agora.members.length.toString()}

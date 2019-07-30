@@ -14,6 +14,7 @@ import {
   ProjectDescriptionAndStatusWrapper,
   ProjectDescription,
   ProjectDescriptionRow,
+  ProjectForumRow,
   ButtonWrapper, 
   BigMembersWrapper,
   MembersWrapper,
@@ -176,21 +177,17 @@ export default class Projects extends Component {
 
         <ProjectDescriptionRow>
           <ProjectImageContainer>
-            {" "}
             <img
-              src={this.state.picture}
-              alt="project"
-              width="100%"
-              height="100%"
-            />{" "}
+              src={this.state.picture} alt="project picture" width="100%"height="100%"
+            />
           </ProjectImageContainer>
-          <ProjectDescriptionAndStatusWrapper>
-            <ProjectDescription> {this.state.description} </ProjectDescription>
-            <Status status={this.state.status}> </Status>
-          </ProjectDescriptionAndStatusWrapper>
+
+          <ProjectDescription> {this.state.description} </ProjectDescription>
+          <Status status={this.state.status} /> 
+
         </ProjectDescriptionRow>
 
-        <ProjectDescriptionRow>
+        <ProjectForumRow>
           <AuthConsumer>
             {({ user }) => (
               <Forum
@@ -203,7 +200,7 @@ export default class Projects extends Component {
               </Forum>
             )}
           </AuthConsumer>
-        </ProjectDescriptionRow>
+        </ProjectForumRow>
 
         <BigMembersWrapper>
           <MemberP> {this.state.members.length} {mem} </MemberP>

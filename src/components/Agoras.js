@@ -14,6 +14,8 @@ import {
   MainBodyAgoras,
   WrapperAgoras,
   CTAContainer,
+  CreateLink,
+  CreateLinkWrap
 } from "./Utils/StyledComponents";
 
 
@@ -106,17 +108,16 @@ export default class Agoras extends Component {
       <MainBodyAgoras>
         <CTAContainer>
           <AuthConsumer>
-            {({ user }) => { return(      
-              <Link
-                style={{ textDecoration: "none", 
-                          color: "white" , //"#f95d64" "#85144b",
-                          margin: "3vh 0", 
-                          fontWeight: "bold" }}
-                to={{ pathname: "/agoracreate", 
-                state: { action: "create", currentUser : user } }}
-              >
-                  Create your agora! 
-              </Link>) 
+            {({ user }) => { return(  
+              <CreateLinkWrap>  
+                  <CreateLink
+                    to={{ pathname: "/agoracreate", 
+                    state: { action: "create", currentUser : user } }}
+                  >
+                      Create your agora! 
+                  </CreateLink>
+              </CreateLinkWrap>  
+              ) 
               }}
           </AuthConsumer>
           <SearchBar

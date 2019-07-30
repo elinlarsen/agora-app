@@ -21,9 +21,9 @@ export default function InfoCard() {
         <P>
           {" "}
           Impact starts from the ground, in your local community.{" "}
-          <B> Agoras.net </B>
+          <B> Agorae </B>
           is a platform to help you impact the world around you and beyond, by
-          delivering tangible projects with your friends{" "}
+          delivering tangible projects with your friends.{" "}
         </P>{" "}
         <HRIcon />
       </BannerText>
@@ -36,7 +36,7 @@ export default function InfoCard() {
             {" "}
             Connect to your Agora: a community of people living in your
             neighboorhood ready to debate ideas and achieve great things
-            together
+            together.
           </PforIcon>
         </IconsAndTextContainer>
         <IconsAndTextContainer>
